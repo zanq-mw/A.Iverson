@@ -3,7 +3,7 @@ from cohere.responses.classify import Example
 
 co = cohere.Client('5mA2w2L0Z0ySFKCC23XAiAJeaLJTTb2dq23UH79K')
 
-examples=[
+examples = [
     Example("What is a moneyline?", "Question"),
     Example("How do I place a bet?", "Question"),
     Example("What is a quick bet?", "Question"),
@@ -43,17 +43,15 @@ examples=[
     Example("You bitches", "Inappropriate"),
 ]
 
-inputs = ["hello"]
 
-response = co.classify(
-inputs=inputs,
-examples=examples,
-)
+def bet_or_question(prompt):
+    response = co.classify(
+        inputs=[prompt],
+        examples=examples,
+    )
+    if response[0].confidence < 0.80 or response[0].prediction == "Inappropriate":
+        response = "I do not understand your request. Please be more specific."
+    else:
+        response = response[0].prediction
 
-if response[0].confidence < 0.80 or response[0].prediction == "Inappropriate":
-    response = "I do not understand your request. Please be more specific."
-else:
-    response = response[0].prediction
-
-print(response)
-# return response
+    return response
