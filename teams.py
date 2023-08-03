@@ -7,9 +7,9 @@
 {"prompt": "I want to bet on the Knicks", "completion": "Knicks"}
 {"prompt": "Bet on the New York Knicks", "completion": "Knicks"}
 {"prompt": "Put money on ny knicks to win", "completion": "Knicks"}
-{"prompt": "I want to bet on the Knicks", "completion": "Knicks"}
-{"prompt": "Bet on the New York Knicks", "completion": "Knicks"}
-{"prompt": "Put money on ny knicks to win", "completion": "Knicks"}
+{"prompt": "I want to bet on the Jazz", "completion": "Jazz"}
+{"prompt": "Bet on the Utah Jazz", "completion": "Jazz"}
+{"prompt": "Put money on uth jazz to win", "completion": "Jazz"}
 {"prompt": "I want to bet on the Nets", "completion": "Nets"}
 {"prompt": "Bet on the Brooklyn Nets", "completion": "Nets"}
 {"prompt": "Put money on bk nets to win", "completion": "Nets"}
@@ -29,5 +29,5 @@
 {"prompt": "Parlay on tor raptors ", "completion": "Raptors"}
 {"prompt": "bet on toronto raptors to win", "completion": "Raptors"}
 {"prompt": "I want to bet on the Magic", "completion": "Magic"}
-{"prompt": "Parlay on orl magic ", "completion": "Raptors"}
-{"prompt": "bet on orlando magic to win", "completion": "Raptors"}
+{"prompt": "Parlay on orl magic ", "completion": "Magic"}
+{"prompt": "bet on orlando magic to win", "completion": "Magic"}
