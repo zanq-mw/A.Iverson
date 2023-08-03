@@ -9,6 +9,10 @@ def answer(prompt):
     response = co.generate(
         pre_prompt + prompt,
         max_tokens=1000,
-        model="fce2cb16-c7ef-4d68-8f59-12696b268dbd-ft"
+        model="6c1b308b-95f6-4604-ab32-ea8364c127b6-ft"
     )
     return (response[0].text)
+
+
+prompt = input("hey")
+print(answer(prompt))
