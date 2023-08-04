@@ -8,13 +8,21 @@
 import Foundation
 import SwiftUI
 
-struct Default {
-    static let background = Color("AppBackground")
-}
+extension Color {
+    struct Theme {
+        static let background = Color("AppBackground")
+    }
 
-struct InputField {
-    static let border = Color("TextBoxEnabled")
-    static let placeholder = Color("TextBoxEnabled")
-    static let text = Color(.white)
-    static let sendButton = Color("SendButton")
+    struct Input {
+        static let border = Color("TextBoxEnabled")
+        static let placeholder = Color("TextBoxEnabled")
+        static let text = Color(.white)
+        static let sendButton = Color("SendButton")
+    }
+
+    struct Chat {
+        static let user = Color("UserChatBubble")
+        static let computer = Color("ComputerChatBubble")
+    }
+
 }

@@ -39,7 +39,7 @@ struct MessageGroupView_Previews: PreviewProvider {
             MessageGroupView(viewModel:.init(user: .init(name: "A.Iverson"), messages: ["test Message is cool"]))
         }
         .padding()
-        .background(Color.basic.background)
+        .background(Color.Theme.background)
     }
 }
 

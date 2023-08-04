@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C4608FA92A7C31BF0052296C /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4608FA82A7C31BF0052296C /* MessageView.swift */; };
 		C4608FAB2A7C33880052296C /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4608FAA2A7C33880052296C /* View.swift */; };
+		C4609D2F2A7D7F1A0052296C /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D2E2A7D7F1A0052296C /* ChatView.swift */; };
+		C4609D312A7D7F300052296C /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D302A7D7F2F0052296C /* Dimensions.swift */; };
+		C4609D332A7D7F370052296C /* MessageGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D322A7D7F370052296C /* MessageGroupView.swift */; };
+		C4609D352A7D80540052296C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D342A7D80540052296C /* UserViewModel.swift */; };
 		C4CBB6BD2A7BFE47007B3E1F /* A_IversonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CBB6BC2A7BFE47007B3E1F /* A_IversonApp.swift */; };
 		C4CBB6BF2A7BFE47007B3E1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */; };
 		C4CBB6C12A7BFE48007B3E1F /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CBB6C02A7BFE48007B3E1F /* Colours.xcassets */; };
@@ -37,8 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C4608FA82A7C31BF0052296C /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		C4608FAA2A7C33880052296C /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		C4609D2E2A7D7F1A0052296C /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		C4609D302A7D7F2F0052296C /* Dimensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
+		C4609D322A7D7F370052296C /* MessageGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageGroupView.swift; sourceTree = "<group>"; };
+		C4609D342A7D80540052296C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		C4CBB6B92A7BFE47007B3E1F /* A.Iverson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A.Iverson.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CBB6BC2A7BFE47007B3E1F /* A_IversonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_IversonApp.swift; sourceTree = "<group>"; };
 		C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,13 +114,16 @@
 		C4CBB6BB2A7BFE47007B3E1F /* A.Iverson */ = {
 			isa = PBXGroup;
 			children = (
-				C4608FAC2A7C338D0052296C /* Extensions */,
 				C4CBB6BC2A7BFE47007B3E1F /* A_IversonApp.swift */,
+				C4609D322A7D7F370052296C /* MessageGroupView.swift */,
+				C4609D302A7D7F2F0052296C /* Dimensions.swift */,
+				C4609D2E2A7D7F1A0052296C /* ChatView.swift */,
+				C4608FAC2A7C338D0052296C /* Extensions */,
 				C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */,
 				C4CBB6C02A7BFE48007B3E1F /* Colours.xcassets */,
 				C4CBB6C22A7BFE48007B3E1F /* Preview Content */,
 				C4CBB6E62A7C02F9007B3E1F /* Colours.swift */,
-				C4608FA82A7C31BF0052296C /* MessageView.swift */,
+				C4609D342A7D80540052296C /* UserViewModel.swift */,
 			);
 			path = A.Iverson;
 			sourceTree = "<group>";
@@ -274,10 +283,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4608FA92A7C31BF0052296C /* MessageView.swift in Sources */,
 				C4CBB6BF2A7BFE47007B3E1F /* ContentView.swift in Sources */,
+				C4609D352A7D80540052296C /* UserViewModel.swift in Sources */,
 				C4608FAB2A7C33880052296C /* View.swift in Sources */,
 				C4CBB6E72A7C02F9007B3E1F /* Colours.swift in Sources */,
+				C4609D2F2A7D7F1A0052296C /* ChatView.swift in Sources */,
+				C4609D312A7D7F300052296C /* Dimensions.swift in Sources */,
+				C4609D332A7D7F370052296C /* MessageGroupView.swift in Sources */,
 				C4CBB6BD2A7BFE47007B3E1F /* A_IversonApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

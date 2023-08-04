@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State var textField: String = ""
-    @State var messages: [MessageView.ViewModel] = []
+    var userViewModel = UserViewModel(name: "Anders")
+    var computerViewModel = UserViewModel(name: "A.Iverson")
+    @ObservedObject var chatViewModel = ChatView.ViewModel(messageGroups: [])
+    @State var userSend = true
 
     enum Constants {
         static let textBoxHeight: CGFloat = 33.0
@@ -19,38 +22,43 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            ScrollView {
-                LazyVStack {
-                    Spacer()
 
-                    ForEach(messages, id: \.id) { message in
-                        MessageView(viewModel: message)
-                    }
-                }
-            }
+            Button(action: {
+                userSend.toggle()
+            }, label: {
+                Text("TOGGLE MESSAGES")
+                    .padding()
+                    .foregroundColor(.black)
+                    .background(.white)
+                    .cornerRadius(20)
+            })
+            
+            ChatView(viewModel: chatViewModel)
+
+            Spacer()
 
             // MARK: INPUT FIELD
             HStack(alignment: .bottom, spacing: 8) {
                 ZStack(alignment: .leading) {
                     if textField.isEmpty {
                         Text("Type a message...")
-                            .foregroundColor(InputField.placeholder)
+                            .foregroundColor(.Input.placeholder)
                     }
 
                     TextField("", text: $textField, axis: .vertical)
                         .frame(minHeight: Constants.textBoxHeight)
-                        .foregroundColor(InputField.text)
+                        .foregroundColor(.Input.text)
                         .disableAutocorrection(true)
                 }
 
                 if !textField.isEmpty {
                     Button(action: {
-                        messages.append(.init(user: .user, text: textField))
+                        chatViewModel.send(textField, user: userSend ? userViewModel : computerViewModel)
                         textField = ""
                     }, label: {
                         ZStack (alignment: .center) {
                             Circle()
-                                .foregroundColor(InputField.sendButton)
+                                .foregroundColor(.Input.sendButton)
 
                             Image(systemName: "paperplane.fill")
                                 .resizable()
@@ -68,12 +76,12 @@ struct ContentView: View {
             .padding(.leading, Constants.textBoxLarge)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(InputField.border, lineWidth: 1)
+                    .stroke(Color.Input.border, lineWidth: 1)
                     .frame(minHeight: Constants.textBoxHeight)
             )
         }
         .padding()
-        .background(Default.background)
+        .background(Color.Theme.background)
         .frame(maxHeight: .infinity)
 
     }

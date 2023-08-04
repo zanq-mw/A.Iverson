@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ChatView: View {
     @ObservedObject var viewModel: ViewModel
-    @EnvironmentObject var world: World
 
     var body: some View {
         ForEach(viewModel.messageGroups, id: \.id) { groupViewModel in
@@ -27,7 +26,7 @@ extension ChatView {
         }
 
         func send(_ message: String, user: UserViewModel) {
-            if var lastMessage = messageGroups.last, lastMessage.user == user {
+            if let lastMessage = messageGroups.last, lastMessage.user == user {
                 lastMessage.messages.append(message)
             } else {
                 messageGroups.append(MessageGroupView.ViewModel(user: user, messages: [message]))
