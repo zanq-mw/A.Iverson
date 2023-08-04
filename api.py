@@ -20,7 +20,7 @@ class BotResponse(Bet, BaseModel):
 
 app = FastAPI()
 
-# run `uvicorn main:app --reload` to start server
+# run `uvicorn api:app --reload` to start server
 # use this every time the user sends a message
 @app.post("/receive_message")
 def receive_message(user_message: UserMessage):
