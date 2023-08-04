@@ -2,6 +2,7 @@ import classify_question
 import cohere
 import configparser
 import bet_attributes
+import api
 
 config_read = configparser.ConfigParser()
 config_read.read("config.ini")
@@ -30,8 +31,9 @@ game_data = [
 ]
 
 
-def send_message(msg):
-    print(msg)
+def send_message(bot_response):
+    message = api.send_message(bot_response)
+    print(message)
 
 
 def bet_workflow(prompt):
@@ -108,17 +110,23 @@ def start():
     print("Hi I'm A.Iverson. How can I help you?")
     quit = False
     while not quit:
-        prompt = input()
-        req_type = classify_question.bet_or_question(prompt)
-        if prompt.lower() == "quit":
+        user_input = input()
+        prompt = api.receive_message({"user_message": user_input})
+        req_type = classify_question.bet_or_question(prompt["user_message"])
+        if prompt["user_message"].lower() == "quit":
             print("Goodbye! I hope I was helpful.")
             quit = True
         elif req_type == "Bet":
             bet = bet_workflow(prompt)
             print(bet)
         elif req_type == "Question":
-            answer = question_workflow(prompt)
-            send_message(answer)
+            answer = question_workflow(prompt["user_message"])
+            bot_response = {
+                "bot_message": answer,
+                "bet_mode": False,
+                "bet": None
+            }
+            send_message(bot_response)
         else:
             print("I can't understand your question, please be more specific.")
 
