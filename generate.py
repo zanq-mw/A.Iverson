@@ -17,3 +17,7 @@ def answer(prompt):
         model=config_read.get("models", "generate_answers")
     )
     return (response[0].text)
+
+if __name__ == "__main__":
+    prompt = input("Prompt: ")
+    print(answer(prompt))
