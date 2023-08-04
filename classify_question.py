@@ -1,5 +1,9 @@
 import cohere
 from cohere.responses.classify import Example
+import configparser
+
+config_read = configparser.ConfigParser()
+config_read.read("config.ini")
 
 co = cohere.Client(config_read.get("api_keys", "classify_question"))
 

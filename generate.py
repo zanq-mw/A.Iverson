@@ -1,4 +1,8 @@
 import cohere
+import configparser
+
+config_read = configparser.ConfigParser()
+config_read.read("config.ini")
 
 api_key = config_read.get("api_keys", "generate_answers")
 
