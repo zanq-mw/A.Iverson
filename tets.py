@@ -1,6 +1,10 @@
 import cohere
+import configparser
 
-api_key = 'UdTVXCMnL32EEYb85EA8q9bJee92nVke4QVXa9o9'
+config_read = configparser.ConfigParser()
+config_read.read("config.ini")
+
+api_key = config_read.get("api_keys", "teams")
 co = cohere.Client(api_key)
 
 
@@ -9,7 +13,7 @@ def answer(prompt):
     response = co.generate(
         pre_prompt + prompt,
         max_tokens=1000,
-        model="6c1b308b-95f6-4604-ab32-ea8364c127b6-ft"
+        model=config_read.get("models", "teams")
     )
     return (response[0].text)
 

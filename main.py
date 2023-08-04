@@ -1,6 +1,10 @@
 import classify_question
 import cohere
-api_key = 'UdTVXCMnL32EEYb85EA8q9bJee92nVke4QVXa9o9'
+import configparser
+
+config_read = configparser.ConfigParser()
+config_read.read("config.ini")
+api_key = config_read.get("api_keys", "generate_answers")
 co = cohere.Client(api_key)
 
 
@@ -17,7 +21,7 @@ def question_workflow(prompt):
     response = co.generate(
         pre_prompt + prompt,
         max_tokens=1000,
-        model="fce2cb16-c7ef-4d68-8f59-12696b268dbd-ft"
+        model=config_read.get("models", "generate_answers")
     )
     return (response[0].text)
 

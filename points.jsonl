@@ -1,7 +1,7 @@
 {"prompt": "I want to bet on the Lakers scoring 70 points", "completion": "70"}
 {"prompt": "Bet on the Los Angeles Lakers getting 90 points", "completion": "90"}
-{"prompt": "Put money on la lakers to win", "completion": "None"}
-{"prompt": "Place parlay on GSW winning", "completion": "None"}
+{"prompt": "Put money on la lakers to win", "completion": "N/A"}
+{"prompt": "Place parlay on GSW winning", "completion": "N/A"}
 {"prompt": "Bet on the Golden State Warriors for 50 points", "completion": "50"}
 {"prompt": "I want to bet on Lebron scoring 20 points", "completion": "20"}
 {"prompt": "I want to bet on the Knicks getting 40 points", "completion": "40"}
@@ -21,7 +21,7 @@
 {"prompt": "Put money on spurs to win and score 60 points", "completion": "60"}
 {"prompt": "I want to bet on the Pistons scoring 120", "completion": "120"}
 {"prompt": "Bet on the Detroit Pistons getting 111", "completion": "1"}
-{"prompt": "Put money on 80 points by the pistons", "completion": "Pistons"}
+{"prompt": "Put money on 80 points by the pistons", "completion": "80"}
 {"prompt": "I want to bet on the Suns scoring 70", "completion": "70"}
 {"prompt": "I wanna bet on Kevin Durant scoring 15 points", "completion": "15"}
 {"prompt": "bet on phx suns to win and score 60", "completion": "60"}
@@ -31,3 +31,7 @@
 {"prompt": "I want to bet on the Magic for 100 points", "completion": "100"}
 {"prompt": "Parlay on orl magic scoring 70", "completion": "70"}
 {"prompt": "bet on orlando magic to win and score 80 points", "completion": "80"}
+{"prompt": "Bet on Kyrie getting 10 assists", "completion": "N/A"}
+{"prompt": "Place a bet that LeBron will get 9 rebounds.", "completion": "N/A"}
+{"prompt": "I wanna bet Jokic gets 12 rebounds", "completion": "N/A"}
+{"prompt": "bet on Steph Curry to get and score 5 assists", "completion": "N/A"}

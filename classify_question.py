@@ -1,7 +1,7 @@
 import cohere
 from cohere.responses.classify import Example
 
-co = cohere.Client('5mA2w2L0Z0ySFKCC23XAiAJeaLJTTb2dq23UH79K')
+co = cohere.Client(config_read.get("api_keys", "classify_question"))
 
 examples = [
     Example("What is a moneyline?", "Question"),

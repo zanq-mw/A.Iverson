@@ -1,5 +1,6 @@
 import cohere
-api_key = 's1jvD0hXSVagqr4xxCo2wO9WGosYttDhRoytAX6h'
+api_key = config_read.get("api_keys", "prices")
+
 co = cohere.Client(api_key)
 
 pre_prompt = "If money is referenced in the following prompt, please output only that amount prepended with a dollar sign and nothing else. Otherwise, say 'N/A'. Here is the prompt: "
