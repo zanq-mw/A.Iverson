@@ -12,7 +12,7 @@ def send_message(msg):
     print(msg)
 
 
-def bet_worflow():
+def bet_workflow():
     print('bet')
 
 
@@ -27,17 +27,21 @@ def question_workflow(prompt):
 
 
 def start():
-    prompt = input("Hi I'm A.Iverson. How can I help you?\n")
-    req_type = classify_question.bet_or_question(prompt)
-    # while prompt != "quit":
-    #     pass
-    if req_type == "Bet":
-        bet_workflow()
-    elif req_type == "Question":
-        answer = question_workflow(prompt)
-        send_message(answer)
-    else:
-        return False
+    print("Hi I'm A.Iverson. How can I help you?")
+    quit  = False
+    while not quit:
+        prompt = input()
+        req_type = classify_question.bet_or_question(prompt)
+        if prompt.lower() == "quit":
+            print("Goodbye! I hope I was helpful.")
+            quit = True
+        elif req_type == "Bet":
+            bet_workflow()
+        elif req_type == "Question":
+            answer = question_workflow(prompt)
+            send_message(answer)
+        else:
+            print("I can't understand your question, please be more specific.")
 
 
 start()
