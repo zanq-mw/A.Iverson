@@ -7,73 +7,58 @@ api_key = config_read.get("api_keys", "prices")
 
 co = cohere.Client(api_key)
 
-pre_prompt = "If money is referenced in the following prompt, please output only that amount prepended with a dollar sign and nothing else. Otherwise, say 'N/A'. Here is the prompt: "
 
-prompt = input("Prompt: ")
+def get_sport(prompt):
+    pre_prompt = "If a sport is referenced in the following prompt, please output the name of the sport and nothing else. Otherwise, say 'N/A'. Here is the prompt: "
+    response = co.generate(
+        pre_prompt + prompt,
+        max_tokens=1000
+    )
+    sport = response[0].text
+    if "N/A" in sport:
+        return None
+    return sport
 
-response = co.generate(
-    pre_prompt + prompt,
-    max_tokens=1000
-)
-print(response[0].text)
+
+def get_bet(prompt):
+    model = config_read.get("models", "prices")
+    response = co.generate(
+        prompt,
+        model=model,
+        max_tokens=1000
+    )
+    bet = response[0].text
+    if bet == 'N/A':
+        return None
+    return float(bet)
 
 
-pre_prompt = "If an NBA is referenced in the following prompt, please output only the full name and nothing else. Otherwise, say 'N/A'. Here is the prompt: "
+def get_team(prompt):
+    api_key = config_read.get("api_keys", "teams")
+    co = cohere.Client(api_key)
+    model = config_read.get("models", "teams")
+    response = co.generate(
+        prompt,
+        model=model,
+        max_tokens=1000
+    )
+    team = response[0].text
+    return team
 
-prompt = input("Prompt: ")
 
-response = co.generate(
-    pre_prompt + prompt,
-    max_tokens=1000
-)
-print(response[0].text)
+def get_points(prompt):
+    api_key = config_read.get("api_keys", "points")
+    co = cohere.Client(api_key)
+    model = config_read.get("models", "points")
+    response = co.generate(
+        prompt,
+        max_tokens=1000,
+        model=model
+    )
+    points = response[0].text
+    if points == "N/A":
+        return None
+    return int(points)
 
-pre_prompt = "If a sport is referenced in the following prompt, please output the name of the sport and nothing else. Otherwise, say 'N/A'. Here is the prompt: "
 
-prompt = input("Prompt: ")
-
-response = co.generate(
-    pre_prompt + prompt,
-    max_tokens=1000
-)
-print(response[0].text)
-
-pre_prompt = "If game statistics are referenced in the following prompt, please output the name of the game statistic and nothing else. Otherwise, say 'N/A'. Here is the prompt: "
-
-prompt = input("Prompt: ")
-
-response = co.generate(
-    pre_prompt + prompt,
-    max_tokens=1000
-)
-print(response[0].text)
-
-pre_prompt = "If the name of an NBA player is referenced in the following prompt, please output the name of the player and nothing else. Otherwise, say 'N/A'. Here is the prompt: "
-
-prompt = input("Prompt: ")
-
-response = co.generate(
-    pre_prompt + prompt,
-    max_tokens=1000
-)
-print(response[0].text)
-
-pre_prompt = "If winning referenced in the following prompt, please output 'Win'. Here is the prompt: "
-
-prompt = input("Prompt: ")
-
-response = co.generate(
-    pre_prompt + prompt,
-    max_tokens=1000
-)
-print(response[0].text)
-
-pre_prompt = "If losing referenced in the following prompt, please output 'Loss'. Here is the prompt: "
-
-prompt = input("Prompt: ")
-
-response = co.generate(
-    pre_prompt + prompt,
-    max_tokens=1000
-)
-print(response[0].text)
+# print(get_points("I want to play Raptors scoring 70 points"))
