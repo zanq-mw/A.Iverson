@@ -86,9 +86,28 @@
 		C4608FAC2A7C338D0052296C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C4CBB6E62A7C02F9007B3E1F /* Colours.swift */,
 				C4608FAA2A7C33880052296C /* View.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C4609D362A7D87300052296C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4609D342A7D80540052296C /* UserViewModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C4609D372A7D875C0052296C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C4609D2E2A7D7F1A0052296C /* ChatView.swift */,
+				C4609D322A7D7F370052296C /* MessageGroupView.swift */,
+				C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		C4CBB6B02A7BFE47007B3E1F = {
@@ -115,15 +134,12 @@
 			isa = PBXGroup;
 			children = (
 				C4CBB6BC2A7BFE47007B3E1F /* A_IversonApp.swift */,
-				C4609D322A7D7F370052296C /* MessageGroupView.swift */,
+				C4609D372A7D875C0052296C /* Views */,
+				C4609D362A7D87300052296C /* Models */,
 				C4609D302A7D7F2F0052296C /* Dimensions.swift */,
-				C4609D2E2A7D7F1A0052296C /* ChatView.swift */,
 				C4608FAC2A7C338D0052296C /* Extensions */,
-				C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */,
 				C4CBB6C02A7BFE48007B3E1F /* Colours.xcassets */,
 				C4CBB6C22A7BFE48007B3E1F /* Preview Content */,
-				C4CBB6E62A7C02F9007B3E1F /* Colours.swift */,
-				C4609D342A7D80540052296C /* UserViewModel.swift */,
 			);
 			path = A.Iverson;
 			sourceTree = "<group>";

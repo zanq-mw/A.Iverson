@@ -35,8 +35,6 @@ struct ContentView: View {
             
             ChatView(viewModel: chatViewModel)
 
-            Spacer()
-
             // MARK: INPUT FIELD
             HStack(alignment: .bottom, spacing: 8) {
                 ZStack(alignment: .leading) {

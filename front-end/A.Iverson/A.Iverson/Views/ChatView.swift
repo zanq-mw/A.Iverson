@@ -11,8 +11,12 @@ struct ChatView: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        ForEach(viewModel.messageGroups, id: \.id) { groupViewModel in
-            MessageGroupView(viewModel: groupViewModel)
+        ScrollView {
+            VStack(spacing: 0) {
+                ForEach(viewModel.messageGroups, id: \.id) { groupViewModel in
+                    MessageGroupView(viewModel: groupViewModel)
+                }
+            }
         }
     }
 }

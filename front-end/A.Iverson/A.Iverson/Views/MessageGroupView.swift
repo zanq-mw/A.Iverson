@@ -11,24 +11,29 @@ struct MessageGroupView: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        VStack(alignment: viewModel.isUser ? .trailing : .leading, spacing: Dimensions.Chat.groupSpacing) {
-            Text(viewModel.user.name)
-                .font(Font.custom("SF Pro Text", size: 12))
-                .foregroundColor(.white.opacity(0.5))
-                .padding(.bottom, 2)
-            
-            ForEach(viewModel.messages, id: \.self) { message in
-                Text(message)
-                    .foregroundColor(.white)
-                    .padding(.vertical, 6)
-                    .padding(.horizontal, 8)
-                    .background(viewModel.background)
-                    .cornerRadius(12, corners: viewModel.roundCorners)
-                    .cornerRadius(2, corners: viewModel.sharpCorners)
-                    .frame(width: 250, alignment: viewModel.isUser ? .trailing : .leading)
+        HStack(spacing: 8) {
+            if let image = viewModel.user.profilePicture {
+                
             }
+            VStack(alignment: viewModel.isUser ? .trailing : .leading, spacing: Dimensions.Chat.groupSpacing) {
+                Text(viewModel.user.name)
+                    .font(Font.custom("SF Pro Text", size: 12))
+                    .foregroundColor(.white.opacity(0.5))
+                    .padding(.bottom, 2)
+
+                ForEach(viewModel.messages, id: \.self) { message in
+                    Text(message)
+                        .foregroundColor(.white)
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 8)
+                        .background(viewModel.background)
+                        .cornerRadius(12, corners: viewModel.roundCorners)
+                        .cornerRadius(2, corners: viewModel.sharpCorners)
+                        .frame(width: 250, alignment: viewModel.isUser ? .trailing : .leading)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: viewModel.isUser ? .trailing : .leading)
         }
-        .frame(maxWidth: .infinity, alignment: viewModel.isUser ? .trailing : .leading)
     }
 }
 
