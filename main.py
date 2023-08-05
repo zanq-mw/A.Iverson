@@ -31,6 +31,7 @@ game_data = [
         "name": "Hawks vs Warriors", "multiplier": 1.4, "odds": 101}
 ]
 
+
 def bet_workflow(prompt):
     data = {'sport': bet_attributes.get_sport(prompt),
             'team': bet_attributes.get_team(prompt),
@@ -40,7 +41,7 @@ def bet_workflow(prompt):
     team_q = 'What team would you like to place your bet on?\n'
     outcome_q = 'What outcome would you like to bet on?\n'
     game_q = 'What game do you want to bet on?\n'
-    bet_amount_q = 'How much would you like to bet\n'
+    bet_amount_q = 'How much would you like to bet?\n'
     try_again = "Sorry I didn't get that. Try again.\n"
 
     while 'sport' not in data or data['sport'] is None:
@@ -66,7 +67,7 @@ def bet_workflow(prompt):
                 msg += (f'{i+1}. {game["name"]}\n')
         user_input = input(game_q + msg)
         if user_input.isdigit() and int(user_input) < len(games):
-            user_input = int(user_input)
+            user_input = int(user_input) - 1
             data['game_title'] = games[user_input]
             data['multiplier'] = multipliers[user_input]
             data['odds'] = odds[user_input]
@@ -90,13 +91,13 @@ def bet_workflow(prompt):
         data['bet_description'] = 'Moneyline'
 
     bet = Bet(
-        game_title=data['game_title'], 
-        bet_title=data['bet_title'], 
+        game_title=data['game_title'],
+        bet_title=data['bet_title'],
         bet_description=data['bet_description'],
         bet_amount=data['bet_amount'],
         to_win=data['bet_amount']*data['multiplier'],
         odds=data['odds']
-        )
+    )
     # send_message("Here is your bet slip\n")
     return {
         "bet": bet,
@@ -133,7 +134,7 @@ def start_workflow(user_input):
             "bet_mode": False,
             "bet": None
         }
-    else: 
+    else:
         answer = "I do not understand, please try again."
         response = {
             "bot_message": answer,
@@ -141,4 +142,3 @@ def start_workflow(user_input):
             "bet": None
         }
     return response
-
