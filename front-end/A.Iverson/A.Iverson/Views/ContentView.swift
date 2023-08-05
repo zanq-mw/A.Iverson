@@ -10,78 +10,62 @@ import SwiftUI
 struct ContentView: View {
     @State var textField: String = ""
     var userViewModel = UserViewModel(name: "Anders")
-    var computerViewModel = UserViewModel(name: "A.Iverson")
+    var computerViewModel = UserViewModel(name: "A.Iverson", profilePicture: {
+        Image(systemName: "face.dashed.fill")
+    }())
     @ObservedObject var chatViewModel = ChatView.ViewModel(messageGroups: [])
     @State var userSend = true
+    @State var betslip = false
 
-    enum Constants {
-        static let textBoxHeight: CGFloat = 33.0
-        static let textBoxSmall: CGFloat = 6
-        static let textBoxLarge: CGFloat = 14
-    }
+    @ObservedObject var betslipViewModel = BetslipView.ViewModel(bets: [])
 
     var body: some View {
         VStack {
+            HStack {
+                Button(action: {
+                    betslip.toggle()
+                }, label: {
+                    Text("BETSLIP")
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 10)
+                        .foregroundColor(.white)
+                        .background(.blue)
+                        .cornerRadius(10)
+                })
 
-            Button(action: {
-                userSend.toggle()
-            }, label: {
-                Text("TOGGLE MESSAGES")
-                    .padding()
-                    .foregroundColor(.black)
-                    .background(.white)
-                    .cornerRadius(20)
-            })
+                Button(action: {
+                    betslipViewModel.addBet()
+                }, label: {
+                    Text("BET")
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 10)
+                        .foregroundColor(.white)
+                        .background(.red)
+                        .cornerRadius(10)
+                })
+
+                Button(action: {
+                    userSend.toggle()
+                }, label: {
+                    Text("MESSAGES")
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 10)
+                        .foregroundColor(.black)
+                        .background(.white)
+                        .cornerRadius(10)
+                })
+            }
             
             ChatView(viewModel: chatViewModel)
 
-            // MARK: INPUT FIELD
-            HStack(alignment: .bottom, spacing: 8) {
-                ZStack(alignment: .leading) {
-                    if textField.isEmpty {
-                        Text("Type a message...")
-                            .foregroundColor(.Input.placeholder)
-                    }
-
-                    TextField("", text: $textField, axis: .vertical)
-                        .frame(minHeight: Constants.textBoxHeight)
-                        .foregroundColor(.Input.text)
-                        .disableAutocorrection(true)
-                }
-
-                if !textField.isEmpty {
-                    Button(action: {
-                        chatViewModel.send(textField, user: userSend ? userViewModel : computerViewModel)
-                        textField = ""
-                    }, label: {
-                        ZStack (alignment: .center) {
-                            Circle()
-                                .foregroundColor(.Input.sendButton)
-
-                            Image(systemName: "paperplane.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 20)
-                                .foregroundColor(.white)
-                                .offset(x: -2)
-                        }
-                        .frame(height: Constants.textBoxHeight)
-                    })
-                }
-            }
-            .padding(.vertical, Constants.textBoxSmall)
-            .padding(.trailing, Constants.textBoxSmall)
-            .padding(.leading, Constants.textBoxLarge)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.Input.border, lineWidth: 1)
-                    .frame(minHeight: Constants.textBoxHeight)
-            )
+            InputFieldView(userSend: $userSend, textField: $textField, chatViewModel: chatViewModel, users: (user: userViewModel, computer: computerViewModel))
         }
         .padding()
         .background(Color.Theme.background)
         .frame(maxHeight: .infinity)
-
+        .sheet(isPresented: $betslip) {
+            BetslipView(viewModel: betslipViewModel)
+        }
     }
 }
 

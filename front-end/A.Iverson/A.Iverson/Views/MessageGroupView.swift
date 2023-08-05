@@ -11,10 +11,15 @@ struct MessageGroupView: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(alignment: .bottom, spacing: 8) {
             if let image = viewModel.user.profilePicture {
-                
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 24)
+                    .foregroundColor(.Input.border)
             }
+
             VStack(alignment: viewModel.isUser ? .trailing : .leading, spacing: Dimensions.Chat.groupSpacing) {
                 Text(viewModel.user.name)
                     .font(Font.custom("SF Pro Text", size: 12))
