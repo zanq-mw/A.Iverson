@@ -14,7 +14,7 @@ config["models"] = {
     "generate_answers": "cf0924a2-7c7f-43a3-962f-4c83403d92fe-ft",
     "teams": "6c1b308b-95f6-4604-ab32-ea8364c127b6-ft",
     "points": "6ff555ab-8547-449a-ad8b-75c94d3ad4da-ft",
-    "prices": "d2aa6c60-00f7-472b-a706-2cf00fd875bb-ft"
+    "prices": "fd79bd6e-0036-492c-88ed-60ec4395d1f3-ft"
 }
 with open("config.ini", "w") as configfile:
     config.write(configfile)
