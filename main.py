@@ -3,6 +3,7 @@ import cohere
 import configparser
 import bet_attributes
 import api
+from api_responses import Bet
 
 config_read = configparser.ConfigParser()
 config_read.read("config.ini")
@@ -30,21 +31,16 @@ game_data = [
         "name": "Hawks vs Warriors", "multiplier": 1.4, "odds": 101}
 ]
 
-
-def send_message(bot_response):
-    message = api.send_message(bot_response)
-    print(message)
-
-
 def bet_workflow(prompt):
     data = {'sport': bet_attributes.get_sport(prompt),
             'team': bet_attributes.get_team(prompt),
-            'bet': bet_attributes.get_bet(prompt),
+            'bet_amount': bet_attributes.get_bet_amount(prompt),
             'points': bet_attributes.get_points(prompt)}
     sport_q = 'What sport would you like to place your bet on?\n'
     team_q = 'What team would you like to place your bet on?\n'
     outcome_q = 'What outcome would you like to bet on?\n'
     game_q = 'What game do you want to bet on?\n'
+    bet_amount_q = 'How much would you like to bet\n'
     try_again = "Sorry I didn't get that. Try again.\n"
 
     while 'sport' not in data or data['sport'] is None:
@@ -81,6 +77,11 @@ def bet_workflow(prompt):
         data['points'] = bet_attributes.get_points(user_input)
         sport_q = try_again
 
+    while ('bet_amount' not in data or data['bet_amount'] is None):
+        user_input = user_input = input(bet_amount_q + "$")
+        data['bet_amount'] = int(user_input)
+        sport_q = try_again
+
     if 'points' in data and data['points'] is not None:
         data['bet_title'] = f"Over {data['points'] - 0.5}"
         data['bet_description'] = 'Total'
@@ -88,8 +89,20 @@ def bet_workflow(prompt):
         data['bet_title'] = data['team']
         data['bet_description'] = 'Moneyline'
 
-    send_message("Here is your bet slip\n")
-    return data
+    bet = Bet(
+        game_title=data['game_title'], 
+        bet_title=data['bet_title'], 
+        bet_description=data['bet_description'],
+        bet_amount=data['bet_amount'],
+        to_win=data['bet_amount']*data['multiplier'],
+        odds=data['odds']
+        )
+    # send_message("Here is your bet slip\n")
+    return {
+        "bet": bet,
+        "bot_message": "Here is your betslip: \n",
+        "bet_mode": True
+    }
 
     # what sport
     # what team
@@ -106,29 +119,26 @@ def question_workflow(prompt):
     return (response[0].text)
 
 
-def start():
-    print("Hi I'm A.Iverson. How can I help you?")
-    quit = False
-    while not quit:
-        user_input = input()
-        prompt = api.receive_message({"user_message": user_input})
-        req_type = classify_question.bet_or_question(prompt["user_message"])
-        if prompt["user_message"].lower() == "quit":
-            print("Goodbye! I hope I was helpful.")
-            quit = True
-        elif req_type == "Bet":
-            bet = bet_workflow(prompt)
-            print(bet)
-        elif req_type == "Question":
-            answer = question_workflow(prompt["user_message"])
-            bot_response = {
-                "bot_message": answer,
-                "bet_mode": False,
-                "bet": None
-            }
-            send_message(bot_response)
-        else:
-            print("I can't understand your question, please be more specific.")
+def start_workflow(user_input):
+    req_type = classify_question.bet_or_question(user_input)
 
+    repsonse = {}
 
-start()
+    if req_type == "Bet":
+        response = bet_workflow(user_input)
+    elif req_type == "Question":
+        answer = question_workflow(user_input)
+        response = {
+            "bot_message": answer,
+            "bet_mode": False,
+            "bet": None
+        }
+    else: 
+        answer = "I do not understand, please try again."
+        response = {
+            "bot_message": answer,
+            "bet_mode": False,
+            "bet": None
+        }
+    return response
+

@@ -20,7 +20,7 @@ def get_sport(prompt):
     return sport
 
 
-def get_bet(prompt):
+def get_bet_amount(prompt):
     model = config_read.get("models", "prices")
     response = co.generate(
         prompt,
