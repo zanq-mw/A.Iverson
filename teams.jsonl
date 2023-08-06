@@ -1,7 +1,7 @@
 {"prompt": "I want to bet on the Lakers", "completion": "Lakers"}
 {"prompt": "Bet on the Los Angeles Lakers", "completion": "Lakers"}
 {"prompt": "Put money on la lakers to win", "completion": "Lakers"}
-{"prompt": "Place parlay on GSW winning", "completion": "Warriors"}
+{"prompt": "Place parlay on GS Warriors winning", "completion": "Warriors"}
 {"prompt": "Bet on the Golden State Warriors", "completion": "Warriors"}
 {"prompt": "Put money on warriors to win", "completion": "Warriors"}
 {"prompt": "I want to bet on the Knicks", "completion": "Knicks"}
@@ -31,3 +31,14 @@
 {"prompt": "I want to bet on the Magic", "completion": "Magic"}
 {"prompt": "Parlay on orl magic ", "completion": "Magic"}
 {"prompt": "bet on orlando magic to win", "completion": "Magic"}
+{"prompt": "Bet on a basketball game", "completion": "N/A"}
+{"prompt": "I want to place a bet", "completion": "N/A"}
+{"prompt": "Bet on Devin Booker", "completion": "N/A"}
+{"prompt": "I want to put money on a parlay", "completion": "N/A"}
+{"prompt": "I am having a wonderful day", "completion": "N/A"}
+{"prompt": "There are 50 states in the United States of America", "completion": "N/A"}
+{"prompt": "I have to go to the grocery store", "completion": "N/A"}
+{"prompt": "Place a straight bet for me, $50", "completion": "N/A"}
+{"prompt": "Put $60 on a basketball game", "completion": "N/A"}
+{"prompt": "I wanna bet", "completion": "N/A"}
+{"prompt": "Place a moneyline wager", "completion": "N/A"}

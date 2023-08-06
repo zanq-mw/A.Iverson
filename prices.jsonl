@@ -42,6 +42,14 @@
 {"prompt": "Place bet for $7", "completion": "7.00"}
 {"prompt": "I want to bet $6.98", "completion": "6.98"}
 {"prompt": "Make a hundred dollar bet", "completion": "100.00"}
-{"prompt": "bet on the 20 dollars Nuggets losing by 12", "completion": "$20"}
+{"prompt": "bet 20 dollars on the Nuggets losing by 12", "completion": "20.00"}
 {"prompt": "Place bet for sixteen dollars", "completion": "16.00"}
 {"prompt": "Place bet for 16 dollars", "completion": "16.00"}
+{"prompt": "Place 2 grand bet on Denver being up twenty", "completion": "2000.00"}
+{"prompt": "Place a grand on Thunder being up 20", "completion": "1000.00"}
+{"prompt": "Place bet for three grand", "completion": "3000.00"}
+{"prompt": "I want to bet 6 grand", "completion": "6000.00"}
+{"prompt": "Make a bet for a grand", "completion": "1000.00"}
+{"prompt": "bet four grand Nuggets losing by 12", "completion": "4000.00"}
+{"prompt": "Place bet for sixteen grand dollars", "completion": "16000.00"}
+{"prompt": "Place bet for a grand", "completion": "1000.00"}

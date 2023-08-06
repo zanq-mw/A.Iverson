@@ -71,17 +71,18 @@ def bet_workflow(prompt):
             data['game_title'] = games[user_input]
             data['multiplier'] = multipliers[user_input]
             data['odds'] = odds[user_input]
-        outcome_q = try_again
+        game_q = try_again
 
     while ('points' not in data or data['points'] is None) and ('win' not in data or data['win'] is None):
         user_input = input(outcome_q)
         data['points'] = bet_attributes.get_points(user_input)
-        sport_q = try_again
+        data['win'] = bet_attributes.get_win(user_input)
+        outcome_q = try_again
 
     while ('bet_amount' not in data or data['bet_amount'] is None):
-        user_input = user_input = input(bet_amount_q + "$")
+        user_input = input(bet_amount_q)
         data['bet_amount'] = int(user_input)
-        sport_q = try_again
+        bet_amount_q = try_again
 
     if 'points' in data and data['points'] is not None:
         data['bet_title'] = f"Over {data['points'] - 0.5}"
@@ -102,7 +103,7 @@ def bet_workflow(prompt):
     return {
         "bet": bet,
         "bot_message": "Here is your betslip: \n",
-        "bet_mode": True
+        "bet_mode": False
     }
 
     # what sport
