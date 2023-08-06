@@ -39,6 +39,7 @@ def bet_workflow(prompt):
             'points': bet_attributes.get_points(prompt)}
     return validate_bet_data(data)
 
+
 def validate_bet_data(data):
 
     if 'sport' not in data or data['sport'] is None:
@@ -106,7 +107,7 @@ def validate_bet_data(data):
 
         return {
             "bet": bet,
-            "bot_message": "Here is your betslip: \n",
+            "bot_message": "I've put together a betslip for you, open it to place your bet. \n\nTo learn more about betting, here are some questions you can ask me: \n\n 'What is a straight bet?' \n 'What is moneyline?' \n 'How do I place a bet?'",
             "bet_mode": False,
             "bet_data": None
         }
@@ -152,6 +153,7 @@ def add_to_bet_data(user_message, user_data):
 
     return validate_bet_data(data)
 
+
 def question_workflow(prompt):
     pre_prompt = "You are an AI chatbot that helps users navigate and use theScore Bet app. Assume that all questions are asked in the context of theScore Bet app. To start, please answer this user's question: "
     response = co.generate(
@@ -159,6 +161,24 @@ def question_workflow(prompt):
         max_tokens=1000,
         model=config_read.get("models", "generate_answers")
     )
+    # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
+
+    # answer = response[0].text
+    # answer += "\n\nWas this helpful? Please answer YES or NO.\n"
+    # helpful = input(answer)
+    # if helpful.lower() == 'yes':
+    #     data = f'"prompt": "{prompt}", "completion": "{response[0].text}"'
+    #     data = '\n{' + data + '}'
+    #     with open('generate_training_data.jsonl', "a") as f:
+    #         f.write(data)
+    #     msg = "Thanks for letting me know. Anything else I can help you with?"
+    # else:
+    #     msg = "Sorry for that. Anything else I can help you with?"
+
+    # return {
+    #     "bot_message": msg,
+    #     "bet_mode": False
+    # }
     return (response[0].text)
 
 
@@ -168,22 +188,22 @@ def start_workflow(user_input):
     else:
         req_type = classify_question.bet_or_question(user_input.user_message)
 
-        repsonse = {}
+    response = {}
 
-        if req_type == "Bet":
-            response = bet_workflow(user_input.user_message)
-        elif req_type == "Question":
-            answer = question_workflow(user_input.user_message)
-            response = {
-                "bot_message": answer,
-                "bet_mode": False,
-                "bet": None
-            }
-        else:
-            answer = "I do not understand, please try again."
-            response = {
-                "bot_message": answer,
-                "bet_mode": False,
-                "bet": None
-            }
-        return response
+    if req_type == "Bet":
+        response = bet_workflow(user_input.user_message)
+    elif req_type == "Question":
+        answer = question_workflow(user_input.user_message)
+        response = {
+            "bot_message": answer,
+            "bet_mode": False,
+            "bet": None
+        }
+    else:
+        answer = "I do not understand, please try again."
+        response = {
+            "bot_message": answer,
+            "bet_mode": False,
+            "bet": None
+        }
+    return response
