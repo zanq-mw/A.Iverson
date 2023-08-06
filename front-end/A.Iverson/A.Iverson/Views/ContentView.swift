@@ -16,6 +16,7 @@ struct ContentView: View {
     @ObservedObject var chatViewModel = ChatView.ViewModel(messageGroups: [])
     @State var userSend = true
     @State var betslip = false
+    @State var betMode = false
     
     @ObservedObject var betslipViewModel = BetslipView.ViewModel(bets: [])
     
@@ -23,6 +24,19 @@ struct ContentView: View {
         ZStack {
             VStack {
                 HStack {
+                    Button(action: {
+                        withAnimation {
+                            betMode.toggle()
+                        }
+                    }, label: {
+                        Text("MODE")
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 10)
+                            .foregroundColor(.white)
+                            .background(.blue)
+                            .cornerRadius(10)
+                    })
+
                     Button(action: {
                         withAnimation {
                             betslip.toggle()
@@ -60,12 +74,23 @@ struct ContentView: View {
                             .cornerRadius(10)
                     })
                 }
-                
-                ChatView(viewModel: chatViewModel)
-                
-                InputFieldView(userSend: $userSend, textField: $textField, chatViewModel: chatViewModel, users: (user: userViewModel, computer: computerViewModel))
+                .frame(maxWidth: .infinity)
+                .background(Color.Theme.background)
+                .zIndex(3)
+
+                if betMode {
+                    BetModeInfoView()
+                        .transition(.move(edge: .top))
+                        .zIndex(2)
+                }
+
+                Group {
+                    ChatView(viewModel: chatViewModel)
+
+                    InputFieldView(userSend: $userSend, textField: $textField, chatViewModel: chatViewModel, users: (user: userViewModel, computer: computerViewModel))
+                }
+                .padding(.horizontal, 16)
             }
-            .padding()
             .background(Color.Theme.background)
             .frame(maxHeight: .infinity)
             

@@ -72,7 +72,9 @@ struct BetslipView: View {
                 Button(action: {
 
                 }, label: {
-
+                    HStack {
+                        
+                    }
                 })
             }
             .padding(.bottom, safeAreaInsets.bottom)
