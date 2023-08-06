@@ -149,4 +149,4 @@ def get_win(prompt):
     return True
 
 
-# print([get_bet_amount("I want to $5 bet on the Sonics winning")])
+# print([get_team("the Raptors")])

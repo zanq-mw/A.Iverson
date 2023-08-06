@@ -4,6 +4,7 @@ import configparser
 import bet_attributes
 import api
 from api_responses import Bet
+from copy import deepcopy
 
 config_read = configparser.ConfigParser()
 config_read.read("config.ini")
@@ -60,6 +61,7 @@ def validate_bet_data(data):
         games = []
         multipliers = []
         odds = []
+        suggested_prompts = []
         msg = 'Here are the options:\n'
         for i in range(len(GAME_DATA)):
             game = GAME_DATA[i]
@@ -68,11 +70,13 @@ def validate_bet_data(data):
                 multipliers.append(game['multiplier'])
                 odds.append(game['odds'])
                 msg += (f'{i+1}. {game["name"]}\n')
+                suggested_prompts.append(str(i+1))
         return {
             "bet": None,
             "bot_message": msg,
             "bet_mode": True,
-            "bet_data": data
+            "bet_data": data,
+            "suggested_prompts": suggested_prompts
         }
     elif ('points' not in data or data['points'] is None) and ('win' not in data or data['win'] is None):
         return {
@@ -107,13 +111,21 @@ def validate_bet_data(data):
 
         return {
             "bet": bet,
-            "bot_message": "I've put together a betslip for you, open it to place your bet. \n\nTo learn more about betting, here are some questions you can ask me: \n\n 'What is a straight bet?' \n 'What is moneyline?' \n 'How do I place a bet?'",
+            "bot_message": "I've put together a betslip for you, open it to place your bet.",
             "bet_mode": False,
-            "bet_data": None
+            "bet_data": None,
+            "suggested_prompts": ['What is a straight bet?', 'What is moneyline?', 'How do I place a bet?']
         }
 
 
 def add_to_bet_data(user_message, user_data):
+    if user_message.lower() == "exit":
+        return {
+            "bot_message": "Okay, I've abandoned that bet. Is there anything else I can help you with?",
+            "bet_mode": False,
+            "bet": None
+        }
+
     data = {
         "sport": user_data.sport,
         "team": user_data.team,
@@ -123,11 +135,12 @@ def add_to_bet_data(user_message, user_data):
         "multiplier": user_data.multiplier,
         "odds": user_data.odds,
     }
+    initial_data = deepcopy(data)
 
     if 'sport' not in data or data['sport'] is None:
-        data['sport'] = user_message
+        data['sport'] = bet_attributes.get_sport(user_message)
     elif 'team' not in data or data['team'] is None:
-        data['team'] = user_message
+        data['team'] = bet_attributes.get_team(user_message)
     elif 'game_title' not in data or data['game_title'] is None:
         games = []
         multipliers = []
@@ -151,7 +164,10 @@ def add_to_bet_data(user_message, user_data):
     elif 'bet_amount' not in data or data['bet_amount'] is None:
         data['bet_amount'] = float(user_message)
 
-    return validate_bet_data(data)
+    bet_data = validate_bet_data(data)
+    if bet_data == initial_data:
+        bet_data['bot_message'] = "Sorry, I didn't get that. Please try again."
+    return bet_data
 
 
 def question_workflow(prompt):
@@ -161,10 +177,11 @@ def question_workflow(prompt):
         max_tokens=1000,
         model=config_read.get("models", "generate_answers")
     )
-    # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
+    # # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
 
     # answer = response[0].text
     # answer += "\n\nWas this helpful? Please answer YES or NO.\n"
+    # # In the returned dictionary, there should be "suggested_prompts": ["Yes", "No"]
     # helpful = input(answer)
     # if helpful.lower() == 'yes':
     #     data = f'"prompt": "{prompt}", "completion": "{response[0].text}"'
