@@ -14,9 +14,16 @@
 		C4609D352A7D80540052296C /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D342A7D80540052296C /* UserViewModel.swift */; };
 		C4609D392A7D93540052296C /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D382A7D93540052296C /* InputFieldView.swift */; };
 		C4609D3B2A7D9EA30052296C /* BetslipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D3A2A7D9EA30052296C /* BetslipView.swift */; };
-		C4609D3E2A7DC5430052296C /* BetslipInputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D3D2A7DC5430052296C /* BetslipInputFieldView.swift */; };
+		C4609D3E2A7DC5430052296C /* BetslipInputFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D3D2A7DC5430052296C /* BetslipInputFieldsView.swift */; };
 		C4609F442A7DC9F90052296C /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F432A7DC9F90052296C /* Optional.swift */; };
 		C4609F472A7DDBF30052296C /* SF Pro Text.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4609F462A7DDBF30052296C /* SF Pro Text.ttf */; };
+		C4609F4A2A7DEB1A0052296C /* BetslipMoneyAmounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F492A7DEB1A0052296C /* BetslipMoneyAmounts.swift */; };
+		C4609F4C2A7E05680052296C /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F4B2A7E05680052296C /* UIScreen.swift */; };
+		C4609F4E2A7E087B0052296C /* BetslipBetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F4D2A7E087B0052296C /* BetslipBetInfoView.swift */; };
+		C4609F502A7E09930052296C /* BetslipBetTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F4F2A7E09930052296C /* BetslipBetTitleView.swift */; };
+		C4609F522A7E17FA0052296C /* SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F512A7E17FA0052296C /* SafeArea.swift */; };
+		C4609F542A7EED6C0052296C /* BetModeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F532A7EED6C0052296C /* BetModeInfoView.swift */; };
+		C4609F562A7F20300052296C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F552A7F20300052296C /* String.swift */; };
 		C4CBB6BD2A7BFE47007B3E1F /* A_IversonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CBB6BC2A7BFE47007B3E1F /* A_IversonApp.swift */; };
 		C4CBB6BF2A7BFE47007B3E1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */; };
 		C4CBB6C12A7BFE48007B3E1F /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CBB6C02A7BFE48007B3E1F /* Colours.xcassets */; };
@@ -52,10 +59,17 @@
 		C4609D342A7D80540052296C /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		C4609D382A7D93540052296C /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 		C4609D3A2A7D9EA30052296C /* BetslipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetslipView.swift; sourceTree = "<group>"; };
-		C4609D3D2A7DC5430052296C /* BetslipInputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetslipInputFieldView.swift; sourceTree = "<group>"; };
+		C4609D3D2A7DC5430052296C /* BetslipInputFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetslipInputFieldsView.swift; sourceTree = "<group>"; };
 		C4609F432A7DC9F90052296C /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		C4609F462A7DDBF30052296C /* SF Pro Text.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF Pro Text.ttf"; path = "../../../../../../../Downloads/SF Pro Text.ttf"; sourceTree = "<group>"; };
 		C4609F482A7DDC820052296C /* A-Iverson-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "A-Iverson-Info.plist"; sourceTree = SOURCE_ROOT; };
+		C4609F492A7DEB1A0052296C /* BetslipMoneyAmounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetslipMoneyAmounts.swift; sourceTree = "<group>"; };
+		C4609F4B2A7E05680052296C /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
+		C4609F4D2A7E087B0052296C /* BetslipBetInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetslipBetInfoView.swift; sourceTree = "<group>"; };
+		C4609F4F2A7E09930052296C /* BetslipBetTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetslipBetTitleView.swift; sourceTree = "<group>"; };
+		C4609F512A7E17FA0052296C /* SafeArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeArea.swift; sourceTree = "<group>"; };
+		C4609F532A7EED6C0052296C /* BetModeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetModeInfoView.swift; sourceTree = "<group>"; };
+		C4609F552A7F20300052296C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C4CBB6B92A7BFE47007B3E1F /* A.Iverson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A.Iverson.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CBB6BC2A7BFE47007B3E1F /* A_IversonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_IversonApp.swift; sourceTree = "<group>"; };
 		C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -100,6 +114,9 @@
 				C4CBB6E62A7C02F9007B3E1F /* Colours.swift */,
 				C4608FAA2A7C33880052296C /* View.swift */,
 				C4609F432A7DC9F90052296C /* Optional.swift */,
+				C4609F4B2A7E05680052296C /* UIScreen.swift */,
+				C4609F512A7E17FA0052296C /* SafeArea.swift */,
+				C4609F552A7F20300052296C /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -120,6 +137,7 @@
 				C4609D322A7D7F370052296C /* MessageGroupView.swift */,
 				C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */,
 				C4609D382A7D93540052296C /* InputFieldView.swift */,
+				C4609F532A7EED6C0052296C /* BetModeInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -128,7 +146,10 @@
 			isa = PBXGroup;
 			children = (
 				C4609D3A2A7D9EA30052296C /* BetslipView.swift */,
-				C4609D3D2A7DC5430052296C /* BetslipInputFieldView.swift */,
+				C4609D3D2A7DC5430052296C /* BetslipInputFieldsView.swift */,
+				C4609F492A7DEB1A0052296C /* BetslipMoneyAmounts.swift */,
+				C4609F4D2A7E087B0052296C /* BetslipBetInfoView.swift */,
+				C4609F4F2A7E09930052296C /* BetslipBetTitleView.swift */,
 			);
 			path = Betslip;
 			sourceTree = "<group>";
@@ -333,11 +354,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4609F562A7F20300052296C /* String.swift in Sources */,
 				C4CBB6BF2A7BFE47007B3E1F /* ContentView.swift in Sources */,
 				C4609D352A7D80540052296C /* UserViewModel.swift in Sources */,
 				C4609D392A7D93540052296C /* InputFieldView.swift in Sources */,
-				C4609D3E2A7DC5430052296C /* BetslipInputFieldView.swift in Sources */,
+				C4609D3E2A7DC5430052296C /* BetslipInputFieldsView.swift in Sources */,
 				C4608FAB2A7C33880052296C /* View.swift in Sources */,
+				C4609F4C2A7E05680052296C /* UIScreen.swift in Sources */,
+				C4609F4A2A7DEB1A0052296C /* BetslipMoneyAmounts.swift in Sources */,
+				C4609F542A7EED6C0052296C /* BetModeInfoView.swift in Sources */,
+				C4609F522A7E17FA0052296C /* SafeArea.swift in Sources */,
+				C4609F4E2A7E087B0052296C /* BetslipBetInfoView.swift in Sources */,
 				C4CBB6E72A7C02F9007B3E1F /* Colours.swift in Sources */,
 				C4609F442A7DC9F90052296C /* Optional.swift in Sources */,
 				C4609D3B2A7D9EA30052296C /* BetslipView.swift in Sources */,
@@ -345,6 +372,7 @@
 				C4609D312A7D7F300052296C /* Dimensions.swift in Sources */,
 				C4609D332A7D7F370052296C /* MessageGroupView.swift in Sources */,
 				C4CBB6BD2A7BFE47007B3E1F /* A_IversonApp.swift in Sources */,
+				C4609F502A7E09930052296C /* BetslipBetTitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

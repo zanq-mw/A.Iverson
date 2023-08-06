@@ -7,11 +7,12 @@
 
 import SwiftUI
 
+enum BetslipInputField: String {
+    case bet
+    case win
+}
+
 struct BetslipInputFieldView: View {
-    enum BetslipInputField: String {
-        case bet
-        case win
-    }
     @ObservedObject var viewModel: ViewModel
     @FocusState var focusedField: BetslipInputField?
 
@@ -19,13 +20,10 @@ struct BetslipInputFieldView: View {
         HStack(spacing: 8) {
             // MARK: TO BET
             VStack(alignment: .leading, spacing: 0) {
-                Text("Bet")
+                Text(viewModel.title)
                     .font(Font.custom("SF Pro Text", size: 12))
                     .foregroundColor(Color(red: 0.34, green: 0.34, blue: 0.34))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .onTapGesture {
-                        print(focusedField)
-                    }
 
                 HStack(spacing: 0) {
                     Text("$")
@@ -33,7 +31,7 @@ struct BetslipInputFieldView: View {
 
                     ZStack(alignment: .leading) {
                         // Value placeholder - 0.00
-                        if viewModel.toBet == "" {
+                        if viewModel.text == "" {
                             Text("0.00")
                                 .lineLimit(1)
                                 .font(
@@ -44,7 +42,7 @@ struct BetslipInputFieldView: View {
 
                         }
 
-                        TextField("", text: $viewModel.toBet)
+                        TextField("", text: $viewModel.text)
                             .focused($focusedField, equals: .bet)
                             .font(
                                 Font.custom("SF Pro Text", size: 16)
@@ -66,56 +64,6 @@ struct BetslipInputFieldView: View {
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(focusedField == .bet ? Color(red: 0, green: 0.39, blue: 0.98) : Color(red: 0.75, green: 0.75, blue: 0.75), lineWidth: 1)
             )
-
-            //MARK: TO WIN
-            VStack(alignment: .leading, spacing: 0) {
-                Text("To Win")
-                    .font(Font.custom("SF Pro Text", size: 12))
-                    .foregroundColor(Color(red: 0.34, green: 0.34, blue: 0.34))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .onTapGesture {
-                        print(focusedField)
-                    }
-
-                HStack(spacing: 0) {
-                    Text("$")
-                        .lineLimit(1)
-
-                    ZStack(alignment: .leading) {
-                        // Value placeholder - 0.00
-                        if viewModel.toWin == "" {
-                            Text("0.00")
-                                .lineLimit(1)
-                                .font(
-                                    Font.custom("SF Pro Text", size: 16)
-                                        .weight(.medium)
-                                )
-                                .foregroundColor(.black)
-
-                        }
-
-                        TextField("", text: $viewModel.toWin)
-                            .focused($focusedField, equals: .win)
-                            .font(
-                                Font.custom("SF Pro Text", size: 16)
-                                    .weight(.medium)
-                            )
-                            .foregroundColor(.black)
-
-                    }
-                }
-                .textFieldStyle(.plain)
-                .keyboardType(.decimalPad)
-                .autocorrectionDisabled()
-                .autocapitalization(.none)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .padding(.vertical, 4)
-            .padding(.horizontal, 8)
-            .background(
-                RoundedRectangle(cornerRadius: 4)
-                    .stroke(focusedField == .win ? Color(red: 0, green: 0.39, blue: 0.98) : Color(red: 0.75, green: 0.75, blue: 0.75), lineWidth: 1)
-            )
         }
         .onChange(of: focusedField) { focus in
             viewModel.focus = focus
@@ -127,68 +75,43 @@ struct BetslipInputFieldView: View {
 // MARK: - ViewModel
 extension BetslipInputFieldView {
     class ViewModel: ObservableObject {
-        let multiplier: Double
+        let title: String
+        let field: BetslipInputField
+
         let decimalSeparator = "."
         let groupingSeparator = ","
 
         @Published var focus: BetslipInputField? {
             didSet {
-                toBet = formattedDollarAmount(toBet, field: focus)
-                toWin = formattedDollarAmount(toWin, field: focus)
+                text = formattedString
             }
         }
-        @Published var toBet: String {
+
+        var editing: Bool {
+            field == focus
+        }
+
+        @Published var text: String = "" {
             didSet {
-                guard oldValue != toBet else { return }
+                guard oldValue != text else { return }
 
-                toBet = formattedDollarAmount(toBet, field: focus)
+                text = formattedString
             }
         }
-        @Published var toWin: String {
-            didSet {
-                guard oldValue != toWin else { return }
 
-                toWin = formattedDollarAmount(toWin, field: focus)
-            }
-        }
-        
-
-        init(toBet: String, toWin: String, multiplier: Double) {
-            self.toBet = toBet
-            self.toWin = toWin
-            self.multiplier = multiplier
+        init(title: String, field: BetslipInputField, focus: BetslipInputField? = nil, text: String) {
+            self.title = title
+            self.field = field
+            self.focus = focus
+            self.text = text
         }
 
-        private lazy var editingNumberFormatter: NumberFormatter = {
-            let formatter = NumberFormatter()
-            formatter.currencyCode = "USD"
-            formatter.numberStyle = .currency
-            formatter.currencySymbol = ""
-            formatter.usesGroupingSeparator = true
-            formatter.maximumFractionDigits = 2
-            formatter.minimumFractionDigits = 0
-            formatter.minimumIntegerDigits = 1
-            return formatter
-        }()
-
-        private lazy var nonEditingNumberFormatter: NumberFormatter = {
-            let formatter = NumberFormatter()
-            formatter.currencyCode = "USD"
-            formatter.numberStyle = .currency
-            formatter.currencySymbol = ""
-            formatter.usesGroupingSeparator = true
-            formatter.maximumFractionDigits = 2
-            formatter.minimumFractionDigits = 2
-            formatter.minimumIntegerDigits = 1
-            return formatter
-        }()
-
-        func formattedDollarAmount(_ text: String, field: BetslipInputField?) -> String {
+        var formattedString: String {
             // Stripping the text of everything non number related (dollar signs, commas, and the possibility the user ever pastes in the field)
             let workingText = text.components(separatedBy: CharacterSet(charactersIn: "0123456789.").inverted).joined()
 
             // If user is not editing just format using the number formatter and add commas
-            if (field != focus || focus == nil),
+            if !editing,
                let dollarsDouble = Double(workingText),
                let formattedDollars = nonEditingNumberFormatter.string(from: NSDecimalNumber(value: dollarsDouble)) {
                 // To ensure 0.00 isnt a valid input
@@ -216,7 +139,7 @@ extension BetslipInputFieldView {
                 // Only taking two decimal places
                 splitNumber[1] = String(cents.prefix(2))
             }
-            
+
             // This is to prevent more than one decimal point being entered
             if splitNumber.count > 2 { splitNumber.removeSubrange(2...) }
 
@@ -224,6 +147,30 @@ extension BetslipInputFieldView {
 
             return fullNumber.isNotEmpty ? fullNumber : ""
         }
+
+        private lazy var editingNumberFormatter: NumberFormatter = {
+            let formatter = NumberFormatter()
+            formatter.currencyCode = "USD"
+            formatter.numberStyle = .currency
+            formatter.currencySymbol = ""
+            formatter.usesGroupingSeparator = true
+            formatter.maximumFractionDigits = 2
+            formatter.minimumFractionDigits = 0
+            formatter.minimumIntegerDigits = 1
+            return formatter
+        }()
+
+        private lazy var nonEditingNumberFormatter: NumberFormatter = {
+            let formatter = NumberFormatter()
+            formatter.currencyCode = "USD"
+            formatter.numberStyle = .currency
+            formatter.currencySymbol = ""
+            formatter.usesGroupingSeparator = true
+            formatter.maximumFractionDigits = 2
+            formatter.minimumFractionDigits = 2
+            formatter.minimumIntegerDigits = 1
+            return formatter
+        }()
     }
 }
 
