@@ -10,7 +10,7 @@ config_read.read("config.ini")
 api_key = config_read.get("api_keys", "generate_answers")
 co = cohere.Client(api_key)
 
-game_data = [
+GAME_DATA = [
     {"home": "Raptors", "away": "Clippers",
         "name": "Raptors vs Clippers", "multiplier": 1.7, "odds": 157},
     {"home": "Raptors", "away": "Mavericks",
@@ -37,78 +37,121 @@ def bet_workflow(prompt):
             'team': bet_attributes.get_team(prompt),
             'bet_amount': bet_attributes.get_bet_amount(prompt),
             'points': bet_attributes.get_points(prompt)}
-    sport_q = 'What sport would you like to place your bet on?\n'
-    team_q = 'What team would you like to place your bet on?\n'
-    outcome_q = 'What outcome would you like to bet on?\n'
-    game_q = 'What game do you want to bet on?\n'
-    bet_amount_q = 'How much would you like to bet?\n'
-    try_again = "Sorry I didn't get that. Try again.\n"
+    return validate_bet_data(data)
 
-    while 'sport' not in data or data['sport'] is None:
-        user_input = input(sport_q)
-        data['sport'] = bet_attributes.get_sport(user_input)
-        sport_q = try_again
-    while 'team' not in data or data['team'] is None:
-        user_input = input(team_q)
-        data['team'] = bet_attributes.get_team(user_input)
-        team_q = try_again
 
-    while 'game_title' not in data or data['game_title'] is None:
+def validate_bet_data(data):
+
+    if 'sport' not in data or data['sport'] is None:
+        return {
+            "bet": None,
+            "bot_message": "What sport would you like to place your bet on?\n",
+            "bet_mode": True,
+            "bet_data": data
+        }
+    elif 'team' not in data or data['team'] is None:
+        return {
+            "bet": None,
+            "bot_message": "What team would you like to place your bet on?\n",
+            "bet_mode": True,
+            "bet_data": data
+        }
+    elif 'game_title' not in data or data['game_title'] is None:
         games = []
         multipliers = []
         odds = []
         msg = 'Here are the options:\n'
-        for i in range(len(game_data)):
-            game = game_data[i]
+        for i in range(len(GAME_DATA)):
+            game = GAME_DATA[i]
             if data['team'] in [game['home'], game['away']]:
                 games.append(game['name'])
                 multipliers.append(game['multiplier'])
                 odds.append(game['odds'])
                 msg += (f'{i+1}. {game["name"]}\n')
-        user_input = input(game_q + msg)
-        if user_input.isdigit() and int(user_input) < len(games):
-            user_input = int(user_input) - 1
+        return {
+            "bet": None,
+            "bot_message": msg,
+            "bet_mode": True,
+            "bet_data": data
+        }
+    elif ('points' not in data or data['points'] is None) and ('win' not in data or data['win'] is None):
+        return {
+            "bet": None,
+            "bot_message": 'What outcome would you like to bet on?\n',
+            "bet_mode": True,
+            "bet_data": data
+        }
+    elif 'bet_amount' not in data or data['bet_amount'] is None:
+        print('here')
+        return {
+            "bet": None,
+            "bot_message": 'How much would you like to bet?\n',
+            "bet_mode": True,
+            "bet_data": data
+        }
+    else:
+        if 'points' in data and data['points'] is not None:
+            data['bet_title'] = f"Over {data['points'] - 0.5}"
+            data['bet_description'] = 'Total'
+        else:
+            data['bet_title'] = data['team']
+            data['bet_description'] = 'Moneyline'
+        bet = Bet(
+            game_title=data['game_title'],
+            bet_title=data['bet_title'],
+            bet_description=data['bet_description'],
+            bet_amount=data['bet_amount'],
+            to_win=data['bet_amount']*data['multiplier'],
+            odds=data['odds']
+        )
+
+        return {
+            "bet": bet,
+            "bot_message": "I've put together a betslip for you, open it to place your bet. \n\nTo learn more about betting, here are some questions you can ask me: \n\n 'What is a straight bet?' \n 'What is moneyline?' \n 'How do I place a bet?'",
+            "bet_mode": False,
+            "bet_data": None
+        }
+
+
+def add_to_bet_data(user_message, user_data):
+    data = {
+        "sport": user_data.sport,
+        "team": user_data.team,
+        "bet_amount": user_data.bet_amount,
+        "points": user_data.points,
+        "game_title": user_data.game_title,
+        "multiplier": user_data.multiplier,
+        "odds": user_data.odds,
+    }
+
+    if 'sport' not in data or data['sport'] is None:
+        data['sport'] = user_message
+    elif 'team' not in data or data['team'] is None:
+        data['team'] = user_message
+    elif 'game_title' not in data or data['game_title'] is None:
+        games = []
+        multipliers = []
+        odds = []
+
+        for i in range(len(GAME_DATA)):
+            game = GAME_DATA[i]
+            if data['team'] in [game['home'], game['away']]:
+                games.append(game['name'])
+                multipliers.append(game['multiplier'])
+                odds.append(game['odds'])
+
+        if user_message.isdigit() and int(user_message) < len(games):
+            user_input = int(user_message) - 1
             data['game_title'] = games[user_input]
             data['multiplier'] = multipliers[user_input]
             data['odds'] = odds[user_input]
-        game_q = try_again
+    elif ('points' not in data or data['points'] is None) and ('win' not in data or data['win'] is None):
+        data['points'] = bet_attributes.get_points(user_message)
+        data['win'] = bet_attributes.get_win(user_message)
+    elif 'bet_amount' not in data or data['bet_amount'] is None:
+        data['bet_amount'] = float(user_message)
 
-    while ('points' not in data or data['points'] is None) and ('win' not in data or data['win'] is None):
-        user_input = input(outcome_q)
-        data['points'] = bet_attributes.get_points(user_input)
-        data['win'] = bet_attributes.get_win(user_input)
-        outcome_q = try_again
-
-    while ('bet_amount' not in data or data['bet_amount'] is None):
-        user_input = input(bet_amount_q)
-        data['bet_amount'] = int(user_input)
-        bet_amount_q = try_again
-
-    if 'points' in data and data['points'] is not None:
-        data['bet_title'] = f"Over {data['points'] - 0.5}"
-        data['bet_description'] = 'Total'
-    else:
-        data['bet_title'] = data['team']
-        data['bet_description'] = 'Moneyline'
-
-    bet = Bet(
-        game_title=data['game_title'],
-        bet_title=data['bet_title'],
-        bet_description=data['bet_description'],
-        bet_amount=data['bet_amount'],
-        to_win=data['bet_amount']*data['multiplier'],
-        odds=data['odds']
-    )
-    # send_message("Here is your bet slip\n")
-    return {
-        "bet": bet,
-        "bot_message": "I've put together a betslip for you, open it to place your bet. \n\nTo learn more about betting, here are some questions you can ask me: \n\n 'What is a straight bet?' \n 'What is moneyline?' \n 'How do I place a bet?'",
-        "bet_mode": False
-    }
-
-    # what sport
-    # what team
-    # what outcome do you want to bet on
+    return validate_bet_data(data)
 
 
 def question_workflow(prompt):
@@ -140,14 +183,17 @@ def question_workflow(prompt):
 
 
 def start_workflow(user_input):
-    req_type = classify_question.bet_or_question(user_input)
+    if user_input.bet_mode == True:
+        return add_to_bet_data(user_input.user_message, user_input.bet_data)
+    else:
+        req_type = classify_question.bet_or_question(user_input.user_message)
 
     response = {}
 
     if req_type == "Bet":
-        response = bet_workflow(user_input)
+        response = bet_workflow(user_input.user_message)
     elif req_type == "Question":
-        answer = question_workflow(user_input)
+        answer = question_workflow(user_input.user_message)
         response = {
             "bot_message": answer,
             "bet_mode": False,
