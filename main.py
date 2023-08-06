@@ -102,7 +102,7 @@ def bet_workflow(prompt):
     # send_message("Here is your bet slip\n")
     return {
         "bet": bet,
-        "bot_message": "Here is your betslip: \n",
+        "bot_message": "I've put together a betslip for you, open it to place your bet. \n\nTo learn more about betting, here are some questions you can ask me: \n\n 'What is a straight bet?' \n 'What is moneyline?' \n 'How do I place a bet?'",
         "bet_mode": False
     }
 
@@ -118,13 +118,31 @@ def question_workflow(prompt):
         max_tokens=1000,
         model=config_read.get("models", "generate_answers")
     )
+    # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
+
+    # answer = response[0].text
+    # answer += "\n\nWas this helpful? Please answer YES or NO.\n"
+    # helpful = input(answer)
+    # if helpful.lower() == 'yes':
+    #     data = f'"prompt": "{prompt}", "completion": "{response[0].text}"'
+    #     data = '\n{' + data + '}'
+    #     with open('generate_training_data.jsonl', "a") as f:
+    #         f.write(data)
+    #     msg = "Thanks for letting me know. Anything else I can help you with?"
+    # else:
+    #     msg = "Sorry for that. Anything else I can help you with?"
+
+    # return {
+    #     "bot_message": msg,
+    #     "bet_mode": False
+    # }
     return (response[0].text)
 
 
 def start_workflow(user_input):
     req_type = classify_question.bet_or_question(user_input)
 
-    repsonse = {}
+    response = {}
 
     if req_type == "Bet":
         response = bet_workflow(user_input)
