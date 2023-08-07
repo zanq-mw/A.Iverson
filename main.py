@@ -86,7 +86,6 @@ def validate_bet_data(data):
             "bet_data": data
         }
     elif 'bet_amount' not in data or data['bet_amount'] is None:
-        print('here')
         return {
             "bet": None,
             "bot_message": 'How much would you like to bet?\n',
@@ -177,13 +176,13 @@ def question_workflow(prompt):
         max_tokens=1000,
         model=config_read.get("models", "generate_answers")
     )
-    # # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
+    # # # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
 
     answer = response[0].text
-    answer += "\n\nWas this helpful? Please answer YES or NO.\n"
+    answer_with_helpful_question = answer + "\n\nWas this helpful? Please answer YES or NO.\n"
 
     return {
-        "bot_message": answer,
+        "bot_message": answer_with_helpful_question,
         "bet_mode": Mode.QUESTION,
         "suggested_prompts": ['YES', 'NO'],
         "saved_question": [prompt, answer]
@@ -219,12 +218,7 @@ def start_workflow(user_input):
     if req_type == "Bet":
         response = bet_workflow(user_input.user_message)
     elif req_type == "Question":
-        answer = question_workflow(user_input.user_message)
-        response = {
-            "bot_message": answer,
-            "mode": Mode.Question,
-            "bet": None
-        }
+        return question_workflow(user_input.user_message)
     else:
         answer = "I do not understand, please try again."
         response = {
