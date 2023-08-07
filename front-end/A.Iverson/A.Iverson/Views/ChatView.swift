@@ -9,15 +9,28 @@ import SwiftUI
 
 struct ChatView: View {
     @ObservedObject var viewModel: ViewModel
+    var questionsHeight: CGFloat
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                ForEach(viewModel.messageGroups, id: \.id) { groupViewModel in
-                    MessageGroupView(viewModel: groupViewModel)
+        ScrollViewReader { scrollView in
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 0) {
+                    ForEach(viewModel.messageGroups, id: \.id) { groupViewModel in
+                        MessageGroupView(viewModel: groupViewModel)
+                    }
+                    Rectangle()
+                        .frame(height: questionsHeight)
+                        .id(1)
+                }
+                .onChange(of: viewModel.messageGroups) { _ in
+                    withAnimation {
+                        scrollView.scrollTo(1)
+                    }
                 }
             }
         }
+        .padding(.top, 8)
+
     }
 }
 

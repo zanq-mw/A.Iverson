@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WrappingHStack
 
 struct ContentView: View {
     @State var textField: String = ""
@@ -13,13 +14,15 @@ struct ContentView: View {
     var computerViewModel = UserViewModel(name: "A.Iverson", profilePicture: {
         Image(systemName: "face.dashed.fill")
     }())
-    @ObservedObject var chatViewModel = ChatView.ViewModel(messageGroups: [])
+    @ObservedObject var chatViewModel = ChatView.ViewModel(messageGroups: [.init(user: .init(name: "A.Iverson"), messages: ["Hi, I'm A.Iverson, your personal betting assistant. You can ask me questions about betting or how to use theScore Bet app. You can even ask me to place a bet for you. What can I help you with today?"])])
     @State var userSend = true
     @State var betslip = false
     @State var betMode = false
     
     @ObservedObject var betslipViewModel = BetslipView.ViewModel(bets: [])
-    
+    @State var questions: [String] = ["What is a straight bet trying to make this extra a a asdasd adsasdasd?", "What is moneyline?", "How do I place a bet?"]
+    @State var questionsHeight: CGFloat = .zero
+
     var body: some View {
         ZStack {
             VStack {
@@ -65,6 +68,7 @@ struct ContentView: View {
                     
                     Button(action: {
                         userSend.toggle()
+                        //questions.append("Test question 123 ?")
                     }, label: {
                         Text("MESSAGES")
                             .padding(.vertical, 5)
@@ -85,8 +89,11 @@ struct ContentView: View {
                 }
 
                 Group {
-                    ChatView(viewModel: chatViewModel)
+                    ZStack {
+                        ChatView(viewModel: chatViewModel, questionsHeight: questionsHeight)
 
+                        questionsView
+                    }
                     InputFieldView(userSend: $userSend, textField: $textField, chatViewModel: chatViewModel, users: (user: userViewModel, computer: computerViewModel))
                 }
                 .padding(.horizontal, 16)
@@ -100,10 +107,53 @@ struct ContentView: View {
                     .zIndex(1)
                     .transition(.move(edge: .bottom))
                     .edgesIgnoringSafeArea(.bottom)
-                
             }
         }
         
+    }
+}
+
+extension ContentView {
+    var questionsView: some View {
+        VStack {
+            Spacer()
+
+            WrappingHStack(alignment: .leading, horizontalSpacing: 8, verticalSpacing: 4) {
+                ForEach(questions,id: \.self) { question in
+                    Button(action: {
+                        print(questionsHeight)
+                    }, label: {
+                        Text(question)
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .foregroundColor(.white)
+                            .font(
+                                Font.custom("SF Pro Text", size: 14)
+                                    .weight(.medium)
+                            )
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                            .background(.gray)
+                            .cornerRadius(8)
+                    })
+                }
+            }
+            .padding(.top, 8)
+            .background(
+                GeometryReader { proxy in
+                    Color.clear
+                        .onChange(of: questions) { value in
+                            withAnimation {
+                                questionsHeight = proxy.size.height
+                            }
+                        }
+                        .onAppear {
+                            questionsHeight = proxy.size.height
+                        }
+                }
+            )
+        }
+        .padding(.bottom, 4)
     }
 }
 

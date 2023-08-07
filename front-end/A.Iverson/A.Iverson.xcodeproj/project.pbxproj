@@ -24,6 +24,8 @@
 		C4609F522A7E17FA0052296C /* SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F512A7E17FA0052296C /* SafeArea.swift */; };
 		C4609F542A7EED6C0052296C /* BetModeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F532A7EED6C0052296C /* BetModeInfoView.swift */; };
 		C4609F562A7F20300052296C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F552A7F20300052296C /* String.swift */; };
+		C4609F582A7F31FD0052296C /* BetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F572A7F31FD0052296C /* BetModel.swift */; };
+		C4609F602A7F76530052296C /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = C4609F5F2A7F76530052296C /* WrappingHStack */; };
 		C4CBB6BD2A7BFE47007B3E1F /* A_IversonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CBB6BC2A7BFE47007B3E1F /* A_IversonApp.swift */; };
 		C4CBB6BF2A7BFE47007B3E1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */; };
 		C4CBB6C12A7BFE48007B3E1F /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CBB6C02A7BFE48007B3E1F /* Colours.xcassets */; };
@@ -70,6 +72,7 @@
 		C4609F512A7E17FA0052296C /* SafeArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeArea.swift; sourceTree = "<group>"; };
 		C4609F532A7EED6C0052296C /* BetModeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetModeInfoView.swift; sourceTree = "<group>"; };
 		C4609F552A7F20300052296C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		C4609F572A7F31FD0052296C /* BetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetModel.swift; sourceTree = "<group>"; };
 		C4CBB6B92A7BFE47007B3E1F /* A.Iverson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A.Iverson.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CBB6BC2A7BFE47007B3E1F /* A_IversonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_IversonApp.swift; sourceTree = "<group>"; };
 		C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4609F602A7F76530052296C /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				C4609D342A7D80540052296C /* UserViewModel.swift */,
+				C4609F572A7F31FD0052296C /* BetModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -239,6 +244,9 @@
 			dependencies = (
 			);
 			name = A.Iverson;
+			packageProductDependencies = (
+				C4609F5F2A7F76530052296C /* WrappingHStack */,
+			);
 			productName = A.Iverson;
 			productReference = C4CBB6B92A7BFE47007B3E1F /* A.Iverson.app */;
 			productType = "com.apple.product-type.application";
@@ -311,6 +319,9 @@
 				Base,
 			);
 			mainGroup = C4CBB6B02A7BFE47007B3E1F;
+			packageReferences = (
+				C4609F5E2A7F76530052296C /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+			);
 			productRefGroup = C4CBB6BA2A7BFE47007B3E1F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -371,6 +382,7 @@
 				C4609D2F2A7D7F1A0052296C /* ChatView.swift in Sources */,
 				C4609D312A7D7F300052296C /* Dimensions.swift in Sources */,
 				C4609D332A7D7F370052296C /* MessageGroupView.swift in Sources */,
+				C4609F582A7F31FD0052296C /* BetModel.swift in Sources */,
 				C4CBB6BD2A7BFE47007B3E1F /* A_IversonApp.swift in Sources */,
 				C4609F502A7E09930052296C /* BetslipBetTitleView.swift in Sources */,
 			);
@@ -699,6 +711,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C4609F5E2A7F76530052296C /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ksemianov/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C4609F5F2A7F76530052296C /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4609F5E2A7F76530052296C /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C4CBB6B12A7BFE47007B3E1F /* Project object */;
 }

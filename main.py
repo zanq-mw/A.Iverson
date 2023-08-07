@@ -47,7 +47,7 @@ def validate_bet_data(data):
         return {
             "bet": None,
             "bot_message": "What sport would you like to place your bet on?\n",
-             "mode": Mode.BET,
+            "mode": Mode.BET,
             "bet_data": data
         }
     elif 'team' not in data or data['team'] is None:
@@ -74,7 +74,7 @@ def validate_bet_data(data):
         return {
             "bet": None,
             "bot_message": msg,
-             "mode": Mode.BET,
+            "mode": Mode.BET,
             "bet_data": data,
             "suggested_prompts": suggested_prompts
         }
@@ -89,7 +89,7 @@ def validate_bet_data(data):
         return {
             "bet": None,
             "bot_message": 'How much would you like to bet?\n',
-             "mode": Mode.BET,
+            "mode": Mode.BET,
             "bet_data": data
         }
     else:
@@ -121,7 +121,7 @@ def add_to_bet_data(user_message, user_data):
     if user_message.lower() == "exit":
         return {
             "bot_message": "Okay, I've abandoned that bet. Is there anything else I can help you with?",
-             "mode": Mode.NO_TYPE,
+            "mode": Mode.NO_TYPE,
             "bet": None
         }
 
@@ -152,7 +152,7 @@ def add_to_bet_data(user_message, user_data):
                 multipliers.append(game['multiplier'])
                 odds.append(game['odds'])
 
-        if user_message.isdigit() and int(user_message) < len(games):
+        if user_message.isdigit() and int(user_message) <= len(games):
             user_input = int(user_message) - 1
             data['game_title'] = games[user_input]
             data['multiplier'] = multipliers[user_input]
@@ -163,10 +163,10 @@ def add_to_bet_data(user_message, user_data):
     elif 'bet_amount' not in data or data['bet_amount'] is None:
         data['bet_amount'] = float(user_message)
 
-    bet_data = validate_bet_data(data)
-    if bet_data == initial_data:
-        bet_data['bot_message'] = "Sorry, I didn't get that. Please try again."
-    return bet_data
+    validated = validate_bet_data(data)
+    if validated['bet_data'] == initial_data and validated['bet'] is None:
+        validated['bot_message'] = "Sorry, I didn't get that. Please try again."
+    return validated
 
 
 def question_workflow(prompt):
@@ -179,16 +179,14 @@ def question_workflow(prompt):
     # # # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
 
     answer = response[0].text
-    answer_with_helpful_question = answer + "\n\nWas this helpful? Please answer YES or NO.\n"
+    answer += "\n\nWas this helpful?"
 
     return {
-        "bot_message": answer_with_helpful_question,
+        "bot_message": response[0].text,
         "bet_mode": Mode.QUESTION,
-        "suggested_prompts": ['YES', 'NO'],
-        "saved_question": [prompt, answer]
+        "suggested_prompts": ['Yes', 'No'],
+        "saved_question": [prompt, response[0].text]
     }
-
-    return (response[0].text)
 
 
 def start_workflow(user_input):
@@ -208,7 +206,7 @@ def start_workflow(user_input):
         return {
             "bot_message": msg,
             "bet_mode": Mode.NO_TYPE,
-            }
+        }
 
     else:
         req_type = classify_question.bet_or_question(user_input.user_message)
