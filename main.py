@@ -3,7 +3,7 @@ import cohere
 import configparser
 import bet_attributes
 import api
-from api_responses import Bet
+from api_responses import Bet, Mode
 from copy import deepcopy
 
 config_read = configparser.ConfigParser()
@@ -47,14 +47,14 @@ def validate_bet_data(data):
         return {
             "bet": None,
             "bot_message": "What sport would you like to place your bet on?\n",
-            "bet_mode": True,
+             "mode": Mode.BET,
             "bet_data": data
         }
     elif 'team' not in data or data['team'] is None:
         return {
             "bet": None,
             "bot_message": "What team would you like to place your bet on?\n",
-            "bet_mode": True,
+            "mode": Mode.BET,
             "bet_data": data
         }
     elif 'game_title' not in data or data['game_title'] is None:
@@ -74,7 +74,7 @@ def validate_bet_data(data):
         return {
             "bet": None,
             "bot_message": msg,
-            "bet_mode": True,
+             "mode": Mode.BET,
             "bet_data": data,
             "suggested_prompts": suggested_prompts
         }
@@ -82,7 +82,7 @@ def validate_bet_data(data):
         return {
             "bet": None,
             "bot_message": 'What outcome would you like to bet on?\n',
-            "bet_mode": True,
+            "mode": Mode.BET,
             "bet_data": data
         }
     elif 'bet_amount' not in data or data['bet_amount'] is None:
@@ -90,7 +90,7 @@ def validate_bet_data(data):
         return {
             "bet": None,
             "bot_message": 'How much would you like to bet?\n',
-            "bet_mode": True,
+             "mode": Mode.BET,
             "bet_data": data
         }
     else:
@@ -112,7 +112,7 @@ def validate_bet_data(data):
         return {
             "bet": bet,
             "bot_message": "I've put together a betslip for you, open it to place your bet.",
-            "bet_mode": False,
+            "mode": Mode.NO_TYPE,
             "bet_data": None,
             "suggested_prompts": ['What is a straight bet?', 'What is moneyline?', 'How do I place a bet?']
         }
@@ -122,7 +122,7 @@ def add_to_bet_data(user_message, user_data):
     if user_message.lower() == "exit":
         return {
             "bot_message": "Okay, I've abandoned that bet. Is there anything else I can help you with?",
-            "bet_mode": False,
+             "mode": Mode.NO_TYPE,
             "bet": None
         }
 
@@ -179,29 +179,40 @@ def question_workflow(prompt):
     )
     # # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
 
-    # answer = response[0].text
-    # answer += "\n\nWas this helpful? Please answer YES or NO.\n"
-    # # In the returned dictionary, there should be "suggested_prompts": ["Yes", "No"]
-    # helpful = input(answer)
-    # if helpful.lower() == 'yes':
-    #     data = f'"prompt": "{prompt}", "completion": "{response[0].text}"'
-    #     data = '\n{' + data + '}'
-    #     with open('generate_training_data.jsonl', "a") as f:
-    #         f.write(data)
-    #     msg = "Thanks for letting me know. Anything else I can help you with?"
-    # else:
-    #     msg = "Sorry for that. Anything else I can help you with?"
+    answer = response[0].text
+    answer += "\n\nWas this helpful? Please answer YES or NO.\n"
 
-    # return {
-    #     "bot_message": msg,
-    #     "bet_mode": False
-    # }
+    return {
+        "bot_message": answer,
+        "bet_mode": Mode.QUESTION,
+        "suggested_prompts": ['YES', 'NO']
+    }
+
     return (response[0].text)
 
 
 def start_workflow(user_input):
-    if user_input.bet_mode == True:
+    if user_input.mode == Mode.BET.value:
         return add_to_bet_data(user_input.user_message, user_input.bet_data)
+    elif user_input.mode == Mode.QUESTION.value:
+        if user_input.user_message == "YES":
+            # there's no way to get the users question and the bot's answer unless we send them back to the JSON object
+            # i vote that we just pretend to write to file but not actually do it
+
+            # data = f'"prompt": "{prompt}", "completion": "{response[0].text}"'
+            # data = '\n{' + data + '}'
+            # with open('generate_training_data.jsonl', "a") as f:
+            # f.write(data)
+
+            msg = "Thanks for letting me know. Anything else I can help you with?"
+
+        else:
+            msg = "Sorry for that. Anything else I can help you with?"
+        return {
+            "bot_message": msg,
+            "bet_mode": Mode.NO_TYPE,
+            }
+
     else:
         req_type = classify_question.bet_or_question(user_input.user_message)
 
@@ -213,14 +224,14 @@ def start_workflow(user_input):
         answer = question_workflow(user_input.user_message)
         response = {
             "bot_message": answer,
-            "bet_mode": False,
+            "mode": Mode.Question,
             "bet": None
         }
     else:
         answer = "I do not understand, please try again."
         response = {
             "bot_message": answer,
-            "bet_mode": False,
+            "mode": Mode.NO_TYPE,
             "bet": None
         }
     return response

@@ -1,5 +1,12 @@
 from pydantic import BaseModel
 from typing import Optional
+from enum import Enum
+
+class Mode(Enum):
+    NO_TYPE = 1
+    BET = 2
+    QUESTION = 3
+
 
 class BetData(BaseModel):
     sport: str | None = None
@@ -22,7 +29,7 @@ class Bet(BaseModel):
 
 class UserMessage(BetData, Bet):
     user_message: str
-    bet_mode: bool
+    mode: int
     bet: Bet | None = None
     bet_data: BetData | None = None
 
