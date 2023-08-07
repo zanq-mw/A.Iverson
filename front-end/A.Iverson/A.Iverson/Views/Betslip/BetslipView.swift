@@ -21,7 +21,7 @@ struct BetslipView: View {
                 header
 
                 // MARK: Individual Bets
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack {
                         ForEach(viewModel.bets, id: \.id) { bet in
                             //MARK: Bet Title
@@ -61,21 +61,15 @@ struct BetslipView: View {
                         }
                     )
                 }
-                .frame(height: min(betsHeight, UIScreen.screenHeight * 0.75 ))
+                .frame(height: min(betsHeight, UIScreen.screenHeight * 0.7))
 
-                //MARK: Payout
                 Divider()
 
+                //MARK: Payout
                 payout
 
-                // placebet
-                Button(action: {
-
-                }, label: {
-                    HStack {
-                        
-                    }
-                })
+                //MARK: - Place Bet
+                placeBetButton
             }
             .padding(.bottom, safeAreaInsets.bottom)
             .background(.white, ignoresSafeAreaEdges: .bottom)
@@ -84,6 +78,7 @@ struct BetslipView: View {
     }
 }
 
+//MARK: - HEADER
 extension BetslipView {
     @ViewBuilder
     var header: some View {
@@ -109,6 +104,7 @@ extension BetslipView {
     }
 }
 
+// MARK: - PAYOUT
 extension BetslipView {
     @ViewBuilder
     var payout: some View {
@@ -122,7 +118,7 @@ extension BetslipView {
 
             Spacer()
 
-            Text("$0.00")
+            Text(String(format: "$%.2f", viewModel.payoutValue))
                 .font(Font.custom("SF Pro Text", size: 18).weight(.bold))
                 .foregroundColor(.black)
         }
@@ -131,19 +127,45 @@ extension BetslipView {
     }
 }
 
-struct BetslipView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            BetslipView(viewModel: .init(bets: [.init(title: "TB Buccaneers @ MIA Dolphins", betTitle: "TB Buccaneers", betDescription: "Moneyline", odds: "-100", betAmount: "", toWinAmount: "", date: "Feb 11 · 12:00 PM")]))
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.Theme.background)
+extension BetslipView {
+    @ViewBuilder
+    var placeBetButton: some View {
+        Button(action: {
+            withAnimation {
+                viewModel.bets = []
+            }
+        }, label: {
+            HStack {
+                Text(String(format: "Place Bet $%.2f", viewModel.payoutValue))
+                    .font(
+                    Font.custom("SF Pro Text", size: 16)
+                    .weight(.bold)
+                    )
+                    .foregroundColor(.white)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(8)
+            .background(Color(red: 0, green: 0.39, blue: 0.98))
+            .cornerRadius(4)
+        })
+        .padding(.horizontal, 8)
     }
 }
 
+// MARK: - VIEWMODEL
 extension BetslipView {
     class ViewModel: ObservableObject {
-        @Published var bets: [Bet]
+        @Published var bets: [Bet] {
+            didSet {
+                payoutValue = 0
+                bets.forEach { bet in
+                    payoutValue += bet.getPayoutValue()
+                    cost += bet.getCost()
+                }
+            }
+        }
+        @Published var payoutValue: Double = 0
+        @Published var cost: Double = 0
 
         init(bets: [Bet]) {
             self.bets = bets
@@ -151,7 +173,7 @@ extension BetslipView {
 
         func addBet() {
             withAnimation {
-                bets.append(.init(title: "TB Buccaneers @ MIA Dolphins", betTitle: "TB Buccaneers", betDescription: "Moneyline", odds: "-100", betAmount: "", toWinAmount: "", date: "Feb 11 · 12:00 PM"))
+                bets.append(.init(title: "TB Buccaneers @ MIA Dolphins", betTitle: "TB Buccaneers", betDescription: "Moneyline", multiplier: 1.66, odds: "-100", betAmount: "50.00", toWinAmount: "26.21", date: "Feb 11 · 12:00 PM"))
             }
         }
 
@@ -165,29 +187,12 @@ extension BetslipView {
     }
 }
 
-class Bet: ObservableObject, Equatable {
-    let id = UUID()
-    let title: String
-    let betTitle: String
-    let betDescription: String
-    let odds: String
-    let date: String
-    
-    @ObservedObject var betViewModel: BetslipInputFieldView.ViewModel
-    @ObservedObject var winViewModel: BetslipInputFieldView.ViewModel
-
-    init(title: String, betTitle: String, betDescription: String, odds: String, betAmount: String, toWinAmount: String, date: String = Date().description) {
-        self.title = title
-        self.betTitle = betTitle
-        self.betDescription = betDescription
-        self.odds = odds
-        self.date = date
-
-        self.betViewModel = .init(title: "Bet", field: .bet, text: "50")
-        self.winViewModel = .init(title: "To Win", field: .win, text: "0")
-    }
-
-    static func == (lhs: Bet, rhs: Bet) -> Bool {
-        return lhs.id == rhs.id
+struct BetslipView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            BetslipView(viewModel: .init(bets: [.init(title: "TB Buccaneers @ MIA Dolphins", betTitle: "TB Buccaneers", betDescription: "Moneyline", multiplier: 1.66, odds: "-100", betAmount: "", toWinAmount: "", date: "Feb 11 · 12:00 PM")]))
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.Theme.background)
     }
 }

@@ -28,6 +28,7 @@ struct MessageGroupView: View {
 
                 ForEach(viewModel.messages, id: \.self) { message in
                     Text(message)
+                        .font(Font.custom("SF Pro Text", size: 14))
                         .foregroundColor(.white)
                         .padding(.vertical, 6)
                         .padding(.horizontal, 8)
@@ -54,7 +55,7 @@ struct MessageGroupView_Previews: PreviewProvider {
 }
 
 extension MessageGroupView {
-    class ViewModel: ObservableObject {
+    class ViewModel: ObservableObject, Equatable {
         let id = UUID()
         let date = Date()
         let user: UserViewModel
@@ -79,6 +80,10 @@ extension MessageGroupView {
 
         var background: Color {
             user.background
+        }
+
+        static func ==(lhs: ViewModel, rhs: ViewModel) -> Bool {
+            return lhs.id == rhs.id
         }
     }
 }

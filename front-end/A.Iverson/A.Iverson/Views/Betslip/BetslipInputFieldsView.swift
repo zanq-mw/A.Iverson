@@ -77,33 +77,34 @@ extension BetslipInputFieldView {
     class ViewModel: ObservableObject {
         let title: String
         let field: BetslipInputField
+        var updateOtherField: () -> Void
 
         let decimalSeparator = "."
         let groupingSeparator = ","
-
-        @Published var focus: BetslipInputField? {
-            didSet {
-                text = formattedString
-            }
-        }
 
         var editing: Bool {
             field == focus
         }
 
+        @Published var focus: BetslipInputField? = nil {
+            didSet {
+                text = formattedString
+            }
+        }
         @Published var text: String = "" {
             didSet {
                 guard oldValue != text else { return }
 
                 text = formattedString
+                updateOtherField()
             }
         }
 
-        init(title: String, field: BetslipInputField, focus: BetslipInputField? = nil, text: String) {
+        init(title: String, field: BetslipInputField, text: String, updateOtherField: @escaping () -> Void) {
             self.title = title
             self.field = field
-            self.focus = focus
             self.text = text
+            self.updateOtherField = updateOtherField
         }
 
         var formattedString: String {
@@ -146,6 +147,10 @@ extension BetslipInputFieldView {
             let fullNumber = splitNumber.joined(separator: decimalSeparator)
 
             return fullNumber.isNotEmpty ? fullNumber : ""
+        }
+
+        func updateValue(_ value: Double, multiplier: Double) {
+            text = String(value * multiplier)
         }
 
         private lazy var editingNumberFormatter: NumberFormatter = {
