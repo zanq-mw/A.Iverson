@@ -22,7 +22,7 @@
 {"prompt": "I want to bet on the Pistons", "completion": "Pistons"}
 {"prompt": "Bet on the Detroit Pistons", "completion": "Pistons"}
 {"prompt": "Put money on my pistons to win", "completion": "Pistons"}
-{"prompt": "I want to bet on the Suns", "completion": "Suns"}
+{"prompt": "I want to bet on the Phoenix Suns", "completion": "Suns"}
 {"prompt": "I wanna bet on Kevin Durant on the Suns scoring ", "completion": "Suns"}
 {"prompt": "bet on phx suns to win", "completion": "Suns"}
 {"prompt": "I want to bet on the Raptors", "completion": "Raptors"}
@@ -31,14 +31,36 @@
 {"prompt": "I want to bet on the Magic", "completion": "Magic"}
 {"prompt": "Parlay on orl magic ", "completion": "Magic"}
 {"prompt": "bet on orlando magic to win", "completion": "Magic"}
-{"prompt": "Bet on a basketball game", "completion": "N/A"}
-{"prompt": "I want to place a bet", "completion": "N/A"}
-{"prompt": "Bet on Devin Booker", "completion": "N/A"}
-{"prompt": "I want to put money on a parlay", "completion": "N/A"}
-{"prompt": "I am having a wonderful day", "completion": "N/A"}
-{"prompt": "There are 50 states in the United States of America", "completion": "N/A"}
-{"prompt": "I have to go to the grocery store", "completion": "N/A"}
-{"prompt": "Place a straight bet for me, $50", "completion": "N/A"}
-{"prompt": "Put $60 on a basketball game", "completion": "N/A"}
-{"prompt": "I wanna bet", "completion": "N/A"}
-{"prompt": "Place a moneyline wager", "completion": "N/A"}
+{"prompt": "the Lakers", "completion": "Lakers"}
+{"prompt": "Los Angeles Lakers", "completion": "Lakers"}
+{"prompt": "Lakers", "completion": "Lakers"}
+{"prompt": "the Warriors", "completion": "Warriors"}
+{"prompt": "Golden State Warriors", "completion": "Warriors"}
+{"prompt": "Warriors", "completion": "Warriors"}
+{"prompt": "the Knicks", "completion": "Knicks"}
+{"prompt": "New York Knicks", "completion": "Knicks"}
+{"prompt": "knicks", "completion": "Knicks"}
+{"prompt": "the Jazz", "completion": "Jazz"}
+{"prompt": "Utah Jazz", "completion": "Jazz"}
+{"prompt": "jazz", "completion": "Jazz"}
+{"prompt": "the Nets", "completion": "Nets"}
+{"prompt": "Brooklyn Nets", "completion": "Nets"}
+{"prompt": "Nets", "completion": "Nets"}
+{"prompt": "Milwaukee Bucks", "completion": "Bucks"}
+{"prompt": "the Bucks", "completion": "Bucks"}
+{"prompt": "bucks", "completion": "Bucks"}
+{"prompt": "the Spurs", "completion": "Spurs"}
+{"prompt": "San Antonio spurs", "completion": "Spurs"}
+{"prompt": "spurs", "completion": "Spurs"}
+{"prompt": "the Pistons", "completion": "Pistons"}
+{"prompt": "Detroit Pistons", "completion": "Pistons"}
+{"prompt": "pistons", "completion": "Pistons"}
+{"prompt": "the Suns", "completion": "Suns"}
+{"prompt": "the Phoenix Suns ", "completion": "Suns"}
+{"prompt": "suns", "completion": "Suns"}
+{"prompt": "the Raptors", "completion": "Raptors"}
+{"prompt": "raptors ", "completion": "Raptors"}
+{"prompt": "toronto raptors", "completion": "Raptors"}
+{"prompt": "the Magic", "completion": "Magic"}
+{"prompt": "magic ", "completion": "Magic"}
+{"prompt": "orlando magic", "completion": "Magic"}

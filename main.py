@@ -48,14 +48,16 @@ def validate_bet_data(data):
             "bet": None,
             "bot_message": "What sport would you like to place your bet on?\n",
             "mode": Mode.BET,
-            "bet_data": data
+            "bet_data": data,
+            "suggested_prompts": ["Exit"]
         }
     elif 'team' not in data or data['team'] is None:
         return {
             "bet": None,
             "bot_message": "What team would you like to place your bet on?\n",
             "mode": Mode.BET,
-            "bet_data": data
+            "bet_data": data,
+            "suggested_prompts": ["Exit"]
         }
     elif 'game_title' not in data or data['game_title'] is None:
         games = []
@@ -71,6 +73,7 @@ def validate_bet_data(data):
                 odds.append(game['odds'])
                 msg += (f'{i+1}. {game["name"]}\n')
                 suggested_prompts.append(str(i+1))
+        suggested_prompts.append("Exit")
         return {
             "bet": None,
             "bot_message": msg,
@@ -83,14 +86,16 @@ def validate_bet_data(data):
             "bet": None,
             "bot_message": 'What outcome would you like to bet on?\n',
             "mode": Mode.BET,
-            "bet_data": data
+            "bet_data": data,
+            "suggested_prompts": ["Exit"]
         }
     elif 'bet_amount' not in data or data['bet_amount'] is None:
         return {
             "bet": None,
             "bot_message": 'How much would you like to bet?\n',
             "mode": Mode.BET,
-            "bet_data": data
+            "bet_data": data,
+            "suggested_prompts": ["Exit"]
         }
     else:
         if 'points' in data and data['points'] is not None:
