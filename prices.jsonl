@@ -1,16 +1,16 @@
 {"prompt": "I want to bet five dollars on warriors", "completion": "5.00"}
 {"prompt": "Put $10.00 on the nets", "completion": "10.00"}
-{"prompt": "I want to put 7.99 on la lakers", "completion": "7.99"}
+{"prompt": "I want to put $7.99 on la lakers", "completion": "7.99"}
 {"prompt": "Bet two dollars on lakers winning", "completion": "2.00"}
-{"prompt": "Place 3.67 on raptors", "completion": "3.67"}
+{"prompt": "Place $3.67 on raptors", "completion": "3.67"}
 {"prompt": "Put seven dollars on the wizards", "completion": "7.00"}
 {"prompt": "I want to bet $69 on the Knicks", "completion": "69.00"}
 {"prompt": "Bet 420 dollars on the New York Knicks", "completion": "420.00"}
 {"prompt": "Put $12.78 on ny knicks to win", "completion": "12.78"}
 {"prompt": "I want to bet 3 dollars on the Jazz", "completion": "3.00"}
 {"prompt": "Bet a hundred dollars on the Utah Jazz", "completion": "100.00"}
-{"prompt": "Put 300 on uth jazz to win", "completion": "300.00"}
-{"prompt": "I want to bet 67.78 on the Nets", "completion": "67.78"}
+{"prompt": "Put $300 on uth jazz to win", "completion": "300.00"}
+{"prompt": "I want to bet $67.78 on the Nets", "completion": "67.78"}
 {"prompt": "Bet $12 on the Brooklyn Nets", "completion": "12.00"}
 {"prompt": "Put 8 dollars on bk nets to win", "completion": "8.00"}
 {"prompt": "Place a ten dollar parlay on Milwaukee Bucks winning", "completion": "10.00"}
@@ -18,19 +18,19 @@
 {"prompt": "Put $3.99 on MWK bucks to win by 24 points", "completion": "3.99"}
 {"prompt": "I want to bet five dollars on the Spurs", "completion": "5.00"}
 {"prompt": "Bet $6.00 on the San Antonio spurs", "completion": "6.00"}
-{"prompt": "Put 15 on spurs to win", "completion": "15.00"}
-{"prompt": "I want to bet fifteen on the Pistons", "completion": "15.00"}
+{"prompt": "Put $15 on spurs to win", "completion": "15.00"}
+{"prompt": "I want to bet fifteen dollars on the Pistons", "completion": "15.00"}
 {"prompt": "Bet $72 on the Detroit Pistons", "completion": "72.00"}
-{"prompt": "Put 17 money on my pistons to win", "completion": "17.00"}
+{"prompt": "Put 17$ on my pistons to win", "completion": "17.00"}
 {"prompt": "I want to bet 3 dollars on the Suns", "completion": "3.00"}
 {"prompt": "I wanna bet 8$ on Kevin Durant on the Suns scoring ", "completion": "12.00"}
 {"prompt": "bet 12$ on phx suns to win", "completion": "12.00"}
 {"prompt": "I want to bet 14 $ on the Raptors", "completion": "14.00"}
 {"prompt": "Parlay $ 17 on tor raptors ", "completion": "17.00"}
-{"prompt": "bet 10.00 on toronto raptors to win", "completion": "10.00"}
+{"prompt": "bet $10.00 on toronto raptors to win", "completion": "10.00"}
 {"prompt": "I want to bet $ 320.75 on the Magic", "completion": "320.75"}
 {"prompt": "Parlay $ 16 on orl magic ", "completion": "16.00"}
-{"prompt": "bet 3.25 on orlando magic to win", "completion": "3.25"}
+{"prompt": "bet $3.25 on orlando magic to win", "completion": "3.25"}
 {"prompt": "bet on orlando magic to win", "completion": "N/A"}
 {"prompt": "I want to bet on the raptors scoring 110", "completion": "N/A"}
 {"prompt": "Place bet on Lowry having 7 assists", "completion": "N/A"}
@@ -39,6 +39,10 @@
 {"prompt": "bet on the Nuggets losing by 12", "completion": "N/A"}
 {"prompt": "Place bet on Denver being up twenty", "completion": "N/A"}
 {"prompt": "Place bet on Thunder being up 20", "completion": "N/A"}
+{"prompt": "bet on the Raptors scoring 60", "completion": "N/A"}
+{"prompt": "bet on the Warriors having 75 points", "completion": "N/A"}
+{"prompt": "Put money on Spurs scoring 100", "completion": "N/A"}
+{"prompt": "I wanna bet on the Celtics having 112 points", "completion": "N/A"}
 {"prompt": "Place bet for $7", "completion": "7.00"}
 {"prompt": "I want to bet $6.98", "completion": "6.98"}
 {"prompt": "Make a hundred dollar bet", "completion": "100.00"}
