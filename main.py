@@ -46,7 +46,7 @@ def validate_bet_data(data):
     if 'sport' not in data or data['sport'] is None:
         return {
             "bet": None,
-            "bot_message": "What sport would you like to place your bet on?\n",
+            "bot_message": "What sport would you like to place your bet on?",
             "mode": Mode.BET,
             "bet_data": data,
             "suggested_prompts": ["Exit"]
@@ -54,7 +54,7 @@ def validate_bet_data(data):
     elif 'team' not in data or data['team'] is None:
         return {
             "bet": None,
-            "bot_message": "What team would you like to place your bet on?\n",
+            "bot_message": "What team would you like to place your bet on?",
             "mode": Mode.BET,
             "bet_data": data,
             "suggested_prompts": ["Exit"]
@@ -71,7 +71,9 @@ def validate_bet_data(data):
                 games.append(game['name'])
                 multipliers.append(game['multiplier'])
                 odds.append(game['odds'])
-                msg += (f'{i+1}. {game["name"]}\n')
+                msg += (f'{i+1}. {game["name"]}')
+                if i < len(GAME_DATA) - 1:
+                    msg += '\n'
                 suggested_prompts.append(str(i+1))
         suggested_prompts.append("Exit")
         return {
@@ -84,7 +86,7 @@ def validate_bet_data(data):
     elif ('points' not in data or data['points'] is None) and ('win' not in data or data['win'] is None):
         return {
             "bet": None,
-            "bot_message": 'What outcome would you like to bet on?\n',
+            "bot_message": 'What outcome would you like to bet on?',
             "mode": Mode.BET,
             "bet_data": data,
             "suggested_prompts": ["Exit"]
@@ -92,7 +94,7 @@ def validate_bet_data(data):
     elif 'bet_amount' not in data or data['bet_amount'] is None:
         return {
             "bet": None,
-            "bot_message": 'How much would you like to bet?\n',
+            "bot_message": 'How much would you like to bet?',
             "mode": Mode.BET,
             "bet_data": data,
             "suggested_prompts": ["Exit"]
