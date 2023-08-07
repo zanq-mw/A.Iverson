@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct InputFieldView: View {
-    @Binding var userSend: Bool
     @Binding var textField: String
-    @ObservedObject var chatViewModel: ChatView.ViewModel
-    var users: (user: UserViewModel, computer: UserViewModel)
+    let sendAction: () -> Void
 
     enum Constants {
         static let textBoxHeight: CGFloat = 33.0
@@ -35,8 +33,7 @@ struct InputFieldView: View {
 
             if !textField.isEmpty {
                 Button(action: {
-                    chatViewModel.send(textField, user: userSend ? users.user : users.computer)
-                    textField = ""
+                    sendAction()
                 }, label: {
                     ZStack (alignment: .center) {
                         Circle()

@@ -173,9 +173,17 @@ extension BetslipView {
 
         func addBet() {
             withAnimation {
-                bets.append(.init(title: "TB Buccaneers @ MIA Dolphins", betTitle: "TB Buccaneers", betDescription: "Moneyline", multiplier: 1.66, odds: "-100", betAmount: "50.00", toWinAmount: "26.21", date: "Feb 11 · 12:00 PM"))
+                bets.append(.init(title: "TB Buccaneers @ MIA Dolphins", betTitle: "TB Buccaneers", betDescription: "Moneyline", multiplier: 1.66, odds: "-100", betAmount: 50.00, toWinAmount: 26.21, date: "Feb 11 · 12:00 PM"))
             }
         }
+
+        func addBet(_ betData: FinalBetData) {
+
+            withAnimation {
+                bets.append(.init(title: betData.game_title, betTitle: betData.bet_title, betDescription: betData.bet_description, multiplier: 1, odds: String(betData.odds), betAmount: betData.bet_amount, toWinAmount: betData.to_win))
+            }
+        }
+
 
         func removeBet(id: UUID) {
             withAnimation {
@@ -190,7 +198,7 @@ extension BetslipView {
 struct BetslipView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            BetslipView(viewModel: .init(bets: [.init(title: "TB Buccaneers @ MIA Dolphins", betTitle: "TB Buccaneers", betDescription: "Moneyline", multiplier: 1.66, odds: "-100", betAmount: "", toWinAmount: "", date: "Feb 11 · 12:00 PM")]))
+            BetslipView(viewModel: .init(bets: [.init(title: "TB Buccaneers @ MIA Dolphins", betTitle: "TB Buccaneers", betDescription: "Moneyline", multiplier: 1.66, odds: "-100", betAmount: 0, toWinAmount: 0, date: "Feb 11 · 12:00 PM")]))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.Theme.background)
