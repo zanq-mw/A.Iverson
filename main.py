@@ -180,13 +180,13 @@ def question_workflow(prompt):
     # # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
 
     answer = response[0].text
-    answer += "\n\nWas this helpful? Please answer YES or NO.\n"
+    answer += "\n\nWas this helpful?"
 
     return {
         "bot_message": answer,
         "bet_mode": Mode.QUESTION,
-        "suggested_prompts": ['YES', 'NO'],
-        "saved_question": [prompt, answer]
+        "suggested_prompts": ['Yes', 'No'],
+        "saved_question": [prompt, response[0].text]
     }
 
     return (response[0].text)
