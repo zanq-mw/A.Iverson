@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import List
 from enum import Enum
 
 class Mode(Enum):
@@ -32,4 +32,6 @@ class UserMessage(BetData, Bet):
     mode: int
     bet: Bet | None = None
     bet_data: BetData | None = None
+    saved_question: List[str] | None = None
+
 

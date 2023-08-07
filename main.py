@@ -185,7 +185,8 @@ def question_workflow(prompt):
     return {
         "bot_message": answer,
         "bet_mode": Mode.QUESTION,
-        "suggested_prompts": ['YES', 'NO']
+        "suggested_prompts": ['YES', 'NO'],
+        "saved_question": [prompt, answer]
     }
 
     return (response[0].text)
@@ -196,13 +197,10 @@ def start_workflow(user_input):
         return add_to_bet_data(user_input.user_message, user_input.bet_data)
     elif user_input.mode == Mode.QUESTION.value:
         if user_input.user_message == "YES":
-            # there's no way to get the users question and the bot's answer unless we send them back to the JSON object
-            # i vote that we just pretend to write to file but not actually do it
-
-            # data = f'"prompt": "{prompt}", "completion": "{response[0].text}"'
-            # data = '\n{' + data + '}'
-            # with open('generate_training_data.jsonl', "a") as f:
-            # f.write(data)
+            data = f'"prompt": "{user_input.saved_question[0]}", "completion": "{user_input.saved_question[1]}"'
+            data = '\n{' + data + '}'
+            with open('generate_training_data.jsonl', "a") as f:
+                f.write(data)
 
             msg = "Thanks for letting me know. Anything else I can help you with?"
 
