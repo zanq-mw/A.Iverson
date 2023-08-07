@@ -177,15 +177,17 @@ def add_to_bet_data(user_message, user_data):
 
 
 def question_workflow(prompt):
-    pre_prompt = "You are an AI chatbot that helps users navigate and use theScore Bet app. Assume that all questions are asked in the context of theScore Bet app. To start, please answer this user's question: "
-    response = co.generate(
-        pre_prompt + prompt,
-        max_tokens=1000,
-        model=config_read.get("models", "generate_answers")
+    # pre_prompt = "You are an AI chatbot that helps users navigate and use theScore Bet app. Assume that all questions are asked in the context of theScore Bet app. To start, please answer this user's question: "
+    # response = co.generate(
+    #     pre_prompt + prompt,
+    #     max_tokens=1000,
+    #     model=config_read.get("models", "generate_answers")
     )
     # # # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
 
-    answer = response[0].text
+    # answer = response[0].text
+
+    answer = "Testing answer"
     answer += "\n\nWas this helpful?"
 
     return {
