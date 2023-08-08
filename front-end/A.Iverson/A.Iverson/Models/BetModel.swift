@@ -19,7 +19,7 @@ class Bet: ObservableObject, Equatable {
     @Published var betViewModel: BetslipInputFieldView.ViewModel
     @Published var winViewModel: BetslipInputFieldView.ViewModel
 
-    init(title: String, betTitle: String, betDescription: String, multiplier: Double, odds: String, betAmount: String, toWinAmount: String, date: String = Date().description) {
+    init(title: String, betTitle: String, betDescription: String, multiplier: Double, odds: String, betAmount: Double, toWinAmount: Double, date: String = Date().description) {
         self.title = title
         self.betTitle = betTitle
         self.betDescription = betDescription
@@ -27,8 +27,8 @@ class Bet: ObservableObject, Equatable {
         self.odds = odds
         self.date = date
 
-        betViewModel = .init(title: "Bet", field: .bet, text: betAmount) {}
-        winViewModel = .init(title: "To Win", field: .win, text: toWinAmount) {}
+        betViewModel = .init(title: "Bet", field: .bet, text: String(betAmount)) {}
+        winViewModel = .init(title: "To Win", field: .win, text: String(toWinAmount)) {}
     }
 
     func getPayoutValue() -> Double {

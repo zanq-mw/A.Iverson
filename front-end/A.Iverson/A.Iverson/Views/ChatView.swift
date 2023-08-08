@@ -19,6 +19,7 @@ struct ChatView: View {
                         MessageGroupView(viewModel: groupViewModel)
                     }
                     Rectangle()
+                        .foregroundColor(Color.clear)
                         .frame(height: questionsHeight)
                         .id(1)
                 }

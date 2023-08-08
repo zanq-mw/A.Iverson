@@ -9,19 +9,7 @@ import SwiftUI
 import WrappingHStack
 
 struct ContentView: View {
-    @State var textField: String = ""
-    var userViewModel = UserViewModel(name: "Anders")
-    var computerViewModel = UserViewModel(name: "A.Iverson", profilePicture: {
-        Image(systemName: "face.dashed.fill")
-    }())
-    @ObservedObject var chatViewModel = ChatView.ViewModel(messageGroups: [.init(user: .init(name: "A.Iverson"), messages: ["Hi, I'm A.Iverson, your personal betting assistant. You can ask me questions about betting or how to use theScore Bet app. You can even ask me to place a bet for you. What can I help you with today?"])])
-    @State var userSend = true
-    @State var betslip = false
-    @State var betMode = false
-    
-    @ObservedObject var betslipViewModel = BetslipView.ViewModel(bets: [])
-    @State var questions: [String] = ["What is a straight bet trying to make this extra a a asdasd adsasdasd?", "What is moneyline?", "How do I place a bet?"]
-    @State var questionsHeight: CGFloat = .zero
+    @StateObject var viewModel: ViewModel = ViewModel()
 
     var body: some View {
         ZStack {
@@ -29,7 +17,7 @@ struct ContentView: View {
                 HStack {
                     Button(action: {
                         withAnimation {
-                            betMode.toggle()
+                            viewModel.betMode.toggle()
                         }
                     }, label: {
                         Text("MODE")
@@ -42,7 +30,7 @@ struct ContentView: View {
 
                     Button(action: {
                         withAnimation {
-                            betslip.toggle()
+                            viewModel.betslip.toggle()
                         }
                     }, label: {
                         Text("BETSLIP")
@@ -55,7 +43,7 @@ struct ContentView: View {
                     
                     Button(action: {
                         
-                        betslipViewModel.addBet()
+                        viewModel.betslipViewModel.addBet()
                         
                     }, label: {
                         Text("BET")
@@ -67,7 +55,7 @@ struct ContentView: View {
                     })
                     
                     Button(action: {
-                        userSend.toggle()
+                        viewModel.userSend.toggle()
                         //questions.append("Test question 123 ?")
                     }, label: {
                         Text("MESSAGES")
@@ -82,7 +70,7 @@ struct ContentView: View {
                 .background(Color.Theme.background)
                 .zIndex(3)
 
-                if betMode {
+                if viewModel.betMode {
                     BetModeInfoView()
                         .transition(.move(edge: .top))
                         .zIndex(2)
@@ -90,19 +78,21 @@ struct ContentView: View {
 
                 Group {
                     ZStack {
-                        ChatView(viewModel: chatViewModel, questionsHeight: questionsHeight)
+                        ChatView(viewModel: viewModel.chatViewModel, questionsHeight: viewModel.questionsHeight)
 
-                        questionsView
+                        extraChatViews
                     }
-                    InputFieldView(userSend: $userSend, textField: $textField, chatViewModel: chatViewModel, users: (user: userViewModel, computer: computerViewModel))
+                    InputFieldView(textField: $viewModel.textField) {
+                        viewModel.sendMessage(user: viewModel.userViewModel)
+                    }
                 }
                 .padding(.horizontal, 16)
             }
             .background(Color.Theme.background)
             .frame(maxHeight: .infinity)
             
-            if betslip {
-                BetslipView(viewModel: betslipViewModel)
+            if viewModel.betslip {
+                BetslipView(viewModel: viewModel.betslipViewModel)
                     .frame(maxHeight: .infinity, alignment: .bottom)
                     .zIndex(1)
                     .transition(.move(edge: .bottom))
@@ -114,14 +104,14 @@ struct ContentView: View {
 }
 
 extension ContentView {
-    var questionsView: some View {
+    var extraChatViews: some View {
         VStack {
             Spacer()
 
             WrappingHStack(alignment: .leading, horizontalSpacing: 8, verticalSpacing: 4) {
-                ForEach(questions,id: \.self) { question in
+                ForEach(viewModel.questions, id: \.self) { question in
                     Button(action: {
-                        print(questionsHeight)
+                        viewModel.askQuestion(question)
                     }, label: {
                         Text(question)
                             .multilineTextAlignment(.leading)
@@ -142,18 +132,94 @@ extension ContentView {
             .background(
                 GeometryReader { proxy in
                     Color.clear
-                        .onChange(of: questions) { value in
+                        .onChange(of: viewModel.questions) { value in
                             withAnimation {
-                                questionsHeight = proxy.size.height
+                                viewModel.questionsHeight = proxy.size.height
                             }
                         }
                         .onAppear {
-                            questionsHeight = proxy.size.height
+                            viewModel.questionsHeight = proxy.size.height
                         }
                 }
             )
+
+            
         }
         .padding(.bottom, 4)
+    }
+}
+
+extension ContentView {
+    @MainActor
+    class ViewModel: ObservableObject {
+        var userViewModel = UserViewModel(name: "Anders")
+        var computerViewModel = UserViewModel(name: "A.Iverson", profilePicture: {
+            Image(systemName: "face.dashed.fill")
+        }())
+        @Published var userSend = true
+
+        @Published var textField: String = ""
+        @Published var chatViewModel = ChatView.ViewModel(messageGroups: [.init(user: .init(name: "A.Iverson"), messages: ["Hi, I'm A.Iverson, your personal betting assistant. You can ask me questions about betting or how to use theScore Bet app. You can even ask me to place a bet for you. What can I help you with today?"])])
+
+        @Published var betslip = false
+        @Published var betMode = false
+        @Published var betslipViewModel = BetslipView.ViewModel(bets: [])
+
+        @Published var questions: [String] = ["I want to bet on Raptors scoring 16 points", "What is moneyline?", "How do I place a bet?"]
+        @Published var questionsHeight: CGFloat = .zero
+        @Published var hideQuestions: Bool = false
+
+        @Published var server = API()
+        @Published var botTyping = false
+
+        func currentUser() -> UserViewModel {
+            userSend ? userViewModel : computerViewModel
+        }
+
+        init() {
+            bindServer()
+        }
+
+        func bindServer() {
+            server.viewModel = self
+        }
+
+        func sendMessage(user: UserViewModel) {
+            chatViewModel.send(textField, user: user)
+            botTyping = true
+            Task {
+                let response = await server.message(textField)
+                if let response {
+                    if let botQuestions = response.suggested_prompts {
+                        questions = botQuestions
+                        hideQuestions = false
+                    }
+
+                    if let betData = response.bet {
+                        betslipViewModel.addBet(betData)
+                        betslip = true
+                    }
+
+                    betMode = false
+                    if .bet == response.mode {
+                        betMode = true
+                    }
+
+                    questions = response.suggested_prompts ?? []
+
+                    chatViewModel.send(response.bot_message, user: computerViewModel)
+                    textField = ""
+                    botTyping = false
+                }
+            }
+        }
+
+        func askQuestion(_ question: String) {
+            textField = question
+            withAnimation {
+                hideQuestions = true
+            }
+        }
     }
 }
 

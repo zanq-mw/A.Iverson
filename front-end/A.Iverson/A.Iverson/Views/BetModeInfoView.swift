@@ -14,7 +14,7 @@ struct BetModeInfoView: View {
         HStack {
             Group {
                 if info {
-                    Text("A. Inverson will help you create and fill out a betslip. Please finish the bet before asking new questions.")
+                    Text("A. Inverson will help you create and fill out a betslip. Please finish the bet before asking new questions. To abandon this bet and exit bet mode, say 'EXIT'.")
                         .font(
                             Font.custom("SF Pro Text", size: 12)
                                 .weight(.medium)
