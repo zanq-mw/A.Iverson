@@ -21,19 +21,21 @@ class API: ObservableObject {
         do {
             let jsonData = try JSONEncoder().encode(tempBody)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            print(jsonString)
+            print("SENDING: \(jsonString)")
 
             request.httpBody = jsonData
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
             let (data, response) = try await URLSession.shared.data(for: request)
+            print(data.prettyPrintedJSONString ?? "UNKNOWN")
             let responseData = try JSONDecoder().decode(Response.self, from: data)
+            print("RECIEVING: \(responseData)")
             self.response = responseData
 
             return responseData
         } catch {
-            print(error)
+            print("ERROR: \(error.localizedDescription)")
             return nil
         }
         
