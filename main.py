@@ -40,7 +40,7 @@ GAME_DATA = [
     {"home": "Thunder", "away": "Celtics",
         "name": "Thunder vs Celtics", "multiplier": 1.5, "odds": "+198"},
     {"home": "Nets", "away": "Spurs",
-        "name": "Nets vs Spurss", "multiplier": 1.3, "odds": "-198"},
+        "name": "Nets vs Spurs", "multiplier": 1.3, "odds": "-198"},
     {"home": "Nets", "away": "Pelicans",
         "name": "Nets vs Pelicans", "multiplier": 1.1, "odds": "+62"},
     {"home": "Thunder", "away": "Nets", "name": "Thunder vs Nets",
@@ -50,7 +50,27 @@ GAME_DATA = [
     {"home": "Cavaliers", "away": "Pelicans",
         "name": "Cavaliers vs Pelicans", "multiplier": 1.6, "odds": "-17"},
     {"home": "Thunder", "away": "Cavaliers",
-        "name": "Thunder vs Cavaliers", "multiplier": 1.4, "odds": "+101"}
+        "name": "Thunder vs Cavaliers", "multiplier": 1.4, "odds": "+101"},
+    {"home": "Knicks", "away": "76ers",
+        "name": "Knicks vs 76ers", "multiplier": 1.3, "odds": "+120"},
+    {"home": "Bulls", "away": "Pistons",
+        "name": "Bulls vs Pistons", "multiplier": 1.5, "odds": "-150"},
+    {"home": "Pacers", "away": "Bucks",
+        "name": "Pacers vs Bucks", "multiplier": 1.6, "odds": "+140"},
+    {"home": "Hornets", "away": "Raptors",
+        "name": "Hornets vs Raptors", "multiplier": 1.2, "odds": "-120"},
+    {"home": "Clippers", "away": "Heat",
+        "name": "Clippers vs Heat", "multiplier": 1.8, "odds": "+180"},
+    {"home": "Magic", "away": "Wizards",
+        "name": "Magic vs Wizards", "multiplier": 1.7, "odds": "-170"},
+    {"home": "Nuggets", "away": "Timberwolves",
+        "name": "Nuggets vs Timberwolves", "multiplier": 1.4, "odds": "+157"},
+    {"home": "Trail Blazers", "away": "Jazz",
+        "name": "Trail Blazers vs Jazz", "multiplier": 1.5, "odds": "+150"},
+    {"home": "Suns", "away": "Kings",
+        "name": "Suns vs Kings", "multiplier": 1.9, "odds": "-198"},
+    {"home": "Rockets", "away": "Grizzlies",
+        "name": "Rockets vs Grizzlies", "multiplier": 1.1, "odds": "+110"}
 ]
 
 
