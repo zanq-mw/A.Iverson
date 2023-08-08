@@ -59,7 +59,7 @@ struct MessageGroupView_Previews: PreviewProvider {
 }
 
 extension MessageGroupView {
-    class ViewModel: ObservableObject, Equatable {
+    class ViewModel: Equatable, ObservableObject {
         let id = UUID()
         let date = Date()
         let user: UserViewModel
@@ -86,7 +86,7 @@ extension MessageGroupView {
             user.background
         }
 
-        static func ==(lhs: ViewModel, rhs: ViewModel) -> Bool {
+        static func ==(lhs: MessageGroupView.ViewModel, rhs: MessageGroupView.ViewModel) -> Bool {
             return lhs.id == rhs.id
         }
     }

@@ -20,18 +20,17 @@ struct ChatView: View {
                     }
                     Rectangle()
                         .foregroundColor(Color.clear)
-                        .frame(height: questionsHeight)
-                        .id(1)
+                        .frame(height: 1)
+                        .padding(.top, questionsHeight)
+                        .id(123123123)
                 }
                 .onChange(of: viewModel.messageGroups) { _ in
                     withAnimation {
-                        scrollView.scrollTo(1)
+                        scrollView.scrollTo(123123123)
                     }
                 }
             }
         }
-        .padding(.top, 8)
-
     }
 }
 
@@ -44,10 +43,11 @@ extension ChatView {
         }
 
         func send(_ message: String, user: UserViewModel) {
+            let formattedMessage = message.deletingPrefix("\n")
             if let lastMessage = messageGroups.last, lastMessage.user == user {
-                lastMessage.messages.append(message)
+                lastMessage.messages.append(formattedMessage)
             } else {
-                messageGroups.append(MessageGroupView.ViewModel(user: user, messages: [message]))
+                messageGroups.append(MessageGroupView.ViewModel(user: user, messages: [formattedMessage]))
             }
         }
     }
