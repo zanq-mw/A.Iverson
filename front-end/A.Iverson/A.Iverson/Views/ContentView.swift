@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import WrappingHStack
 
 struct ContentView: View {
     @StateObject var viewModel: ViewModel = ViewModel()
@@ -20,7 +19,6 @@ struct ContentView: View {
                         .scaledToFit()
                         .frame(height: 15)
                         .foregroundColor(.white)
-                        .padding(.leading, 20)
 
 
                     Text("A.Iverson")
@@ -30,70 +28,14 @@ struct ContentView: View {
 
                     Spacer()
 
-//                    Image(systemName: "info.circle")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(height: 20)
-//                        .foregroundColor(.white)
-//                        .padding(.trailing, 20)
+                    Image("ScoreBetLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 20)
 
                 }
                 .padding(.top, 8)
-//                HStack {
-//                    Button(action: {
-//                        withAnimation {
-//                            viewModel.betMode.toggle()
-//                        }
-//                    }, label: {
-//                        Text("MODE")
-//                            .padding(.vertical, 5)
-//                            .padding(.horizontal, 10)
-//                            .foregroundColor(.white)
-//                            .background(.blue)
-//                            .cornerRadius(10)
-//                    })
-//
-//                    Button(action: {
-//                        withAnimation {
-//                            viewModel.betslip.toggle()
-//                        }
-//                    }, label: {
-//                        Text("BETSLIP")
-//                            .padding(.vertical, 5)
-//                            .padding(.horizontal, 10)
-//                            .foregroundColor(.white)
-//                            .background(.blue)
-//                            .cornerRadius(10)
-//                    })
-//
-//                    Button(action: {
-//
-//                        viewModel.betslipViewModel.addBet()
-//
-//                    }, label: {
-//                        Text("BET")
-//                            .padding(.vertical, 5)
-//                            .padding(.horizontal, 10)
-//                            .foregroundColor(.white)
-//                            .background(.red)
-//                            .cornerRadius(10)
-//                    })
-//
-//                    Button(action: {
-//                        //viewModel.userSend.toggle()
-//                        print(viewModel.botTyping)
-//                    }, label: {
-//                        Text("MESSAGES")
-//                            .padding(.vertical, 5)
-//                            .padding(.horizontal, 10)
-//                            .foregroundColor(.black)
-//                            .background(.white)
-//                            .cornerRadius(10)
-//                    })
-//                }
-//                .frame(maxWidth: .infinity)
-//                .background(Color.Theme.background)
-//                .zIndex(3)
+                .padding(.horizontal, 20)
 
                 if viewModel.betMode {
                     BetModeInfoView()
@@ -101,7 +43,7 @@ struct ContentView: View {
                         .zIndex(2)
                 }
 
-                Group {
+                VStack(spacing: 4) {
                     ZStack {
                         ChatView(viewModel: viewModel.chatViewModel, questionsHeight: viewModel.questionsHeight)
 
@@ -126,6 +68,7 @@ struct ContentView: View {
                         }
                         .padding(.bottom, 4)
                     }
+
                     HStack {
                         if viewModel.betslipViewModel.bets.isNotEmpty {
                             Button(action: {
@@ -221,11 +164,11 @@ extension ContentView {
                 Color.clear
                     .onChange(of: viewModel.questions) { value in
                         withAnimation {
-                            viewModel.questionsHeight = proxy.size.height + 8
+                            viewModel.questionsHeight = proxy.size.height + 4
                         }
                     }
                     .onAppear {
-                        viewModel.questionsHeight = proxy.size.height + 8
+                        viewModel.questionsHeight = proxy.size.height + 4
                     }
             }
         )
@@ -278,7 +221,7 @@ extension ContentView {
 
             Task {
                 let response = await server.message(tempText)
-                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                try? await Task.sleep(nanoseconds: 1_500_000_000)
 
                 if let response {
                     let mode = .bet == response.mode

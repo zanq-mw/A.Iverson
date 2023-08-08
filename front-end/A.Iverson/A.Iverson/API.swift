@@ -93,7 +93,7 @@ struct BetData: Codable {
     let points: Int?
     let game_title: String?
     let multiplier: Double?
-    let odds: Int?
+    let odds: String?
 }
 
 struct FinalBetData: Codable {
