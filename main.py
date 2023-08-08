@@ -189,10 +189,10 @@ def question_workflow(prompt):
     answer += "\n\nWas this helpful?"
 
     return {
-        "bot_message": response[0].text,
+        "bot_message": answer,
         "bet_mode": Mode.QUESTION,
         "suggested_prompts": ['Yes', 'No'],
-        "saved_question": [prompt, response[0].text]
+        "saved_question": [prompt, "Testing answer"]
     }
 
 
