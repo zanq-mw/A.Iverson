@@ -71,8 +71,8 @@ def validate_bet_data(data):
                 games.append(game['name'])
                 multipliers.append(game['multiplier'])
                 odds.append(game['odds'])
-                suggested_prompts.append(str(i+1))
         for i in range(len(games)):
+            suggested_prompts.append(str(i+1))
             game = games[i]
             msg += (f'{i+1}. {game}\n')
         suggested_prompts.append("Exit")
