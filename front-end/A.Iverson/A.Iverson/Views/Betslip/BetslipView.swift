@@ -168,6 +168,7 @@ extension BetslipView {
         @Published var bets: [Bet] {
             didSet {
                 payoutValue = 0
+                cost = 0
                 bets.forEach { bet in
                     payoutValue += bet.getPayoutValue()
                     cost += bet.getCost()

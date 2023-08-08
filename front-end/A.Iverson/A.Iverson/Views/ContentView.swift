@@ -229,6 +229,7 @@ extension ContentView {
                                 RoundedRectangle(cornerRadius: 8)
                                     .inset(by: 0.5)
                                     .stroke(Color.Chat.user, lineWidth: 1)
+
                             )
                     })
                 }
@@ -268,7 +269,7 @@ extension ContentView {
         @Published var betMode = false
         @Published var betslipViewModel = BetslipView.ViewModel(bets: [])
 
-        @Published var questions: [String] = ["I want to bet on Raptors scoring 16 points", "What is moneyline?", "How do I place a bet?"]
+        @Published var questions: [String] = ["How do I place a bet?", "Place a bet!", "What is moneyline?", "How do I place a bet?"]
         @Published var questionsHeight: CGFloat = .zero
         @Published var hideQuestions: Bool = false
 
