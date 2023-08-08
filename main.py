@@ -187,7 +187,7 @@ def question_workflow(prompt):
         "bot_message": answer,
         "mode": Mode.QUESTION,
         "suggested_prompts": ['Yes', 'No'],
-        "saved_question": [prompt, response[0].text]
+        "saved_question": [prompt, response]
     }
 
 
