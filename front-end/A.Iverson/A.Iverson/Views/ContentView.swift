@@ -55,8 +55,8 @@ struct ContentView: View {
                     })
                     
                     Button(action: {
-                        viewModel.userSend.toggle()
-                        //questions.append("Test question 123 ?")
+                        //viewModel.userSend.toggle()
+                        print(viewModel.botTyping)
                     }, label: {
                         Text("MESSAGES")
                             .padding(.vertical, 5)
@@ -80,7 +80,23 @@ struct ContentView: View {
                     ZStack {
                         ChatView(viewModel: viewModel.chatViewModel, questionsHeight: viewModel.questionsHeight)
 
-                        extraChatViews
+                        VStack {
+                            Spacer()
+
+                            suggestedQuestions
+
+                            if viewModel.botTyping {
+                                Text("A.Iverson is typing...")
+                                    .font(
+                                        Font.custom("SF Pro Text", size: 12)
+                                            .weight(.medium)
+                                    )
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .foregroundColor(Color.Input.border)
+                                    .transition(.move(edge: .bottom))
+                            }
+                        }
+                        .padding(.bottom, 4)
                     }
                     InputFieldView(textField: $viewModel.textField) {
                         viewModel.sendMessage(user: viewModel.userViewModel)
@@ -103,52 +119,57 @@ struct ContentView: View {
     }
 }
 
-extension ContentView {
-    var extraChatViews: some View {
-        VStack {
-            Spacer()
+//extension ContentView {
+//    var typingIndicator: some View {
+//        Group {
+//
+//            } else {
+//                EmptyView()
+//            }
+//        }
+//    }
+//}
 
-            WrappingHStack(alignment: .leading, horizontalSpacing: 8, verticalSpacing: 4) {
-                ForEach(viewModel.questions, id: \.self) { question in
-                    Button(action: {
-                        viewModel.askQuestion(question)
-                    }, label: {
-                        Text(question)
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .foregroundColor(.white)
-                            .font(
-                                Font.custom("SF Pro Text", size: 14)
-                                    .weight(.medium)
-                            )
-                            .padding(.vertical, 4)
-                            .padding(.horizontal, 8)
-                            .background(.gray)
-                            .cornerRadius(8)
-                    })
-                }
+extension ContentView {
+    var suggestedQuestions: some View {
+        WrappingHStack(alignment: .leading, horizontalSpacing: 8, verticalSpacing: 4) {
+            ForEach(viewModel.questions, id: \.self) { question in
+                Button(action: {
+                    viewModel.askQuestion(question)
+                }, label: {
+                    Text(question)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .foregroundColor(.white)
+                        .font(
+                            Font.custom("SF Pro Text", size: 14)
+                                .weight(.medium)
+                        )
+                        .padding(.vertical, 4)
+                        .padding(.horizontal, 8)
+                        .background(.gray)
+                        .cornerRadius(8)
+                })
             }
-            .padding(.top, 8)
-            .background(
-                GeometryReader { proxy in
-                    Color.clear
-                        .onChange(of: viewModel.questions) { value in
-                            withAnimation {
-                                viewModel.questionsHeight = proxy.size.height
-                            }
-                        }
-                        .onAppear {
+        }
+        .padding(.top, 8)
+        .background(
+            GeometryReader { proxy in
+                Color.clear
+                    .onChange(of: viewModel.questions) { value in
+                        withAnimation {
                             viewModel.questionsHeight = proxy.size.height
                         }
-                }
-            )
-
-            
-        }
-        .padding(.bottom, 4)
+                    }
+                    .onAppear {
+                        viewModel.questionsHeight = proxy.size.height
+                    }
+            }
+        )
     }
 }
 
+// MARK: - VIEWMODEL
 extension ContentView {
     @MainActor
     class ViewModel: ObservableObject {
@@ -186,9 +207,17 @@ extension ContentView {
 
         func sendMessage(user: UserViewModel) {
             chatViewModel.send(textField, user: user)
-            botTyping = true
+
             Task {
-                let response = await server.message(textField)
+                withAnimation {
+                    botTyping = true
+                }
+                let tempText = textField
+                textField = ""
+
+                let response = await server.message(tempText)
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+
                 if let response {
                     if let botQuestions = response.suggested_prompts {
                         questions = botQuestions
@@ -207,10 +236,10 @@ extension ContentView {
 
                     questions = response.suggested_prompts ?? []
 
-                    chatViewModel.send(response.bot_message, user: computerViewModel)
-                    textField = ""
-                    botTyping = false
+                    chatViewModel.send(response.bot_message, user:computerViewModel)
                 }
+                botTyping = false
+
             }
         }
 
