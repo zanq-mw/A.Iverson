@@ -27,8 +27,8 @@ class Bet: ObservableObject, Equatable {
         self.odds = odds
         self.date = date
 
-        betViewModel = .init(title: "Bet", field: .bet, text: String(betAmount)) {}
-        winViewModel = .init(title: "To Win", field: .win, text: String(toWinAmount)) {}
+        betViewModel = .init(title: "Bet", field: .bet, text: String(format: "$%.2f", betAmount)) {}
+        winViewModel = .init(title: "To Win", field: .win, text: String(format: "$%.2f", toWinAmount)) {}
     }
 
     func getPayoutValue() -> Double {

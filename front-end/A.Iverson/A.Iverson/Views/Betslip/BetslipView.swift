@@ -86,13 +86,13 @@ extension BetslipView {
         HStack {
             Text("Betslip")
                 .font(
-                    Font.custom("SF Pro Text", size: 18)
+                    Font.custom("SF_Pro_Text", size: 18)
                         .weight(.bold)
                 )
                 .foregroundColor(.black)
 
             Text(String(viewModel.bets.count))
-                .font(Font.custom("SF Pro Text", size: 15))
+                .font(Font.custom("SF_Pro_Text", size: 15))
                 .foregroundColor(.white)
                 .padding(.horizontal, 13)
                 .padding(.vertical, 3)
@@ -121,7 +121,7 @@ extension BetslipView {
         HStack {
             Text("PAYOUT")
                 .font(
-                    Font.custom("SF Pro Text", size: 12)
+                    Font.custom("SF_Pro_Text", size: 12)
                         .weight(.bold)
                 )
                 .foregroundColor(.black)
@@ -129,7 +129,7 @@ extension BetslipView {
             Spacer()
 
             Text(String(format: "$%.2f", viewModel.payoutValue))
-                .font(Font.custom("SF Pro Text", size: 18).weight(.bold))
+                .font(Font.custom("SF_Pro_Text", size: 18).weight(.bold))
                 .foregroundColor(.black)
         }
         .padding(.horizontal, 16)
@@ -148,7 +148,7 @@ extension BetslipView {
             HStack {
                 Text(String(format: "Place Bet $%.2f", viewModel.cost))
                     .font(
-                    Font.custom("SF Pro Text", size: 16)
+                    Font.custom("SF_Pro_Text", size: 16)
                     .weight(.bold)
                     )
                     .foregroundColor(.white)
@@ -168,6 +168,7 @@ extension BetslipView {
         @Published var bets: [Bet] {
             didSet {
                 payoutValue = 0
+                cost = 0
                 bets.forEach { bet in
                     payoutValue += bet.getPayoutValue()
                     cost += bet.getCost()

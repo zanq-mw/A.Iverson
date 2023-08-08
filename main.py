@@ -19,9 +19,9 @@ GAME_DATA = [
     {"home": "Hawks", "away": "Raptors",
         "name": "Hawks vs Raptors", "multiplier": 1.5, "odds": "+198"},
     {"home": "Lakers", "away": "Clippers",
-        "name": "Lakers vs Clippers", "multiplier": 1.3, "odds": "-198"},
-    {"home": "Lakerrs", "away": "Mavericks",
-        "name": "Lakers vs Mavericks", "multiplier": 1.1, "odds": "+62"},
+        "name": "Lakers vs Clippers", "multiplier": 1.3, "odds": -198},
+    {"home": "Lakers", "away": "Mavericks",
+        "name": "Lakers vs Mavericks", "multiplier": 1.1, "odds": 62},
     {"home": "Hawks", "away": "Lakers", "name": "Hawks vs Lakers",
         "multiplier": 1.8, "odds": "-62"},
     {"home": "Warriors", "away": "Clippers",
@@ -49,7 +49,7 @@ def validate_bet_data(data):
             "bot_message": "What sport would you like to place your bet on?",
             "mode": Mode.BET,
             "bet_data": data,
-            "suggested_prompts": ["Exit"]
+            "suggested_prompts": ["Basketball", "Soccer", "Hockey", "Football", "Baseball", "Ultimate Frisbee", "Exit"]
         }
     elif 'team' not in data or data['team'] is None:
         return {
@@ -64,15 +64,17 @@ def validate_bet_data(data):
         multipliers = []
         odds = []
         suggested_prompts = []
-        msg = 'Here are the options:\n'
+        msg = 'Here are the options:\n\n'
         for i in range(len(GAME_DATA)):
             game = GAME_DATA[i]
             if data['team'] in [game['home'], game['away']]:
                 games.append(game['name'])
                 multipliers.append(game['multiplier'])
                 odds.append(game['odds'])
-                msg += (f'{i+1}. {game["name"]}\n')
-                suggested_prompts.append(str(i+1))
+        for i in range(len(games)):
+            suggested_prompts.append(str(i+1))
+            game = games[i]
+            msg += (f'{i+1}. {game}\n')
         suggested_prompts.append("Exit")
         return {
             "bet": None,

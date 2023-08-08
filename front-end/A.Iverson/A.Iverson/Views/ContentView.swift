@@ -14,65 +14,90 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             VStack {
-                HStack {
-                    Button(action: {
-                        withAnimation {
-                            viewModel.betMode.toggle()
-                        }
-                    }, label: {
-                        Text("MODE")
-                            .padding(.vertical, 5)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.white)
-                            .background(.blue)
-                            .cornerRadius(10)
-                    })
+                HStack(spacing: 20) {
+                    Image(systemName: "chevron.left")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 15)
+                        .foregroundColor(.white)
+                        .padding(.leading, 20)
 
-                    Button(action: {
-                        withAnimation {
-                            viewModel.betslip.toggle()
-                        }
-                    }, label: {
-                        Text("BETSLIP")
-                            .padding(.vertical, 5)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.white)
-                            .background(.blue)
-                            .cornerRadius(10)
-                    })
-                    
-                    Button(action: {
-                        
-                        viewModel.betslipViewModel.addBet()
-                        
-                    }, label: {
-                        Text("BET")
-                            .padding(.vertical, 5)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.white)
-                            .background(.red)
-                            .cornerRadius(10)
-                    })
-                    
-                    Button(action: {
-                        //viewModel.userSend.toggle()
-                        print(viewModel.botTyping)
-                    }, label: {
-                        Text("MESSAGES")
-                            .padding(.vertical, 5)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.black)
-                            .background(.white)
-                            .cornerRadius(10)
-                    })
+
+                    Text("A.Iverson")
+                        .foregroundColor(.white)
+                        .font(.custom("SF_Pro_Text", size: 20))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    Spacer()
+
+//                    Image(systemName: "info.circle")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(height: 20)
+//                        .foregroundColor(.white)
+//                        .padding(.trailing, 20)
+
                 }
-                .frame(maxWidth: .infinity)
-                .background(Color.Theme.background)
-                .zIndex(3)
+                .padding(.top, 8)
+//                HStack {
+//                    Button(action: {
+//                        withAnimation {
+//                            viewModel.betMode.toggle()
+//                        }
+//                    }, label: {
+//                        Text("MODE")
+//                            .padding(.vertical, 5)
+//                            .padding(.horizontal, 10)
+//                            .foregroundColor(.white)
+//                            .background(.blue)
+//                            .cornerRadius(10)
+//                    })
+//
+//                    Button(action: {
+//                        withAnimation {
+//                            viewModel.betslip.toggle()
+//                        }
+//                    }, label: {
+//                        Text("BETSLIP")
+//                            .padding(.vertical, 5)
+//                            .padding(.horizontal, 10)
+//                            .foregroundColor(.white)
+//                            .background(.blue)
+//                            .cornerRadius(10)
+//                    })
+//
+//                    Button(action: {
+//
+//                        viewModel.betslipViewModel.addBet()
+//
+//                    }, label: {
+//                        Text("BET")
+//                            .padding(.vertical, 5)
+//                            .padding(.horizontal, 10)
+//                            .foregroundColor(.white)
+//                            .background(.red)
+//                            .cornerRadius(10)
+//                    })
+//
+//                    Button(action: {
+//                        //viewModel.userSend.toggle()
+//                        print(viewModel.botTyping)
+//                    }, label: {
+//                        Text("MESSAGES")
+//                            .padding(.vertical, 5)
+//                            .padding(.horizontal, 10)
+//                            .foregroundColor(.black)
+//                            .background(.white)
+//                            .cornerRadius(10)
+//                    })
+//                }
+//                .frame(maxWidth: .infinity)
+//                .background(Color.Theme.background)
+//                .zIndex(3)
 
                 if viewModel.betMode {
                     BetModeInfoView()
-                        .transition(.move(edge: .top))
+                        .transition(.move(edge: .leading))
                         .zIndex(2)
                 }
 
@@ -80,19 +105,22 @@ struct ContentView: View {
                     ZStack {
                         ChatView(viewModel: viewModel.chatViewModel, questionsHeight: viewModel.questionsHeight)
 
-                        VStack {
+                        VStack(spacing: 0) {
                             Spacer()
-
-                            suggestedQuestions
 
                             if viewModel.botTyping {
                                 Text("A.Iverson is typing...")
                                     .font(
-                                        Font.custom("SF Pro Text", size: 12)
+                                        Font.custom("SF_Pro_Text", size: 12)
                                             .weight(.medium)
                                     )
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .foregroundColor(Color.Input.border)
+                            }
+
+                            if !viewModel.hideQuestions {
+                                suggestedQuestions
+                                    .transition(.move(edge: .leading))
                             }
                         }
                         .padding(.bottom, 4)
@@ -175,24 +203,36 @@ struct ContentView: View {
 
 extension ContentView {
     var suggestedQuestions: some View {
-        WrappingHStack(alignment: .leading, horizontalSpacing: 8, verticalSpacing: 4) {
-            ForEach(viewModel.questions, id: \.self) { question in
-                Button(action: {
-                    viewModel.askQuestion(question)
-                }, label: {
-                    Text(question)
-                        .multilineTextAlignment(.leading)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .foregroundColor(.white)
-                        .font(
-                            Font.custom("SF Pro Text", size: 14)
-                                .weight(.medium)
-                        )
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 8)
-                        .background(.gray)
-                        .cornerRadius(8)
-                })
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(viewModel.questions, id: \.self) { question in
+                    Button(action: {
+                        viewModel.askQuestion(question)
+                        withAnimation {
+                            viewModel.hideQuestions = true
+                        }
+                        viewModel.sendMessage(user: viewModel.userViewModel)
+                    }, label: {
+                        Text(question)
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .foregroundColor(Color.Chat.user)
+                            .font(
+                                Font.custom("SF_Pro_Text_Bold", size: 16)
+
+                            )
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 10)
+                            //.background(.gray)
+                            //.cornerRadius(8)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .inset(by: 0.5)
+                                    .stroke(Color.Chat.user, lineWidth: 1)
+
+                            )
+                    })
+                }
             }
         }
         .padding(.top, 8)
@@ -201,11 +241,11 @@ extension ContentView {
                 Color.clear
                     .onChange(of: viewModel.questions) { value in
                         withAnimation {
-                            viewModel.questionsHeight = proxy.size.height
+                            viewModel.questionsHeight = proxy.size.height + 8
                         }
                     }
                     .onAppear {
-                        viewModel.questionsHeight = proxy.size.height
+                        viewModel.questionsHeight = proxy.size.height + 8
                     }
             }
         )
@@ -218,7 +258,7 @@ extension ContentView {
     class ViewModel: ObservableObject {
         var userViewModel = UserViewModel(name: "Anders")
         var computerViewModel = UserViewModel(name: "A.Iverson", profilePicture: {
-            Image(systemName: "face.dashed.fill")
+            Image("Icon")
         }())
         @Published var userSend = true
 
@@ -229,7 +269,7 @@ extension ContentView {
         @Published var betMode = false
         @Published var betslipViewModel = BetslipView.ViewModel(bets: [])
 
-        @Published var questions: [String] = ["I want to bet on Raptors scoring 16 points", "What is moneyline?", "How do I place a bet?"]
+        @Published var questions: [String] = ["How do I place a bet?", "Place a bet!", "What is moneyline?", "How do I place a bet?"]
         @Published var questionsHeight: CGFloat = .zero
         @Published var hideQuestions: Bool = false
 
@@ -281,7 +321,7 @@ extension ContentView {
                     }
 
                     if let betData = response.bet {
-                        try? await Task.sleep(nanoseconds: 5_000_000_000)
+                        try? await Task.sleep(nanoseconds: 3_000_000_000)
 
                         withAnimation {
                             betslipViewModel.addBet(betData)

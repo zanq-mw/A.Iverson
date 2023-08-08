@@ -21,7 +21,7 @@ struct BetslipInputFieldView: View {
             // MARK: TO BET
             VStack(alignment: .leading, spacing: 0) {
                 Text(viewModel.title)
-                    .font(Font.custom("SF Pro Text", size: 12))
+                    .font(Font.custom("SF_Pro_Text", size: 12))
                     .foregroundColor(Color(red: 0.34, green: 0.34, blue: 0.34))
                     .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -35,7 +35,7 @@ struct BetslipInputFieldView: View {
                             Text("0.00")
                                 .lineLimit(1)
                                 .font(
-                                    Font.custom("SF Pro Text", size: 16)
+                                    Font.custom("SF_Pro_Text", size: 16)
                                         .weight(.medium)
                                 )
                                 .foregroundColor(.black)
@@ -45,7 +45,7 @@ struct BetslipInputFieldView: View {
                         TextField("", text: $viewModel.text)
                             .focused($focusedField, equals: .bet)
                             .font(
-                                Font.custom("SF Pro Text", size: 16)
+                                Font.custom("SF_Pro_Text", size: 16)
                                     .weight(.medium)
                             )
                             .foregroundColor(.black)

@@ -19,7 +19,7 @@ struct BetslipMoneyAmounts: View {
                 }, label: {
                     Text("+$\(money)")
                         .font(
-                        Font.custom("SF Pro Text", size: 16)
+                        Font.custom("SF_Pro_Text", size: 16)
                         .weight(.bold)
                         )
                         .frame(maxWidth: .infinity, alignment: .center)

@@ -16,26 +16,30 @@ struct MessageGroupView: View {
                 image
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 24)
+                    .frame(height: 50)
                     .foregroundColor(.Input.border)
+                    .background(
+                        RoundedRectangle(cornerRadius: 30)
+                            .foregroundColor(.white.opacity(0.2))
+                    )
             }
 
             VStack(alignment: viewModel.isUser ? .trailing : .leading, spacing: Dimensions.Chat.groupSpacing) {
                 Text(viewModel.user.name)
-                    .font(Font.custom("SF Pro Text", size: 12))
+                    .font(Font.custom("SF_Pro_Text", size: 12))
                     .foregroundColor(.white.opacity(0.5))
                     .padding(.bottom, 2)
 
                 ForEach(viewModel.messages, id: \.self) { message in
                     Text(message)
-                        .font(Font.custom("SF Pro Text", size: 14))
+                        .font(Font.custom("SF_Pro_Text", size: 14))
                         .foregroundColor(.white)
                         .padding(.vertical, 6)
                         .padding(.horizontal, 8)
                         .background(viewModel.background)
                         .cornerRadius(12, corners: viewModel.roundCorners)
                         .cornerRadius(2, corners: viewModel.sharpCorners)
-                        .frame(width: 250, alignment: viewModel.isUser ? .trailing : .leading)
+                        .frame(width: 270, alignment: viewModel.isUser ? .trailing : .leading)
                 }
             }
             .frame(maxWidth: .infinity, alignment: viewModel.isUser ? .trailing : .leading)
