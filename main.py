@@ -177,24 +177,18 @@ def add_to_bet_data(user_message, user_data):
 
 
 def question_workflow(prompt):
-    # pre_prompt = "You are an AI chatbot that helps users navigate and use theScore Bet app. Assume that all questions are asked in the context of theScore Bet app. To start, please answer this user's question: "
-    # response = co.generate(
-    #     pre_prompt + prompt,
-    #     max_tokens=1000,
-    #     model=config_read.get("models", "generate_answers")
-    # )
-    # # # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
-
-    # answer = response[0].text
-
-    answer = "Testing answer"
+    response = co.generate(
+        prompt,
+        max_tokens=1000,
+        model=config_read.get("models", "generate_answers")
+    )
+    answer = response[0].text
     answer += "\n\nWas this helpful?"
-
     return {
         "bot_message": answer,
         "mode": Mode.QUESTION,
         "suggested_prompts": ['Yes', 'No'],
-        "saved_question": [prompt, "Testing answer"]
+        "saved_question": [prompt, response[0].text]
     }
 
 
@@ -205,7 +199,7 @@ def start_workflow(user_input):
         if user_input.user_message.lower() == "yes":
             data = f'"prompt": "{user_input.saved_question[0]}", "completion": "{user_input.saved_question[1]}"'
             data = '\n{' + data + '}'
-            with open('generate_training_data.jsonl', "a") as f:
+            with open('training-data/generate_training_data.jsonl', "a") as f:
                 f.write(data)
 
             msg = "Thanks for letting me know. Anything else I can help you with?"
