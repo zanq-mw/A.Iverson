@@ -31,6 +31,7 @@ struct ChatView: View {
                 }
             }
         }
+        .padding(.top, 8)
     }
 }
 
