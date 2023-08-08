@@ -49,7 +49,7 @@ def validate_bet_data(data):
             "bot_message": "What sport would you like to place your bet on?",
             "mode": Mode.BET,
             "bet_data": data,
-            "suggested_prompts": ["Basketball", "Soccer", "Hockey", "Football", "Baseball", "Ultimate Frisbee" "Exit"]
+            "suggested_prompts": ["Basketball", "Soccer", "Hockey", "Football", "Baseball", "Ultimate Frisbee", "Exit"]
         }
     elif 'team' not in data or data['team'] is None:
         return {
