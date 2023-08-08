@@ -78,7 +78,7 @@ def get_sport(prompt):
         sport = sport[1:]
     if "N/A" in sport:
         return None
-    if sport.lower not in ["basketball", "soccer", "baseball", "football", "hockey", "ultimate frisbee"]:
+    if sport.lower() not in ["basketball", "soccer", "baseball", "football", "hockey", "ultimate frisbee"]:
         return None
     return sport
 
