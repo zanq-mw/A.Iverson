@@ -64,7 +64,7 @@ def validate_bet_data(data):
         multipliers = []
         odds = []
         suggested_prompts = []
-        msg = 'Here are the options:\n'
+        msg = 'Here are the options:\n\n'
         for i in range(len(GAME_DATA)):
             game = GAME_DATA[i]
             if data['team'] in [game['home'], game['away']]:
