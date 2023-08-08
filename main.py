@@ -202,7 +202,7 @@ def start_workflow(user_input):
     if user_input.mode == Mode.BET.value:
         return add_to_bet_data(user_input.user_message, user_input.bet_data)
     elif user_input.mode == Mode.QUESTION.value:
-        if user_input.user_message == "YES":
+        if user_input.user_message.lower() == "yes":
             data = f'"prompt": "{user_input.saved_question[0]}", "completion": "{user_input.saved_question[1]}"'
             data = '\n{' + data + '}'
             with open('generate_training_data.jsonl', "a") as f:
