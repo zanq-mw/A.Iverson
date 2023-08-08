@@ -20,7 +20,7 @@ GAME_DATA = [
         "name": "Hawks vs Raptors", "multiplier": 1.5, "odds": 198},
     {"home": "Lakers", "away": "Clippers",
         "name": "Lakers vs Clippers", "multiplier": 1.3, "odds": -198},
-    {"home": "Lakerrs", "away": "Mavericks",
+    {"home": "Lakers", "away": "Mavericks",
         "name": "Lakers vs Mavericks", "multiplier": 1.1, "odds": 62},
     {"home": "Hawks", "away": "Lakers", "name": "Hawks vs Lakers",
         "multiplier": 1.8, "odds": -62},
@@ -71,8 +71,10 @@ def validate_bet_data(data):
                 games.append(game['name'])
                 multipliers.append(game['multiplier'])
                 odds.append(game['odds'])
-                msg += (f'{i+1}. {game["name"]}\n')
                 suggested_prompts.append(str(i+1))
+        for i in range(len(games)):
+            game = games[i]
+            msg += (f'{i+1}. {game}\n')
         suggested_prompts.append("Exit")
         return {
             "bet": None,
