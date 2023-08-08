@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BetslipView: View {
     @ObservedObject var viewModel: ViewModel
+    @Binding var showBetslip: Bool
     @State private var betslipHeight: CGFloat = .zero
     @State private var betsHeight: CGFloat = .zero
     @Environment(\.safeAreaInsets) private var safeAreaInsets
@@ -99,6 +100,15 @@ extension BetslipView {
                 .cornerRadius(13)
 
             Spacer()
+
+            Button(action: {
+                withAnimation {
+                    showBetslip.toggle()
+                }
+            }, label: {
+                Image(systemName: "xmark")
+                    .foregroundColor(.black)
+            })
         }
         .padding(18)
     }
@@ -136,7 +146,7 @@ extension BetslipView {
             }
         }, label: {
             HStack {
-                Text(String(format: "Place Bet $%.2f", viewModel.payoutValue))
+                Text(String(format: "Place Bet $%.2f", viewModel.cost))
                     .font(
                     Font.custom("SF Pro Text", size: 16)
                     .weight(.bold)
@@ -178,7 +188,6 @@ extension BetslipView {
         }
 
         func addBet(_ betData: FinalBetData) {
-
             withAnimation {
                 bets.append(.init(title: betData.game_title, betTitle: betData.bet_title, betDescription: betData.bet_description, multiplier: 1, odds: String(betData.odds), betAmount: betData.bet_amount, toWinAmount: betData.to_win))
             }
@@ -198,7 +207,7 @@ extension BetslipView {
 struct BetslipView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            BetslipView(viewModel: .init(bets: [.init(title: "TB Buccaneers @ MIA Dolphins", betTitle: "TB Buccaneers", betDescription: "Moneyline", multiplier: 1.66, odds: "-100", betAmount: 0, toWinAmount: 0, date: "Feb 11 · 12:00 PM")]))
+            BetslipView(viewModel: .init(bets: [.init(title: "TB Buccaneers @ MIA Dolphins", betTitle: "TB Buccaneers", betDescription: "Moneyline", multiplier: 1.66, odds: "-100", betAmount: 0, toWinAmount: 0, date: "Feb 11 · 12:00 PM")]), showBetslip: .constant(true))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.Theme.background)

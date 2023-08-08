@@ -93,13 +93,39 @@ struct ContentView: View {
                                     )
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .foregroundColor(Color.Input.border)
-                                    .transition(.move(edge: .bottom))
                             }
                         }
                         .padding(.bottom, 4)
                     }
-                    InputFieldView(textField: $viewModel.textField) {
-                        viewModel.sendMessage(user: viewModel.userViewModel)
+                    HStack {
+                        if viewModel.betslipViewModel.bets.isNotEmpty {
+                            Button(action: {
+                                withAnimation {
+                                    if viewModel.betslipViewModel.bets.isNotEmpty {
+                                        viewModel.betslip = true
+                                    }
+                                }
+                            }, label: {
+                                ZStack (alignment: .center) {
+                                    Circle()
+                                        .foregroundColor(.Input.sendButton)
+
+                                    Image(systemName: "newspaper.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 18)
+                                        .foregroundColor(.white)
+                                        .offset(x: -1)
+                                }
+                                .frame(height: 33)
+                            })
+                        }
+
+                        InputFieldView(textField: $viewModel.textField) {
+                            withAnimation {
+                                viewModel.sendMessage(user: viewModel.userViewModel)
+                            }
+                        }
                     }
                 }
                 .padding(.horizontal, 16)
@@ -108,16 +134,33 @@ struct ContentView: View {
             .frame(maxHeight: .infinity)
             
             if viewModel.betslip {
-                BetslipView(viewModel: viewModel.betslipViewModel)
+                BetslipView(viewModel: viewModel.betslipViewModel, showBetslip: $viewModel.betslip)
                     .frame(maxHeight: .infinity, alignment: .bottom)
                     .zIndex(1)
                     .transition(.move(edge: .bottom))
                     .edgesIgnoringSafeArea(.bottom)
             }
         }
+        .task {
+            await startMessage()
+        }
         
     }
+
+    private func startMessage() async {
+        withAnimation {
+            viewModel.botTyping = true
+        }
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+
+        withAnimation {
+            viewModel.chatViewModel.send("Hi, I'm A.Iverson, your personal betting assistant. You can ask me questions about betting or how to use theScore Bet app. You can even ask me to place a bet for you. What can I help you with today?", user: viewModel.computerViewModel)
+            viewModel.botTyping = false
+        }
+    }
+
 }
+
 
 //extension ContentView {
 //    var typingIndicator: some View {
@@ -180,7 +223,7 @@ extension ContentView {
         @Published var userSend = true
 
         @Published var textField: String = ""
-        @Published var chatViewModel = ChatView.ViewModel(messageGroups: [.init(user: .init(name: "A.Iverson"), messages: ["Hi, I'm A.Iverson, your personal betting assistant. You can ask me questions about betting or how to use theScore Bet app. You can even ask me to place a bet for you. What can I help you with today?"])])
+        @Published var chatViewModel = ChatView.ViewModel(messageGroups: [])
 
         @Published var betslip = false
         @Published var betMode = false
@@ -207,38 +250,45 @@ extension ContentView {
 
         func sendMessage(user: UserViewModel) {
             chatViewModel.send(textField, user: user)
+            botTyping = true
+            let tempText = textField
+            textField = ""
 
             Task {
-                botTyping = true
-
-                let tempText = textField
-                textField = ""
-
                 let response = await server.message(tempText)
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
 
                 if let response {
-                    if let botQuestions = response.suggested_prompts {
-                        questions = botQuestions
+                    let mode = .bet == response.mode
+                    if mode != betMode {
+                        withAnimation {
+                            betMode = mode
+                        }
+                    }
+
+                    withAnimation {
                         hideQuestions = false
+                        questions = response.suggested_prompts ?? []
+                    }
+
+                    withAnimation {
+                        chatViewModel.send(response.bot_message, user:computerViewModel)
+                    }
+
+                    withAnimation {
+                        botTyping = false
+
                     }
 
                     if let betData = response.bet {
-                        betslipViewModel.addBet(betData)
-                        betslip = true
+                        try? await Task.sleep(nanoseconds: 5_000_000_000)
+
+                        withAnimation {
+                            betslipViewModel.addBet(betData)
+                            betslip = true
+                        }
                     }
-
-                    betMode = false
-                    if .bet == response.mode {
-                        betMode = true
-                    }
-
-                    questions = response.suggested_prompts ?? []
-
-                    chatViewModel.send(response.bot_message, user:computerViewModel)
                 }
-                botTyping = false
-
             }
         }
 
