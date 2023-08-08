@@ -26,14 +26,14 @@ struct BetslipBetInfoView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(bet.betTitle)
                     .font(
-                        Font.custom("SF Pro Text", size: 16)
+                        Font.custom("SF_Pro_Text", size: 16)
                             .weight(.medium)
                     )
                     .foregroundColor(.black)
 
                 Text(bet.betDescription)
                     .font(
-                        Font.custom("SF Pro Text", size: 12)
+                        Font.custom("SF_Pro_Text", size: 12)
                             .weight(.medium)
                     )
                     .foregroundColor(.black.opacity(0.65))
@@ -43,7 +43,7 @@ struct BetslipBetInfoView: View {
 
             Text(bet.odds)
                 .font(
-                    Font.custom("SF Pro Text", size: 16)
+                    Font.custom("SF_Pro_Text", size: 16)
                         .weight(.bold)
                 )
                 .multilineTextAlignment(.trailing)

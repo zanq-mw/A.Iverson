@@ -15,13 +15,13 @@ struct BetslipBetTitleView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(bet.date)
                     .font(
-                        Font.custom("SF Pro Text", size: 12)
+                        Font.custom("SF_Pro_Text", size: 12)
                             .weight(.medium)
                     )
                     .foregroundColor(.black.opacity(0.65))
                 Text(bet.title)
                     .font(
-                        Font.custom("SF Pro Text", size: 14)
+                        Font.custom("SF_Pro_Text", size: 14)
                             .weight(.bold)
                     )
                     .foregroundColor(.black)
