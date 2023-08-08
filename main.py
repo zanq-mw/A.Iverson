@@ -168,7 +168,7 @@ def add_to_bet_data(user_message, user_data):
         data['points'] = bet_attributes.get_points(user_message)
         data['win'] = bet_attributes.get_win(user_message)
     elif 'bet_amount' not in data or data['bet_amount'] is None:
-        data['bet_amount'] = round(float(user_message), 2)
+        data['bet_amount'] = bet_attributes.get_bet_amount(user_message)
 
     validated = validate_bet_data(data)
     if validated['bet_data'] == initial_data and validated['bet'] is None:
