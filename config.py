@@ -12,7 +12,7 @@ config["api_keys"] = {
 }
 
 config["models"] = {
-    "generate_answers": "ba443efe-b248-4d09-a6a4-f682a3fa4445-ft",
+    "generate_answers": "2bfe0e6c-5004-4524-9cb2-68c3ea2376cf-ft",
     "teams": "ccaf2c54-69a1-4584-9cb1-e4145d8b9e48-ft",
     "points": "6ff555ab-8547-449a-ad8b-75c94d3ad4da-ft",
     "prices": "fd79bd6e-0036-492c-88ed-60ec4395d1f3-ft"
