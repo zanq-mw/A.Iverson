@@ -29,7 +29,25 @@ GAME_DATA = [
     {"home": "Warriors", "away": "Mavericks",
         "name": "Warriors vs Mavericks", "multiplier": 1.6, "odds": "-17"},
     {"home": "Hawks", "away": "Warriors",
-        "name": "Hawks vs Warriors", "multiplier": 1.4, "odds": "+101"}
+        "name": "Hawks vs Warriors", "multiplier": 1.4, "odds": "+101"},
+    {"home": "Celtics", "away": "Spurs",
+        "name": "Celtics vs Spurs", "multiplier": 1.7, "odds": "+157"},
+    {"home": "Celtics", "away": "Pelicans",
+        "name": "Celtics vs Pelicans", "multiplier": 1.2, "odds": "-157"},
+    {"home": "Thunder", "away": "Celtics",
+        "name": "Thunder vs Celtics", "multiplier": 1.5, "odds": "+198"},
+    {"home": "Nets", "away": "Spurs",
+        "name": "Nets vs Spurss", "multiplier": 1.3, "odds": "-198"},
+    {"home": "Nets", "away": "Pelicans",
+        "name": "Nets vs Pelicans", "multiplier": 1.1, "odds": "+62"},
+    {"home": "Thunder", "away": "Nets", "name": "Thunder vs Nets",
+        "multiplier": 1.8, "odds": "-62"},
+    {"home": "Cavaliers", "away": "Spurs",
+        "name": "Cavaliers vs Spurs", "multiplier": 1.9, "odds": "+81"},
+    {"home": "Cavaliers", "away": "Pelicans",
+        "name": "Cavaliers vs Pelicans", "multiplier": 1.6, "odds": "-17"},
+    {"home": "Thunder", "away": "Cavaliers",
+        "name": "Thunder vs Cavaliers", "multiplier": 1.4, "odds": "+101"}
 ]
 
 
