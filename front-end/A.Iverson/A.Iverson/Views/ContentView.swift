@@ -209,9 +209,8 @@ extension ContentView {
             chatViewModel.send(textField, user: user)
 
             Task {
-                withAnimation {
-                    botTyping = true
-                }
+                botTyping = true
+
                 let tempText = textField
                 textField = ""
 
