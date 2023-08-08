@@ -1,25 +1,25 @@
-{"prompt": "I want to bet five dollars on warriors", "completion": "5.00"}
+{"prompt": "I want to bet 5 dollars on warriors", "completion": "5.00"}
 {"prompt": "Put $10.00 on the nets", "completion": "10.00"}
 {"prompt": "I want to put $7.99 on la lakers", "completion": "7.99"}
-{"prompt": "Bet two dollars on lakers winning", "completion": "2.00"}
+{"prompt": "Bet 2 dollars on lakers winning", "completion": "2.00"}
 {"prompt": "Place $3.67 on raptors", "completion": "3.67"}
-{"prompt": "Put seven dollars on the wizards", "completion": "7.00"}
+{"prompt": "Put 7 dollars on the wizards", "completion": "7.00"}
 {"prompt": "I want to bet $69 on the Knicks", "completion": "69.00"}
 {"prompt": "Bet 420 dollars on the New York Knicks", "completion": "420.00"}
 {"prompt": "Put $12.78 on ny knicks to win", "completion": "12.78"}
 {"prompt": "I want to bet 3 dollars on the Jazz", "completion": "3.00"}
-{"prompt": "Bet a hundred dollars on the Utah Jazz", "completion": "100.00"}
+{"prompt": "Bet 100 dollars on the Utah Jazz", "completion": "100.00"}
 {"prompt": "Put $300 on uth jazz to win", "completion": "300.00"}
 {"prompt": "I want to bet $67.78 on the Nets", "completion": "67.78"}
 {"prompt": "Bet $12 on the Brooklyn Nets", "completion": "12.00"}
 {"prompt": "Put 8 dollars on bk nets to win", "completion": "8.00"}
-{"prompt": "Place a ten dollar parlay on Milwaukee Bucks winning", "completion": "10.00"}
+{"prompt": "Place a 10 dollar parlay on Milwaukee Bucks winning", "completion": "10.00"}
 {"prompt": "Bet 10 dollars on the Bucks", "completion": "10.00"}
 {"prompt": "Put $3.99 on MWK bucks to win by 24 points", "completion": "3.99"}
-{"prompt": "I want to bet five dollars on the Spurs", "completion": "5.00"}
+{"prompt": "I want to bet 5 dollars on the Spurs", "completion": "5.00"}
 {"prompt": "Bet $6.00 on the San Antonio spurs", "completion": "6.00"}
 {"prompt": "Put $15 on spurs to win", "completion": "15.00"}
-{"prompt": "I want to bet fifteen dollars on the Pistons", "completion": "15.00"}
+{"prompt": "I want to bet 15 dollars on the Pistons", "completion": "15.00"}
 {"prompt": "Bet $72 on the Detroit Pistons", "completion": "72.00"}
 {"prompt": "Put 17$ on my pistons to win", "completion": "17.00"}
 {"prompt": "I want to bet 3 dollars on the Suns", "completion": "3.00"}
@@ -45,15 +45,60 @@
 {"prompt": "I wanna bet on the Celtics having 112 points", "completion": "N/A"}
 {"prompt": "Place bet for $7", "completion": "7.00"}
 {"prompt": "I want to bet $6.98", "completion": "6.98"}
-{"prompt": "Make a hundred dollar bet", "completion": "100.00"}
+{"prompt": "Make 100 dollar bet", "completion": "100.00"}
 {"prompt": "bet 20 dollars on the Nuggets losing by 12", "completion": "20.00"}
-{"prompt": "Place bet for sixteen dollars", "completion": "16.00"}
 {"prompt": "Place bet for 16 dollars", "completion": "16.00"}
-{"prompt": "Place 2 grand bet on Denver being up twenty", "completion": "2000.00"}
-{"prompt": "Place a grand on Thunder being up 20", "completion": "1000.00"}
-{"prompt": "Place bet for three grand", "completion": "3000.00"}
-{"prompt": "I want to bet 6 grand", "completion": "6000.00"}
-{"prompt": "Make a bet for a grand", "completion": "1000.00"}
-{"prompt": "bet four grand Nuggets losing by 12", "completion": "4000.00"}
-{"prompt": "Place bet for sixteen grand dollars", "completion": "16000.00"}
-{"prompt": "Place bet for a grand", "completion": "1000.00"}
+{"prompt": "20 points", "completion": "N/A"}
+{"prompt": "Raptors scoring 20 points", "completion": "N/A"}
+{"prompt": "25 points", "completion": "N/A"}
+{"prompt": "Bucks scoring 25 points", "completion": "N/A"}
+{"prompt": "35 points", "completion": "N/A"}
+{"prompt": "Spurs scoring 35 points", "completion": "N/A"}
+{"prompt": "60 points", "completion": "N/A"}
+{"prompt": "Rockets having 60 points", "completion": "N/A"}
+{"prompt": "Thunder score 80", "completion": "N/A"}
+{"prompt": "Knicks score 80", "completion": "N/A"}
+{"prompt": "Nets score 100", "completion": "N/A"}
+{"prompt": "Bulls score 119", "completion": "N/A"}
+{"prompt": "Place a bet", "completion": "N/A"}
+{"prompt": "Place a bet on the raptors", "completion": "N/A"}
+{"prompt": "I want to Place a bet on a basketball game", "completion": "N/A"}
+{"prompt": "over 41 points", "completion": "N/A"}
+{"prompt": "having 64", "completion": "N/A"}
+{"prompt": "over 457points", "completion": "N/A"}
+{"prompt": "having 89", "completion": "N/A"}
+{"prompt": "over 21 points", "completion": "N/A"}
+{"prompt": "having 94", "completion": "N/A"}
+{"prompt": "$20", "completion": "20.00"}
+{"prompt": "$165", "completion": "165.00"}
+{"prompt": "$32", "completion": "32.00"}
+{"prompt": "$2000", "completion": "2000.00"}
+{"prompt": "$20.12", "completion": "20.12"}
+{"prompt": "$165.75", "completion": "165.75"}
+{"prompt": "$32.15", "completion": "32.15"}
+{"prompt": "$2000.82", "completion": "2000.82"}
+{"prompt": "89$", "completion": "89.00"}
+{"prompt": "250$", "completion": "250.00"}
+{"prompt": "38$", "completion": "38.00"}
+{"prompt": "42$", "completion": "42.00"}
+{"prompt": "38 dollars", "completion": "38.00"}
+{"prompt": "1500 dollars", "completion": "1500.00"}
+{"prompt": "3 dollars", "completion": "3.00"}
+{"prompt": "500 dollars", "completion": "500.00"}
+{"prompt": "bet $17.00 on toronto raptors scoring 18 points", "completion": "17.00"}
+{"prompt": "bet $74.00 on Mavericks having 101 points", "completion": "74.00"}
+{"prompt": "bet $1 on Warriors to score 25 points", "completion": "1.00"}
+{"prompt": "I bet the Cavaliers will score 81 for 40 dollars", "completion": "40.00"}
+{"prompt": "Put 48$ on Clippers scoring 101 points", "completion": "48.00"}
+{"prompt": "scoring 75", "completion": "N/A"}
+{"prompt": "scoring 16", "completion": "N/A"}
+{"prompt": "scoring 28", "completion": "N/A"}
+{"prompt": "scoring 93", "completion": "N/A"}
+{"prompt": "score 75", "completion": "N/A"}
+{"prompt": "score 16", "completion": "N/A"}
+{"prompt": "score 28", "completion": "N/A"}
+{"prompt": "score 93", "completion": "N/A"}
+{"prompt": "getting 75", "completion": "N/A"}
+{"prompt": "getting 16", "completion": "N/A"}
+{"prompt": "getting 28", "completion": "N/A"}
+{"prompt": "getting 93", "completion": "N/A"}
