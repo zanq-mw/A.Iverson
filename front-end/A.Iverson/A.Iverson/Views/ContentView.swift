@@ -171,36 +171,14 @@ struct ContentView: View {
             }
         }
         .task {
-            await startMessage()
+            await viewModel.startMessage()
         }
         
     }
 
-    private func startMessage() async {
-        withAnimation {
-            viewModel.botTyping = true
-        }
-        try? await Task.sleep(nanoseconds: 1_000_000_000)
-
-        withAnimation {
-            viewModel.chatViewModel.send("Hi, I'm A.Iverson, your personal betting assistant. You can ask me questions about betting or how to use theScore Bet app. You can even ask me to place a bet for you. What can I help you with today?", user: viewModel.computerViewModel)
-            viewModel.botTyping = false
-        }
-    }
 
 }
 
-
-//extension ContentView {
-//    var typingIndicator: some View {
-//        Group {
-//
-//            } else {
-//                EmptyView()
-//            }
-//        }
-//    }
-//}
 
 extension ContentView {
     var suggestedQuestions: some View {
@@ -208,7 +186,8 @@ extension ContentView {
             HStack {
                 ForEach(viewModel.questions, id: \.self) { question in
                     Button(action: {
-                        viewModel.askQuestion(question)
+                        viewModel.textField = question
+
                         withAnimation {
                             viewModel.hideQuestions = true
                         }
@@ -336,9 +315,18 @@ extension ContentView {
         }
 
         func askQuestion(_ question: String) {
-            textField = question
+
+        }
+
+        func startMessage() async {
             withAnimation {
-                hideQuestions = true
+                botTyping = true
+            }
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+
+            withAnimation {
+                chatViewModel.send("Hi, I'm A.Iverson, your personal betting assistant. You can ask me questions about betting or how to use theScore Bet app. You can even ask me to place a bet for you. What can I help you with today?", user: computerViewModel)
+                botTyping = false
             }
         }
     }
