@@ -16,7 +16,8 @@ class API: ObservableObject {
     func message(_ text: String) async -> Response? {
         var request = URLRequest(url: URL(string: "http://127.0.0.1:8000/message")!)
 
-        let tempBody = Request(user_message: text, mode: response?.mode ?? .none, bet_data: response?.bet_data ?? nil, bet: response?.bet ?? nil, saved_question: nil)
+        let tempBody = Request(user_message: text, mode: response?.mode ?? .none, bet_data: response?.bet_data ?? nil, bet: response?.bet ?? nil, saved_question: response?.saved_question ?? nil)
+
         do {
             let jsonData = try JSONEncoder().encode(tempBody)
             let jsonString = String(data: jsonData, encoding: .utf8)!
@@ -25,10 +26,12 @@ class API: ObservableObject {
             request.httpBody = jsonData
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
             let (data, response) = try await URLSession.shared.data(for: request)
             print(data.prettyPrintedJSONString!)
             let responseData = try JSONDecoder().decode(Response.self, from: data)
             self.response = responseData
+
             return responseData
         } catch {
             print(error)
@@ -73,6 +76,7 @@ struct Response: Codable {
     let bet_data: BetData?
     let bet: FinalBetData?
     let suggested_prompts: [String]?
+    let saved_question: [String]?
 }
 
 enum BotMode: Int, Codable {
