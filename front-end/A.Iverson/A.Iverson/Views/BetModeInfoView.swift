@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BetModeInfoView: View {
-    @State var info: Bool = true
+    @State var info: Bool = false
 
     var body: some View {
         HStack {
