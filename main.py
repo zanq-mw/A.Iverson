@@ -190,7 +190,7 @@ def question_workflow(prompt):
 
     return {
         "bot_message": answer,
-        "bet_mode": Mode.QUESTION,
+        "mode": Mode.QUESTION,
         "suggested_prompts": ['Yes', 'No'],
         "saved_question": [prompt, "Testing answer"]
     }
@@ -212,7 +212,7 @@ def start_workflow(user_input):
             msg = "Sorry for that. Anything else I can help you with?"
         return {
             "bot_message": msg,
-            "bet_mode": Mode.NO_TYPE,
+            "mode": Mode.NO_TYPE,
         }
 
     else:
