@@ -116,6 +116,7 @@ struct ContentView: View {
                                     )
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .foregroundColor(Color.Input.border)
+                                    .transition(.move(edge: .bottom))
                             }
 
                             if !viewModel.hideQuestions {
@@ -289,8 +290,10 @@ extension ContentView {
         }
 
         func sendMessage(user: UserViewModel) {
-            chatViewModel.send(textField, user: user)
-            botTyping = true
+            withAnimation {
+                chatViewModel.send(textField, user: user)
+                botTyping = true
+            }
             let tempText = textField
             textField = ""
 
