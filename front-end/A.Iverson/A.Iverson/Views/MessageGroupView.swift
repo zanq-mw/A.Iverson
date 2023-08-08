@@ -22,7 +22,6 @@ struct MessageGroupView: View {
                         RoundedRectangle(cornerRadius: 30)
                             .foregroundColor(.white.opacity(0.2))
                     )
-
             }
 
             VStack(alignment: viewModel.isUser ? .trailing : .leading, spacing: Dimensions.Chat.groupSpacing) {

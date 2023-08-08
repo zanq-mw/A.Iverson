@@ -23,7 +23,7 @@ struct ContentView: View {
                         .padding(.leading, 20)
 
 
-                    Text("Virtual Assistant")
+                    Text("A.Iverson")
                         .foregroundColor(.white)
                         .font(.custom("SF_Pro_Text", size: 20))
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -118,7 +118,10 @@ struct ContentView: View {
                                     .foregroundColor(Color.Input.border)
                             }
 
-                            suggestedQuestions
+                            if !viewModel.hideQuestions {
+                                suggestedQuestions
+                                    .transition(.move(edge: .leading))
+                            }
                         }
                         .padding(.bottom, 4)
                     }
@@ -205,6 +208,10 @@ extension ContentView {
                 ForEach(viewModel.questions, id: \.self) { question in
                     Button(action: {
                         viewModel.askQuestion(question)
+                        withAnimation {
+                            viewModel.hideQuestions = true
+                        }
+                        viewModel.sendMessage(user: viewModel.userViewModel)
                     }, label: {
                         Text(question)
                             .multilineTextAlignment(.leading)
@@ -313,7 +320,7 @@ extension ContentView {
                     }
 
                     if let betData = response.bet {
-                        try? await Task.sleep(nanoseconds: 5_000_000_000)
+                        try? await Task.sleep(nanoseconds: 3_000_000_000)
 
                         withAnimation {
                             betslipViewModel.addBet(betData)
