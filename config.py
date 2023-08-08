@@ -4,7 +4,7 @@ config = configparser.ConfigParser()
 
 config["api_keys"] = {
     "generate_answers": "UdTVXCMnL32EEYb85EA8q9bJee92nVke4QVXa9o9",
-    "teams": "UdTVXCMnL32EEYb85EA8q9bJee92nVke4QVXa9o9",
+    "teams": "5mA2w2L0Z0ySFKCC23XAiAJeaLJTTb2dq23UH79K",
     "points": "5mA2w2L0Z0ySFKCC23XAiAJeaLJTTb2dq23UH79K",
     "prices": "s1jvD0hXSVagqr4xxCo2wO9WGosYttDhRoytAX6h",
     "classify_question": "5mA2w2L0Z0ySFKCC23XAiAJeaLJTTb2dq23UH79K",
@@ -13,7 +13,7 @@ config["api_keys"] = {
 
 config["models"] = {
     "generate_answers": "cf0924a2-7c7f-43a3-962f-4c83403d92fe-ft",
-    "teams": "6c1b308b-95f6-4604-ab32-ea8364c127b6-ft",
+    "teams": "ccaf2c54-69a1-4584-9cb1-e4145d8b9e48-ft",
     "points": "6ff555ab-8547-449a-ad8b-75c94d3ad4da-ft",
     "prices": "fd79bd6e-0036-492c-88ed-60ec4395d1f3-ft"
 }
