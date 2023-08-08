@@ -1,10 +1,13 @@
-import classify_question
 import cohere
-import configparser
-import bet_attributes
-import api
-from api_responses import Bet, Mode
 from copy import deepcopy
+
+import api
+import bet_attributes
+import classify_question
+import configparser
+import questions
+
+from api_responses import Bet, Mode
 
 config_read = configparser.ConfigParser()
 config_read.read("config.ini")
@@ -177,13 +180,9 @@ def add_to_bet_data(user_message, user_data):
 
 
 def question_workflow(prompt):
-    response = co.generate(
-        prompt,
-        max_tokens=1000,
-        model=config_read.get("models", "generate_answers")
-    )
-    answer = response[0].text
-    answer += "\n\nWas this helpful?"
+    response = questions.generate_answer(prompt)
+    answer = response + "\n\nWas this helpful?"
+
     return {
         "bot_message": answer,
         "mode": Mode.QUESTION,
