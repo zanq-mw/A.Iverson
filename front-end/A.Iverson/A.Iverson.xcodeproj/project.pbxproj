@@ -16,7 +16,6 @@
 		C4609D3B2A7D9EA30052296C /* BetslipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D3A2A7D9EA30052296C /* BetslipView.swift */; };
 		C4609D3E2A7DC5430052296C /* BetslipInputFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609D3D2A7DC5430052296C /* BetslipInputFieldsView.swift */; };
 		C4609F442A7DC9F90052296C /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F432A7DC9F90052296C /* Optional.swift */; };
-		C4609F472A7DDBF30052296C /* SF Pro Text.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4609F462A7DDBF30052296C /* SF Pro Text.ttf */; };
 		C4609F4A2A7DEB1A0052296C /* BetslipMoneyAmounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F492A7DEB1A0052296C /* BetslipMoneyAmounts.swift */; };
 		C4609F4C2A7E05680052296C /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F4B2A7E05680052296C /* UIScreen.swift */; };
 		C4609F4E2A7E087B0052296C /* BetslipBetInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F4D2A7E087B0052296C /* BetslipBetInfoView.swift */; };
@@ -25,9 +24,10 @@
 		C4609F542A7EED6C0052296C /* BetModeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F532A7EED6C0052296C /* BetModeInfoView.swift */; };
 		C4609F562A7F20300052296C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F552A7F20300052296C /* String.swift */; };
 		C4609F582A7F31FD0052296C /* BetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F572A7F31FD0052296C /* BetModel.swift */; };
-		C4609F602A7F76530052296C /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = C4609F5F2A7F76530052296C /* WrappingHStack */; };
 		C4609F622A8195000052296C /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F612A8195000052296C /* JSON.swift */; };
 		C4609F642A81951C0052296C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4609F632A81951C0052296C /* API.swift */; };
+		C4609F692A81DE7C0052296C /* SF_Pro_Text_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4609F672A81DE7B0052296C /* SF_Pro_Text_Bold.ttf */; };
+		C4609F6A2A81DE7C0052296C /* SF_Pro_Text.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4609F682A81DE7C0052296C /* SF_Pro_Text.ttf */; };
 		C4CBB6BD2A7BFE47007B3E1F /* A_IversonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CBB6BC2A7BFE47007B3E1F /* A_IversonApp.swift */; };
 		C4CBB6BF2A7BFE47007B3E1F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */; };
 		C4CBB6C12A7BFE48007B3E1F /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CBB6C02A7BFE48007B3E1F /* Colours.xcassets */; };
@@ -65,7 +65,6 @@
 		C4609D3A2A7D9EA30052296C /* BetslipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetslipView.swift; sourceTree = "<group>"; };
 		C4609D3D2A7DC5430052296C /* BetslipInputFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetslipInputFieldsView.swift; sourceTree = "<group>"; };
 		C4609F432A7DC9F90052296C /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
-		C4609F462A7DDBF30052296C /* SF Pro Text.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF Pro Text.ttf"; path = "../../../../../../../Downloads/SF Pro Text.ttf"; sourceTree = "<group>"; };
 		C4609F482A7DDC820052296C /* A-Iverson-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "A-Iverson-Info.plist"; sourceTree = SOURCE_ROOT; };
 		C4609F492A7DEB1A0052296C /* BetslipMoneyAmounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetslipMoneyAmounts.swift; sourceTree = "<group>"; };
 		C4609F4B2A7E05680052296C /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
@@ -77,6 +76,8 @@
 		C4609F572A7F31FD0052296C /* BetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetModel.swift; sourceTree = "<group>"; };
 		C4609F612A8195000052296C /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		C4609F632A81951C0052296C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		C4609F672A81DE7B0052296C /* SF_Pro_Text_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SF_Pro_Text_Bold.ttf; sourceTree = "<group>"; };
+		C4609F682A81DE7C0052296C /* SF_Pro_Text.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SF_Pro_Text.ttf; sourceTree = "<group>"; };
 		C4CBB6B92A7BFE47007B3E1F /* A.Iverson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A.Iverson.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CBB6BC2A7BFE47007B3E1F /* A_IversonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A_IversonApp.swift; sourceTree = "<group>"; };
 		C4CBB6BE2A7BFE47007B3E1F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,7 +96,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4609F602A7F76530052296C /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,8 +167,9 @@
 		C4609F452A7DDBD50052296C /* Assests */ = {
 			isa = PBXGroup;
 			children = (
+				C4609F672A81DE7B0052296C /* SF_Pro_Text_Bold.ttf */,
+				C4609F682A81DE7C0052296C /* SF_Pro_Text.ttf */,
 				C4CBB6C02A7BFE48007B3E1F /* Colours.xcassets */,
-				C4609F462A7DDBF30052296C /* SF Pro Text.ttf */,
 			);
 			path = Assests;
 			sourceTree = "<group>";
@@ -251,7 +252,6 @@
 			);
 			name = A.Iverson;
 			packageProductDependencies = (
-				C4609F5F2A7F76530052296C /* WrappingHStack */,
 			);
 			productName = A.Iverson;
 			productReference = C4CBB6B92A7BFE47007B3E1F /* A.Iverson.app */;
@@ -326,7 +326,6 @@
 			);
 			mainGroup = C4CBB6B02A7BFE47007B3E1F;
 			packageReferences = (
-				C4609F5E2A7F76530052296C /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = C4CBB6BA2A7BFE47007B3E1F /* Products */;
 			projectDirPath = "";
@@ -344,7 +343,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4609F472A7DDBF30052296C /* SF Pro Text.ttf in Resources */,
+				C4609F6A2A81DE7C0052296C /* SF_Pro_Text.ttf in Resources */,
+				C4609F692A81DE7C0052296C /* SF_Pro_Text_Bold.ttf in Resources */,
 				C4CBB6C42A7BFE48007B3E1F /* Preview Assets.xcassets in Resources */,
 				C4CBB6C12A7BFE48007B3E1F /* Colours.xcassets in Resources */,
 			);
@@ -719,25 +719,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		C4609F5E2A7F76530052296C /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ksemianov/WrappingHStack";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.3;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		C4609F5F2A7F76530052296C /* WrappingHStack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C4609F5E2A7F76530052296C /* XCRemoteSwiftPackageReference "WrappingHStack" */;
-			productName = WrappingHStack;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C4CBB6B12A7BFE47007B3E1F /* Project object */;
 }
