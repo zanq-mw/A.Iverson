@@ -72,7 +72,7 @@ def validate_bet_data(data):
                 multipliers.append(game['multiplier'])
                 odds.append(game['odds'])
                 msg += (f'{i+1}. {game["name"]}')
-                if i < len(GAME_DATA) - 1:
+                if i < len(GAME_DATA) - 2:
                     msg += '\n'
                 suggested_prompts.append(str(i+1))
         suggested_prompts.append("Exit")
@@ -97,7 +97,7 @@ def validate_bet_data(data):
             "bot_message": 'How much would you like to bet?',
             "mode": Mode.BET,
             "bet_data": data,
-            "suggested_prompts": ["Exit"]
+            "suggested_prompts": ["$20", "$50", "$100", "$200", "Exit"]
         }
     else:
         if 'points' in data and data['points'] is not None:
@@ -182,7 +182,7 @@ def question_workflow(prompt):
     #     pre_prompt + prompt,
     #     max_tokens=1000,
     #     model=config_read.get("models", "generate_answers")
-    )
+    # )
     # # # Use below code if back and forth with front end is working. It is to add to training data if q&a was helpful to user
 
     # answer = response[0].text
