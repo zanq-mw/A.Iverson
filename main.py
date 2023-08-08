@@ -13,23 +13,23 @@ co = cohere.Client(api_key)
 
 GAME_DATA = [
     {"home": "Raptors", "away": "Clippers",
-        "name": "Raptors vs Clippers", "multiplier": 1.7, "odds": 157},
+        "name": "Raptors vs Clippers", "multiplier": 1.7, "odds": "+157"},
     {"home": "Raptors", "away": "Mavericks",
-        "name": "Raptors vs Mavericks", "multiplier": 1.2, "odds": -157},
+        "name": "Raptors vs Mavericks", "multiplier": 1.2, "odds": "-157"},
     {"home": "Hawks", "away": "Raptors",
-        "name": "Hawks vs Raptors", "multiplier": 1.5, "odds": 198},
+        "name": "Hawks vs Raptors", "multiplier": 1.5, "odds": "+198"},
     {"home": "Lakers", "away": "Clippers",
-        "name": "Lakers vs Clippers", "multiplier": 1.3, "odds": -198},
+        "name": "Lakers vs Clippers", "multiplier": 1.3, "odds": "-198"},
     {"home": "Lakerrs", "away": "Mavericks",
-        "name": "Lakers vs Mavericks", "multiplier": 1.1, "odds": 62},
+        "name": "Lakers vs Mavericks", "multiplier": 1.1, "odds": "+62"},
     {"home": "Hawks", "away": "Lakers", "name": "Hawks vs Lakers",
-        "multiplier": 1.8, "odds": -62},
+        "multiplier": 1.8, "odds": "-62"},
     {"home": "Warriors", "away": "Clippers",
-        "name": "Warriors vs Clippers", "multiplier": 1.9, "odds": 81},
+        "name": "Warriors vs Clippers", "multiplier": 1.9, "odds": "+81"},
     {"home": "Warriors", "away": "Mavericks",
-        "name": "Warriors vs Mavericks", "multiplier": 1.6, "odds": -17},
+        "name": "Warriors vs Mavericks", "multiplier": 1.6, "odds": "-17"},
     {"home": "Hawks", "away": "Warriors",
-        "name": "Hawks vs Warriors", "multiplier": 1.4, "odds": 101}
+        "name": "Hawks vs Warriors", "multiplier": 1.4, "odds": "+101"}
 ]
 
 
@@ -166,7 +166,7 @@ def add_to_bet_data(user_message, user_data):
         data['points'] = bet_attributes.get_points(user_message)
         data['win'] = bet_attributes.get_win(user_message)
     elif 'bet_amount' not in data or data['bet_amount'] is None:
-        data['bet_amount'] = float(user_message)
+        data['bet_amount'] = round(float(user_message), 2)
 
     validated = validate_bet_data(data)
     if validated['bet_data'] == initial_data and validated['bet'] is None:
