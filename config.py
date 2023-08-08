@@ -8,7 +8,8 @@ config["api_keys"] = {
     "points": "5mA2w2L0Z0ySFKCC23XAiAJeaLJTTb2dq23UH79K",
     "prices": "s1jvD0hXSVagqr4xxCo2wO9WGosYttDhRoytAX6h",
     "classify_question": "4Bnc7EKGSVz3EPE2EXCFP8xzjC8eKTC3LMdNksjB",
-    "win": "6XRMX7IZkWtY5NnBg7MNoyy5wcHouRL3ew37i2PD"
+    "win": "6XRMX7IZkWtY5NnBg7MNoyy5wcHouRL3ew37i2PD",
+    "sports": "cQmQ79u03QO8HOR1iXLlNzkw0vd3I5MJuCBy9zK6"
 }
 
 config["models"] = {

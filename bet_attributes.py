@@ -4,9 +4,6 @@ from cohere.responses.classify import Example
 
 config_read = configparser.ConfigParser()
 config_read.read("config.ini")
-api_key = config_read.get("api_keys", "prices")
-
-co = cohere.Client(api_key)
 
 basketball_teams = ['Celtics',
                     'Nets',
@@ -68,6 +65,8 @@ moneyline_examples = [
 
 
 def get_sport(prompt):
+    api_key = config_read.get("api_keys", "sports")
+    co = cohere.Client(api_key)
     pre_prompt = "If a sport is referenced in the following prompt, please output the name of the sport and nothing else. Otherwise, say 'N/A'. Here is the prompt: "
     response = co.generate(
         pre_prompt + prompt,
@@ -84,6 +83,8 @@ def get_sport(prompt):
 
 
 def get_bet_amount(prompt):
+    api_key = config_read.get("api_keys", "prices")
+    co = cohere.Client(api_key)
     model = config_read.get("models", "prices")
     response = co.generate(
         prompt,
