@@ -71,14 +71,12 @@ def validate_bet_data(data):
                 games.append(game['name'])
                 multipliers.append(game['multiplier'])
                 odds.append(game['odds'])
-                msg += (f'{i+1}. {game["name"]}')
-                if i < len(GAME_DATA) - 2:
-                    msg += '\n'
+                msg += (f'{i+1}. {game["name"]}\n')
                 suggested_prompts.append(str(i+1))
         suggested_prompts.append("Exit")
         return {
             "bet": None,
-            "bot_message": msg,
+            "bot_message": msg[:len(msg)-1],
             "mode": Mode.BET,
             "bet_data": data,
             "suggested_prompts": suggested_prompts
