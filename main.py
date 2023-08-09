@@ -84,15 +84,15 @@ def bet_workflow(prompt):
 
 def validate_bet_data(data):
 
-    if 'sport' not in data or data['sport'] is None:
-        return {
-            "bet": None,
-            "bot_message": "What sport would you like to place your bet on?",
-            "mode": Mode.BET,
-            "bet_data": data,
-            "suggested_prompts": ["Basketball", "Soccer", "Hockey", "Football", "Baseball", "Ultimate Frisbee", "Exit"]
-        }
-    elif 'team' not in data or data['team'] is None:
+    # if 'sport' not in data or data['sport'] is None:
+    #     return {
+    #         "bet": None,
+    #         "bot_message": "What sport would you like to place your bet on?",
+    #         "mode": Mode.BET,
+    #         "bet_data": data,
+    #         "suggested_prompts": ["Basketball", "Soccer", "Hockey", "Football", "Baseball", "Ultimate Frisbee", "Exit"]
+    #     }
+    if 'team' not in data or data['team'] is None:
         return {
             "bet": None,
             "bot_message": "What team would you like to place your bet on?",
