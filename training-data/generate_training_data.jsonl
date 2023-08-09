@@ -52,3 +52,6 @@
 {"prompt": "Can u explain what a spread bet is?", "completion": "When wagering on the point spread, you're betting on whether a team will win by more or lose by less than the given amount of points."}
 {"prompt": "What's the meaning of point spread?", "completion": "When wagering on the point spread, you're betting on whether a team will win by more or lose by less than the given amount of points."}
 {"prompt": "Give me an overview of spread bets.", "completion": "When wagering on the point spread, you're betting on whether a team will win by more or lose by less than the given amount of points."}
+
+{"prompt": "How do I place a bet?", "completion": "
+To place a bet, you must be logged in to the app and have geolocation services enabled. From the side menu or homepage of theScore Bet, navigate to a sport or competition. Then, under the event you'd like to wager on, choose the outcome(s) you'd like to wager on. Within the app, we offer money line bets, over/under bets, and spreads. Alternatively, you can ask me to create a bet for you and I'll populate your betslip automatically! Then, you can view your betslip from the bottom of the app (or the top-right corner on the website) and adjust as necessary. Now just submit your bets and enjoy the game!"}

@@ -28,9 +28,9 @@ class API: ObservableObject {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
             let (data, response) = try await URLSession.shared.data(for: request)
-            print(data.prettyPrintedJSONString ?? "UNKNOWN")
+            print("RECIEVING: \(data.prettyPrintedJSONString ?? "UNKNOWN")")
             let responseData = try JSONDecoder().decode(Response.self, from: data)
-            print("RECIEVING: \(responseData)")
+            //print("RECIEVING: \(responseData)")
             self.response = responseData
 
             return responseData
