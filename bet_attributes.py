@@ -72,12 +72,10 @@ def get_sport(prompt):
         pre_prompt + prompt,
         max_tokens=20
     )
-    sport = response[0].text
+    sport = response[0].text.strip()
     if sport[:1] == '\n':
         sport = sport[1:]
     if "N/A" in sport:
-        return None
-    if sport not in ["Basketball", "soccer", "baseball", "football", "hockey", "ultimate frisbee"]:
         return None
     return sport
 

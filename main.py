@@ -75,7 +75,7 @@ GAME_DATA = [
 
 
 def bet_workflow(prompt):
-    data = {'sport': bet_attributes.get_sport(prompt),
+    data = {'sport': 'basketball',
             'team': bet_attributes.get_team(prompt),
             'bet_amount': bet_attributes.get_bet_amount(prompt),
             'points': bet_attributes.get_points(prompt)}
@@ -92,7 +92,7 @@ def validate_bet_data(data):
             "bet_data": data,
             "suggested_prompts": ["Basketball", "Soccer", "Hockey", "Football", "Baseball", "Ultimate Frisbee", "Exit"]
         }
-    elif 'team' not in data or data['team'] is None:
+    if 'team' not in data or data['team'] is None:
         return {
             "bet": None,
             "bot_message": "What team would you like to place your bet on?",

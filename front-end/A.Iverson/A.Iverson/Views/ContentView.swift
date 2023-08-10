@@ -220,7 +220,12 @@ extension ContentView {
             textField = ""
 
             Task {
-                let response = await server.message(tempText)
+                var response = await server.message(tempText)
+                
+                if response == nil  {
+                    response = Response(bot_message: "Sorry the cohere is down at the moment please try again later :(", mode: .none, bet_data: nil, bet: nil, suggested_prompts: nil, saved_question: nil)
+                }
+
                 try? await Task.sleep(nanoseconds: 1_500_000_000)
 
                 if let response {
