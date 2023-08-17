@@ -2,7 +2,7 @@
 
 ## Demo
 Question and bet
-https://github.com/zanq-mw/A.Iverson/assets/50245287/c0c9c648-e7ee-4855-b8ce-e895d3509fbb
+<video src='[your URL here](https://github.com/zanq-mw/A.Iverson/assets/50245287/c0c9c648-e7ee-4855-b8ce-e895d3509fbb)' width=180/>
 
 ## How to run the app
 1. Install xyz for backend
