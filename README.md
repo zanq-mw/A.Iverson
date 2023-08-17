@@ -2,9 +2,11 @@
 
 ## Demo
 Question and bet
-pt1 | pt2
-:-: | :-:
-https://github.com/zanq-mw/A.Iverson/assets/50245287/cf09c950-8b11-4fc2-9b5a-82f794932e9d | https://github.com/zanq-mw/A.Iverson/assets/50245287/5cfb9456-2c37-400a-8904-6097ac1db1f3
+pt1
+https://github.com/zanq-mw/A.Iverson/assets/50245287/cf09c950-8b11-4fc2-9b5a-82f794932e9d 
+
+pt2
+https://github.com/zanq-mw/A.Iverson/assets/50245287/5cfb9456-2c37-400a-8904-6097ac1db1f3
 
 ## How to run the app
 1. Install xyz for backend
