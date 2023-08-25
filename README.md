@@ -3,7 +3,8 @@
 ## Demo
 Question and bet
 
-https://github.com/zanq-mw/A.Iverson/assets/50245287/ba0d59d6-ba6d-4a4d-a540-10412269ebfd
+https://github.com/zanq-mw/A.Iverson/assets/50245287/4abcd787-1d68-40de-9bde-e972a011d43a
+
 
 ## How to run the app
 1. Install xyz for backend
