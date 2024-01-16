@@ -6,14 +6,9 @@ Question and bet
 https://github.com/zanq-mw/A.Iverson/assets/50245287/4abcd787-1d68-40de-9bde-e972a011d43a
 
 
-## How to run the app
-1. Install xyz for backend
-2. Install abc for front end
-3. Run backend
-4. Run front end
-
 ### Backend
-
+1. run `uvicorn api:app --reload` to start server
+2. go to http://127.0.0.1:8000/docs to test
 
 ### Frontend
 1. Install Xcode (Developed on 14.3.1)
