@@ -1,5 +1,7 @@
 # A.Iverson
+A.Iverson is a virtual betting assistant made for theScore Bet App. It uses natural language proccessing to communicate with users, lowering the barrier of entry into sports betting. Through studies it was found that many people that starting to get into sports betting struggle with the terminology and logisitcs so A.Iverson was made to combat that.
 
+A.Iverson works as a chatbot where users can either ask it questions or ask it to place a bet for them. It will use its ever growing knowledge base to answer questions about betting or app navigation. If you ask it to place a bet, it will parse the text to get all the details of the bet to put together a bet slip, where the user can simply click confirm to place the bet. It was made using Python, Swift, Fast API, and Cohere APIs.
 ## Demo
 
 https://github.com/zanq-mw/A.Iverson/assets/50245287/4abcd787-1d68-40de-9bde-e972a011d43a
